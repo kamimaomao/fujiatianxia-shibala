@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>《富甲天下：十八啦！》项目总览与在线可玩 MVP 门户</title>
+  <style>
+    :root {
+      --bg-dark: #1F1209;
+      --bg-card: #FFFDF7;
+      --bg-warm: #F6ECD6;
+      --ink: #231815;
+      --muted: #57534E;
+      --vermilion: #D9483B;
+      --amber: #F59E0B;
+      --gold-light: #FDE047;
+      --indigo: #2F6FDE;
+      --jade: #16A34A;
+      --border: #3B2313;
+      --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.22) 0%, transparent 55%),
+        linear-gradient(180deg, #2A180D 0%, #160C06 100%);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 24px 16px 48px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* 顶部潮玩牌匾 */
+    .hero-card {
+      background: linear-gradient(135deg, #FFFDF7 0%, #F5E6C8 100%);
+      border: 3px solid var(--border);
+      outline: 2px solid var(--amber);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        padding: 22px 18px;
+      }
+    }
+
+    .kicker {
+      display: inline-block;
+      background: #3B2313;
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 900;
+      line-height: 1.18;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 17px;
+      font-weight: 900;
+      border: 2.5px solid var(--ink);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #FDE047 0%, #F59E0B 68%, #D97706 100%);
+      color: var(--ink);
+      box-shadow: 0 5px 0 var(--ink), 0 10px 24px rgba(245, 158, 11, 0.42);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(180deg, #FFFDF7 0%, #E7D7BA 100%);
+      color: var(--ink);
+      font-size: 15px;
+      padding: 11px 18px;
+      box-shadow: 0 4px 0 var(--ink);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active,
+    .btn-secondary:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--ink);
+    }
+
+    .hero-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-preview a {
+      display: block;
+      width: 100%;
+      max-width: 260px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 3px solid var(--ink);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-preview img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .preview-caption {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    /* 内容板块 */
+    .section-card {
+      background: var(--bg-card);
+      border: 2.5px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 2px solid #E7D7BA;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .section-head span {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .hl-item {
+      background: var(--bg-warm);
+      border: 1.5px solid #D6C5A5;
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .hl-item strong {
+      display: block;
+      font-size: 14.5px;
+      margin-bottom: 4px;
+      color: #7C2D12;
+    }
+
+    .hl-item p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* 立项书与分册导航列表 */
+    .doc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .doc-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--ink);
+      background: #FFF;
+      border: 2px solid #D6CFC2;
+      border-radius: 14px;
+      padding: 14px 16px;
+      transition: border-color 0.14s ease, transform 0.14s ease;
+    }
+
+    .doc-link:hover {
+      border-color: var(--amber);
+      transform: translateY(-2px);
+    }
+
+    .doc-link.featured {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #FEFCE8 0%, #FEF3C7 100%);
+      border-color: #D97706;
+    }
+
+    .doc-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #231815;
+      color: var(--gold-light);
+    }
+
+    .doc-link h3 {
+      font-size: 15.5px;
+      font-weight: 900;
+    }
+
+    .doc-link p {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .svg-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .svg-pill {
+      text-decoration: none;
+      color: var(--ink);
+      background: #F5F5F4;
+      border: 1.5px solid #A8A29E;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .svg-pill:hover {
+      background: #FEF3C7;
+      border-color: #D97706;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255, 248, 235, 0.68);
+      font-size: 12.5px;
+      margin-top: 6px;
+    }
+
+    footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部主视觉与核心入口 -->
+    <section class="hero-card">
+      <div>
+        <span class="kicker">9:16 竖屏单手 · B+A 潮玩沙盘 × 爆笑漫画立牌</span>
+        <h1 class="hero-title">《富甲天下：十八啦！》</h1>
+        <p class="hero-subtitle">
+          融合《富甲天下》踩城四择武将经营、《虚拟人生》四维正邪命格与《Heroll》快节奏环道构筑——单手十分钟，买地盖屎王神、派张飞拎折凳骑弹簧木马免单，关底拿全部身家化作万门火炮轰翻天命魔王！
+        </p>
+
+        <div class="cta-stack">
+          <a class="btn-primary" href="./mvp/index.html">
+            🎲 立即开局试玩《富甲天下：十八啦！》MVP
+          </a>
+          <a class="btn-secondary" href="./assets/art_style_candidates/index.html">
+            🎨 查看 B+A 融合方案与五向画风 AB 比对台
+          </a>
+          <a class="btn-secondary" href="https://github.com/kamimaomao/fujiatianxia-shibala" target="_blank" rel="noopener">
+            📦 访问 GitHub 仓库阅读完整立项总册
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-preview">
+        <a href="./mvp/index.html" title="点击进入 9:16 竖屏可玩 MVP">
+          <img src="./assets/art_style_candidates/style_BA_fusion_xuchang_gameplay.png" alt="富甲天下：十八啦！B+A 融合风 9:16 竖屏实机基准帧" />
+        </a>
+        <span class="preview-caption">▲ B+A 融合风 9:16 竖屏基准帧（点击直达试玩）</span>
+      </div>
+    </section>
+
+    <!-- 可玩 MVP 四大体验看点 -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>🔥 可玩 MVP 核心机制亮点</h2>
+        <span>手机竖屏全屏贴合 · 桌面端自动居中 9:16 舞台</span>
+      </div>
+      <div class="highlights-grid">
+        <div class="hl-item">
+          <strong>⚡ 霸主同步落子 · 零等待</strong>
+          <p>按下一键「掷骰 十八啦！」，主公走 2D6 的同刻曹操与孙权车驾同步走 1D6 抢地、交租或挨箭塔射瘫，全程不黑屏不切场。</p>
+        </div>
+        <div class="hl-item">
+          <strong>🪑 踩城四择 × 骑木马单挑</strong>
+          <p>踩进敌方巨城拒绝当冤大头！明示真实胜算选择交钱、骑弹簧木马单挑（含军师口斗与 2 秒奇策窗）、地形野战或火炮攻城夺店面。</p>
+        </div>
+        <div class="hl-item">
+          <strong>💩 缺德基建 × 正邪改写</strong>
+          <p>过圈置业支持「阿伯代办」一键最优盖楼，可造箭塔剥皮或屎王神熏臭邻居降租；邪道名望解锁「开芭乐票」白住赖账，正道解锁「开城劝降」。</p>
+        </div>
+        <div class="hl-item">
+          <strong>💥 决战三段 · 身家变火炮</strong>
+          <p>告别传统大富翁尾盘垃圾时间！第 8/15 圈终局将全盘房产身家、太守连携与先锋冲阵化作三段万炮火力，正面轰沉魔化曹丞相铁索巨舰。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 旗舰立项书与五大分册在线阅读入口 -->
+    <section class="section-card">
+      <div class="section-head">
+        <h2>📚 完整立项书体系与架构图谱</h2>
+        <span>点击跳转 GitHub Markdown 渲染页阅读全文</span>
+      </div>
+
+      <div class="doc-list">
+        <a class="doc-link featured" href="https://github.com/kamimaomao/fujiatianxia-shibala/blob/main/%E9%A1%B9%E7%9B%AE%E7%AB%8B%E9%A1%B9%E4%B9%A6_%E5%AF%8C%E7%94%B2%E5%A4%A9%E4%B8%8B%E7%AB%96%E7%89%88%E5%8D%95%E4%BA%BA%E6%89%8B%E6%B8%B8.md" target="_blank" rel="noopener">
+          <span class="doc-tag">旗舰合订总册</span>
+          <h3>《富甲天下：十八啦！》竖版单人手游旗舰立项书（全卷合订本）</h3>
+          <p>一站式汇总市场破局、三基因融合总纲、9:16 竖屏拓扑、F1~F9 核心数学公式、五维养成与商业化长线蓝图。</p>
+        </a>
+
+        <a class="doc-link" href="https://github.com/kamimaomao/fujiatianxia-shibala/blob/main/docs/00_research_dossier.md" target="_blank" rel="noopener">
+          <span class="doc-tag">分册 00</span>
+          <h3>品类考据与竞品解构档案</h3>
+          <p>《富甲天下 3/4/5》《虚拟人生 1/2》《Heroll》《MONOPOLY GO!》深度拆解与破局机会点。</p>
+        </a>
+
+        <a class="doc-link" href="https://github.com/kamimaomao/fujiatianxia-shibala/blob/main/docs/01_master_blueprint.md" target="_blank" rel="noopener">
+          <span class="doc-tag">分册 01</span>
+          <h3>产品宪法与顶层设计总纲</h3>
+          <p>核心设计红线 R1~R8、三基因融合架构、全局术语字典与九大底层数学公式 F1~F9。</p>
+        </a>
+
+        <a class="doc-link" href="https://github.com/kamimaomao/fujiatianxia-shibala/blob/main/docs/02_core_gameplay_and_board.md" target="_blank" rel="noopener">
+          <span class="doc-tag">分册 02</span>
+          <h3>核心玩法、28格方环棋盘与台味喜剧</h3>
+          <p>0.1 秒级单刻时间轴、踩城四择三套战力口径、12 张霸主手笔、32 条政见与决战三段精算。</p>
+        </a>
+
+        <a class="doc-link" href="https://github.com/kamimaomao/fujiatianxia-shibala/blob/main/docs/03_character_and_card_systems.md" target="_blank" rel="noopener">
+          <span class="doc-tag">分册 03</span>
+          <h3>主公名将、锦囊蓝图与五维养成系统</h3>
+          <p>首发六主公、三岗零冷板凳名将矩阵、正邪命格树、锦囊奇策与建筑蓝图演进数值总表。</p>
+        </a>
+
+        <a class="doc-link" href="https://github.com/kamimaomao/fujiatianxia-shibala/blob/main/docs/04_commercialization_and_liveops.md" target="_blank" rel="noopener">
+          <span class="doc-tag">分册 04</span>
+          <h3>混合变现漏斗、长线赛季与美术矩阵</h3>
+          <p>单人无强制社交焦虑商业模型、产消对账单、赛季日历、研发里程碑与 A~E 画风评估。</p>
+        </a>
+      </div>
+
+      <div class="svg-strip">
+        <a class="svg-pill" href="./assets/fig01_portrait_board_wireframe.svg" target="_blank">📐 图1：9:16 竖屏与棋盘拓扑</a>
+        <a class="svg-pill" href="./assets/fig02_trinity_core_loop_topology.svg" target="_blank">🔄 图2：三基因双循环拓扑</a>
+        <a class="svg-pill" href="./assets/fig03_character_card_progression_matrix.svg" target="_blank">🃏 图3：角色与卡牌养成矩阵</a>
+        <a class="svg-pill" href="./assets/fig04_hybrid_monetization_funnel.svg" target="_blank">💎 图4：混合商业化漏斗</a>
+      </div>
+    </section>
+
+    <footer>
+      《富甲天下：十八啦！》立项研发工程 · <a href="./mvp/index.html">在线试玩 MVP</a> ｜ <a href="./assets/art_style_candidates/index.html">B+A 画风比对台</a> ｜ <a href="https://github.com/kamimaomao/fujiatianxia-shibala" target="_blank" rel="noopener">GitHub Repository</a>
+    </footer>
+  </div>
+</body>
+</html>

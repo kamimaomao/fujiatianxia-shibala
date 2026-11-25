@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2000" viewBox="0 0 1800 2000" font-family="Noto Sans SC, PingFang SC, sans-serif" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title">《富甲天下：十八啦！》图一：竖屏界面与方环棋盘线框（9:16 单手拓扑）</title>
+<desc id="figure-desc">900 × 1600 竖屏四段工程线框。方环包含二十八个编号单元，中央舞台保持同屏。结构示意，不代表最终美术风格。</desc>
+<rect x="0" y="0" width="1800" height="2000" rx="0" fill="#FAF7F0" stroke="none" stroke-width="0" />
+<text x="70" y="58" font-size="34" font-weight="700" text-anchor="start" fill="#1F2937">《富甲天下：十八啦！》</text>
+<text x="70" y="103" font-size="30" font-weight="500" text-anchor="start" fill="#1F2937">图一：竖屏界面与方环棋盘线框（9:16 单手拓扑）</text>
+<line x1="70" y1="115" x2="1730" y2="115" stroke="#1F2937" stroke-width="2" />
+<text x="70" y="140" font-size="22" font-weight="400" text-anchor="start" fill="#1F2937">900 × 1600（9:16 竖屏）</text>
+<rect x="70" y="150" width="900" height="128" rx="0" fill="#F4EFE6" stroke="none" stroke-width="0" id="region-status" data-height="128" />
+<rect x="70" y="278" width="900" height="864" rx="0" fill="#FFFFFF" stroke="none" stroke-width="0" id="region-board" data-height="864" />
+<rect x="70" y="1142" width="900" height="256" rx="0" fill="#FFFFFF" stroke="none" stroke-width="0" id="region-deck" data-height="256" />
+<rect x="70" y="1398" width="900" height="352" rx="0" fill="#F4EFE6" stroke="none" stroke-width="0" id="region-thumb" data-height="352" />
+<rect x="70" y="150" width="900" height="1600" rx="0" fill="none" stroke="#1F2937" stroke-width="3" id="phone-frame" />
+<line x1="70" y1="278" x2="970" y2="278" stroke="#1F2937" stroke-width="2" />
+<line x1="70" y1="1142" x2="970" y2="1142" stroke="#1F2937" stroke-width="2" />
+<line x1="70" y1="1398" x2="970" y2="1398" stroke="#1F2937" stroke-width="2" />
+<text x="90" y="185" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">顶部状态栏 8%</text>
+<text x="430" y="185" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">第 7/15 圈</text>
+<text x="680" y="185" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">距踢馆宿敌 3 圈</text>
+<rect x="90" y="207" width="195" height="50" rx="8" fill="#FFFFFF" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="187.5" y="240" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">银两</text>
+<rect x="300" y="207" width="195" height="50" rx="8" fill="#FFFFFF" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="397.5" y="240" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">兵力</text>
+<rect x="510" y="207" width="245" height="50" rx="8" fill="#FFFFFF" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="632.5" y="240" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">气运签</text>
+<rect x="770" y="207" width="180" height="50" rx="8" fill="#FFFFFF" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="860" y="240" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">2 倍速</text>
+<text x="90" y="301" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">方环棋盘 + 中央舞台 54%</text>
+<g id="cell-0" data-index="0" data-kind="起点">
+<rect x="90" y="1029" width="107.5" height="103" rx="0" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">0</text>
+<text x="143.75" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">起点</text>
+</g>
+<g id="cell-1" data-index="1" data-kind="城池格">
+<rect x="90" y="926" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="952" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">1</text>
+<text x="143.75" y="995" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-2" data-index="2" data-kind="城池格">
+<rect x="90" y="823" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="849" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">2</text>
+<text x="143.75" y="877" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+<g transform="translate(114 905) scale(0.35)">
+<circle cx="0" cy="-18" r="11" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<path d="M -11 -3 L 11 -3 L 19 28 L -19 28 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M -13 -33 L -12 -44 L -4 -38 L 0 -47 L 5 -38 L 13 -44 L 12 -33 Z" fill="#F2A900" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<text x="134" y="914" font-size="22" font-weight="400" text-anchor="start" fill="#1F2937">主公</text>
+</g>
+<g id="cell-3" data-index="3" data-kind="天命格">
+<rect x="90" y="720" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="746" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">3</text>
+<text x="143.75" y="789" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">天命格</text>
+</g>
+<g id="cell-4" data-index="4" data-kind="城池格">
+<rect x="90" y="617" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="643" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">4</text>
+<rect x="155" y="623" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="2" />
+<text x="173" y="644.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">2</text>
+<text x="143.75" y="686" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-5" data-index="5" data-kind="奇遇格">
+<rect x="90" y="514" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="540" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">5</text>
+<rect x="155" y="520" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="3" />
+<text x="173" y="541.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">3</text>
+<text x="143.75" y="583" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">奇遇格</text>
+</g>
+<g id="cell-6" data-index="6" data-kind="城池格">
+<rect x="90" y="411" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="437" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">6</text>
+<rect x="155" y="417" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="4" />
+<text x="173" y="438.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">4</text>
+<text x="143.75" y="480" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-7" data-index="7" data-kind="聚宝盆">
+<rect x="90" y="308" width="107.5" height="103" rx="0" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<text x="99" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">7</text>
+<rect x="155" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="5" />
+<text x="173" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">5</text>
+<text x="143.75" y="377" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">聚宝盆</text>
+</g>
+<g id="cell-8" data-index="8" data-kind="城池格">
+<rect x="197.5" y="308" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="206.5" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">8</text>
+<rect x="262.5" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="6" />
+<text x="280.5" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">6</text>
+<text x="251.25" y="377" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-9" data-index="9" data-kind="城池格">
+<rect x="305" y="308" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="314" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">9</text>
+<rect x="370" y="314" width="36" height="30" rx="5" fill="#F2A900" stroke="#F2A900" stroke-width="3" data-preview-step="7" />
+<text x="388" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">7</text>
+<rect x="308" y="311" width="101.5" height="97" rx="4" fill="none" stroke="#F2A900" stroke-width="4" />
+<text x="358.75" y="366" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+<text x="358.75" y="399" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">Lv.5</text>
+</g>
+<g id="cell-10" data-index="10" data-kind="心魔格">
+<rect x="412.5" y="308" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="421.5" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">10</text>
+<rect x="477.5" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="8" />
+<text x="495.5" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">8</text>
+<text x="466.25" y="377" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">心魔格</text>
+</g>
+<g id="cell-11" data-index="11" data-kind="夜市摊">
+<rect x="520" y="308" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="529" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">11</text>
+<rect x="585" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="9" />
+<text x="603" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">9</text>
+<text x="573.75" y="362" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">夜市摊</text>
+<g transform="translate(573.75 375) scale(0.28)">
+<path d="M -27 5 L -20 -15 L 20 -15 L 27 5 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="-31" y="5" width="62" height="15" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="-19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<line x1="0" y1="-15" x2="0" y2="-37" stroke="#1F2937" stroke-width="2" />
+<path d="M 0 -37 L 20 -31 L 0 -24 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<text x="573.75" y="402" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">霸主车驾</text>
+</g>
+<g id="cell-12" data-index="12" data-kind="城池格">
+<rect x="627.5" y="308" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="636.5" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">12</text>
+<rect x="692.5" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="10" />
+<text x="710.5" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">10</text>
+<text x="681.25" y="377" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-13" data-index="13" data-kind="补习班">
+<rect x="735" y="308" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="744" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">13</text>
+<rect x="800" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="11" />
+<text x="818" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">11</text>
+<text x="788.75" y="377" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">补习班</text>
+</g>
+<g id="cell-14" data-index="14" data-kind="赌场">
+<rect x="842.5" y="308" width="107.5" height="103" rx="0" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="334" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">14</text>
+<rect x="907.5" y="314" width="36" height="30" rx="5" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.2" data-preview-step="12" />
+<text x="925.5" y="335.5" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">12</text>
+<text x="896.25" y="377" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">赌场</text>
+</g>
+<g id="cell-15" data-index="15" data-kind="城池格">
+<rect x="842.5" y="411" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="437" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">15</text>
+<text x="896.25" y="480" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-16" data-index="16" data-kind="天命格">
+<rect x="842.5" y="514" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="540" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">16</text>
+<text x="896.25" y="583" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">天命格</text>
+</g>
+<g id="cell-17" data-index="17" data-kind="城池格">
+<rect x="842.5" y="617" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="643" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">17</text>
+<text x="896.25" y="686" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-18" data-index="18" data-kind="城池格">
+<rect x="842.5" y="720" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="746" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">18</text>
+<text x="896.25" y="789" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-19" data-index="19" data-kind="心魔格">
+<rect x="842.5" y="823" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="849" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">19</text>
+<text x="896.25" y="892" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">心魔格</text>
+</g>
+<g id="cell-20" data-index="20" data-kind="城池格">
+<rect x="842.5" y="926" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="952" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">20</text>
+<text x="896.25" y="980" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+<g transform="translate(896.25 993) scale(0.28)">
+<path d="M -27 5 L -20 -15 L 20 -15 L 27 5 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="-31" y="5" width="62" height="15" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="-19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<line x1="0" y1="-15" x2="0" y2="-37" stroke="#1F2937" stroke-width="2" />
+<path d="M 0 -37 L 20 -31 L 0 -24 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<text x="896.25" y="1020" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">霸主车驾</text>
+</g>
+<g id="cell-21" data-index="21" data-kind="官府">
+<rect x="842.5" y="1029" width="107.5" height="103" rx="0" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<text x="851.5" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">21</text>
+<text x="896.25" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">官府</text>
+</g>
+<g id="cell-22" data-index="22" data-kind="城池格">
+<rect x="735" y="1029" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="744" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">22</text>
+<text x="788.75" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-23" data-index="23" data-kind="奇遇格">
+<rect x="627.5" y="1029" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="636.5" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">23</text>
+<text x="681.25" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">奇遇格</text>
+</g>
+<g id="cell-24" data-index="24" data-kind="城池格">
+<rect x="520" y="1029" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="529" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">24</text>
+<text x="573.75" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<g id="cell-25" data-index="25" data-kind="夜市摊">
+<rect x="412.5" y="1029" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="421.5" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">25</text>
+<text x="466.25" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">夜市摊</text>
+</g>
+<g id="cell-26" data-index="26" data-kind="章节机制格">
+<rect x="305" y="1029" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="314" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">26</text>
+<text x="358.75" y="1087" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">章节</text>
+<text x="358.75" y="1116" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">机制格</text>
+</g>
+<g id="cell-27" data-index="27" data-kind="城池格">
+<rect x="197.5" y="1029" width="107.5" height="103" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5" />
+<text x="206.5" y="1055" font-size="22" font-weight="650" text-anchor="start" fill="#1F2937">27</text>
+<text x="251.25" y="1098" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城池格</text>
+</g>
+<rect x="197.5" y="411" width="645" height="618" rx="0" fill="#FAF7F0" stroke="#1F2937" stroke-width="1.5" id="board-interior" />
+<text x="520" y="443" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">中原（3 座城）</text>
+<text x="520" y="1017" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">荆州（3 座城）</text>
+<text x="218" y="643" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">益</text>
+<text x="218" y="674" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">州</text>
+<text x="218" y="737" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">4</text>
+<text x="218" y="767" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">座</text>
+<text x="218" y="797" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城</text>
+<text x="822" y="643" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">江</text>
+<text x="822" y="674" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">东</text>
+<text x="822" y="737" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">4</text>
+<text x="822" y="767" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">座</text>
+<text x="822" y="797" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">城</text>
+<rect x="244" y="465" width="552" height="511" rx="12" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="520" y="504" font-size="27" font-weight="650" text-anchor="middle" fill="#1F2937">中央舞台（不切屏）</text>
+<rect x="263" y="530" width="170" height="52" rx="10" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="348" y="564" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">军师·口斗技</text>
+<path d="M 328 582 L 343 595 L 353 582" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="607" y="530" width="170" height="52" rx="10" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="692" y="564" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">军师·口斗技</text>
+<path d="M 672 582 L 687 595 L 697 582" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" />
+<g transform="translate(366 659) scale(0.95)">
+<circle cx="0" cy="-18" r="11" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<path d="M -11 -3 L 11 -3 L 19 28 L -19 28 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<path d="M 312 722 L 323 689 L 398 689 L 418 664 L 432 671 L 420 713 L 400 721 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 313 748 Q 372 780 433 748" fill="none" stroke="#1F2937" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<line x1="335" y1="721" x2="328" y2="752" stroke="#1F2937" stroke-width="3" />
+<line x1="400" y1="721" x2="411" y2="752" stroke="#1F2937" stroke-width="3" />
+<text x="372" y="811" font-size="24" font-weight="550" text-anchor="middle" fill="#1F2937">先锋·骑木马</text>
+<text x="520" y="704" font-size="30" font-weight="650" text-anchor="middle" fill="#1F2937">VS</text>
+<g transform="translate(669 725) scale(0.85)">
+<path d="M -53 32 L -53 -24 L -37 -24 L -37 -39 L -22 -39 L -22 -24 L -7 -24 L -7 -39 L 8 -39 L 8 -24 L 23 -24 L 23 -39 L 38 -39 L 38 -24 L 53 -24 L 53 32 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M -12 32 L -12 8 Q 0 -8 12 8 L 12 32" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<line x1="-64" y1="33" x2="64" y2="33" stroke="#1F2937" stroke-width="2" />
+</g>
+<g transform="translate(669 659) scale(0.85)">
+<circle cx="0" cy="-18" r="11" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<path d="M -11 -3 L 11 -3 L 19 28 L -19 28 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<text x="668" y="811" font-size="24" font-weight="550" text-anchor="middle" fill="#1F2937">敌方太守</text>
+<line x1="266" y1="836" x2="774" y2="836" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="270" y="874" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">斗志</text>
+<text x="770" y="874" font-size="22" font-weight="400" text-anchor="end" fill="#1F2937">0~100 集气槽</text>
+<rect x="270" y="890" width="500" height="24" rx="12" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<rect x="270" y="890" width="325" height="24" rx="12" fill="#2F6FDE" stroke="none" stroke-width="0" />
+<rect x="415" y="931" width="210" height="36" rx="8" fill="#F4EFE6" stroke="#F2A900" stroke-width="2.5" />
+<text x="520" y="958" font-size="24" font-weight="700" text-anchor="middle" fill="#1F2937">胜算 65%</text>
+<text x="90" y="1172" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">构筑与手牌舱 16%</text>
+<rect x="90" y="1185" width="315" height="96" rx="9" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="247.5" y="1242" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">出征名册：先锋、军师</text>
+<rect x="420" y="1185" width="530" height="96" rx="9" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<g font-size="22" font-weight="400" text-anchor="start" fill="#1F2937"><desc>先锋装备栏：兵器、头冠、衣甲、坐骑（即换即融）</desc><text font-size="22" font-weight="400" text-anchor="start" fill="#1F2937" x="436" y="1216">先锋装备栏：</text><text font-size="22" font-weight="400" text-anchor="start" fill="#1F2937" x="436" y="1253">兵器、头冠、衣甲、坐骑（即换即融）</text></g>
+<rect x="90" y="1292" width="420" height="94" rx="9" fill="#FFFFFF" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="106" y="1347" font-size="24" font-weight="550" text-anchor="start" fill="#1F2937">棋盘锦囊 ×3</text>
+<rect x="331" y="1307" width="40" height="63" rx="5" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<line x1="340" y1="1327" x2="362" y2="1327" stroke="#D6CFC2" stroke-width="1.5" />
+<line x1="340" y1="1339" x2="362" y2="1339" stroke="#D6CFC2" stroke-width="1.5" />
+<circle cx="351" cy="1354" r="5" fill="none" stroke="#D6CFC2" stroke-width="1" />
+<rect x="382" y="1307" width="40" height="63" rx="5" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<line x1="391" y1="1327" x2="413" y2="1327" stroke="#D6CFC2" stroke-width="1.5" />
+<line x1="391" y1="1339" x2="413" y2="1339" stroke="#D6CFC2" stroke-width="1.5" />
+<circle cx="402" cy="1354" r="5" fill="none" stroke="#D6CFC2" stroke-width="1" />
+<rect x="433" y="1307" width="40" height="63" rx="5" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<line x1="442" y1="1327" x2="464" y2="1327" stroke="#D6CFC2" stroke-width="1.5" />
+<line x1="442" y1="1339" x2="464" y2="1339" stroke="#D6CFC2" stroke-width="1.5" />
+<circle cx="453" cy="1354" r="5" fill="none" stroke="#D6CFC2" stroke-width="1" />
+<rect x="530" y="1292" width="420" height="94" rx="9" fill="#FFFFFF" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="546" y="1347" font-size="24" font-weight="550" text-anchor="start" fill="#1F2937">战斗奇策 ×2</text>
+<rect x="771" y="1307" width="40" height="63" rx="5" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<line x1="780" y1="1327" x2="802" y2="1327" stroke="#D6CFC2" stroke-width="1.5" />
+<line x1="780" y1="1339" x2="802" y2="1339" stroke="#D6CFC2" stroke-width="1.5" />
+<circle cx="791" cy="1354" r="5" fill="none" stroke="#D6CFC2" stroke-width="1" />
+<rect x="822" y="1307" width="40" height="63" rx="5" fill="#F4EFE6" stroke="#1F2937" stroke-width="1.5" />
+<line x1="831" y1="1327" x2="853" y2="1327" stroke="#D6CFC2" stroke-width="1.5" />
+<line x1="831" y1="1339" x2="853" y2="1339" stroke="#D6CFC2" stroke-width="1.5" />
+<circle cx="842" cy="1354" r="5" fill="none" stroke="#D6CFC2" stroke-width="1" />
+<text x="90" y="1432" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">拇指热区 22%</text>
+<rect x="300" y="1470" width="420" height="180" rx="25" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" />
+<rect x="300" y="1460" width="420" height="180" rx="25" fill="#FFFFFF" stroke="#1F2937" stroke-width="3" />
+<rect x="449" y="1483" width="49" height="49" rx="9" fill="#FFFFFF" stroke="#1F2937" stroke-width="2.2" />
+<circle cx="462" cy="1496" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<circle cx="473.5" cy="1507.5" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<circle cx="485" cy="1519" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<rect x="517" y="1483" width="49" height="49" rx="9" fill="#FFFFFF" stroke="#1F2937" stroke-width="2.2" />
+<circle cx="530" cy="1496" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<circle cx="553" cy="1496" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<circle cx="530" cy="1519" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<circle cx="553" cy="1519" r="3.2" fill="#1F2937" stroke="#1F2937" stroke-width="0" />
+<text x="510" y="1596" font-size="34" font-weight="700" text-anchor="middle" fill="#1F2937">掷骰 ROLL</text>
+<text x="510" y="1686" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">长按连掷</text>
+<circle cx="178" cy="1522" r="45" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="178" y="1530" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">命格</text>
+<circle cx="178" cy="1641" r="45" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="178" y="1649" font-size="24" font-weight="400" text-anchor="middle" fill="#1F2937">政见</text>
+<rect x="745" y="1480" width="205" height="195" rx="13" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<g font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937"><desc>加注 ×1 / ×2 / ×3</desc><text font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937" x="847.5" y="1520">加注 </text><text font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937" x="847.5" y="1564">×1 / ×2 / ×3</text></g>
+<rect x="756" y="1593" width="57" height="53" rx="7" fill="#FFFFFF" stroke="#F2A900" stroke-width="2.5" />
+<text x="784.5" y="1628" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">×1</text>
+<rect x="819" y="1593" width="57" height="53" rx="7" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="847.5" y="1628" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">×2</text>
+<rect x="882" y="1593" width="57" height="53" rx="7" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="910.5" y="1628" font-size="22" font-weight="400" text-anchor="middle" fill="#1F2937">×3</text>
+<g id="annotation-column" data-x="1030" data-y="150" data-width="700" data-height="1600">
+<rect x="1030" y="150" width="700" height="324" rx="16" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="1056" y="190" font-size="27" font-weight="650" text-anchor="start" fill="#1F2937">卡片 A：9:16 竖屏四段屏占比总账</text>
+<line x1="1056" y1="208" x2="1704" y2="208" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1056" y="238" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">顶部状态栏 8%</text>
+<rect x="1550" y="221" width="154" height="17" rx="4" fill="#F4EFE6" stroke="none" stroke-width="0" />
+<rect x="1550" y="221" width="22.8148" height="17" rx="4" fill="#1F2937" stroke="none" stroke-width="0" />
+<text x="1056" y="274" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">方环棋盘加中央舞台 54%</text>
+<rect x="1550" y="257" width="154" height="17" rx="4" fill="#F4EFE6" stroke="none" stroke-width="0" />
+<rect x="1550" y="257" width="154" height="17" rx="4" fill="#1F2937" stroke="none" stroke-width="0" />
+<text x="1056" y="310" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">构筑与手牌舱 16%</text>
+<rect x="1550" y="293" width="154" height="17" rx="4" fill="#F4EFE6" stroke="none" stroke-width="0" />
+<rect x="1550" y="293" width="45.6296" height="17" rx="4" fill="#1F2937" stroke="none" stroke-width="0" />
+<text x="1056" y="346" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">拇指热区 22%</text>
+<rect x="1550" y="329" width="154" height="17" rx="4" fill="#F4EFE6" stroke="none" stroke-width="0" />
+<rect x="1550" y="329" width="62.7407" height="17" rx="4" fill="#1F2937" stroke="none" stroke-width="0" />
+<line x1="1056" y1="365" x2="1704" y2="365" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1056" y="399" font-size="25" font-weight="650" text-anchor="start" fill="#1F2937">8% + 54% + 16% + 22% = 100%</text>
+<text x="1056" y="447" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">单手大拇指操作集中于屏幕下方 38%</text>
+<rect x="1030" y="494" width="700" height="460" rx="16" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="1056" y="534" font-size="27" font-weight="650" text-anchor="start" fill="#1F2937">卡片 B：棋盘要素与示例城拆解</text>
+<line x1="1056" y1="552" x2="1704" y2="552" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1056" y="585" font-size="22" font-weight="400" text-anchor="start" fill="#1F2937">落点预览：前方 2~12 步浮现角标，7 点高亮</text>
+<rect x="1056" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1081.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">2</text>
+<rect x="1115" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1140.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">3</text>
+<rect x="1174" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1199.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">4</text>
+<rect x="1233" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1258.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">5</text>
+<rect x="1292" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1317.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">6</text>
+<rect x="1351" y="602" width="51" height="40" rx="6" fill="#F2A900" stroke="#F2A900" stroke-width="3" />
+<text x="1376.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">7</text>
+<rect x="1410" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1435.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">8</text>
+<rect x="1469" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1494.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">9</text>
+<rect x="1528" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1553.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">10</text>
+<rect x="1587" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1612.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">11</text>
+<rect x="1646" y="602" width="51" height="40" rx="6" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1671.5" y="630" font-size="22" font-weight="650" text-anchor="middle" fill="#1F2937">12</text>
+<text x="1056" y="680" font-size="22" font-weight="400" text-anchor="start" fill="#1F2937">主公与两枚霸主车驾同步落子（1 刻 = 1 掷）</text>
+<g transform="translate(1090 717) scale(0.45)">
+<circle cx="0" cy="-18" r="11" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<path d="M -11 -3 L 11 -3 L 19 28 L -19 28 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M -13 -33 L -12 -44 L -4 -38 L 0 -47 L 5 -38 L 13 -44 L 12 -33 Z" fill="#F2A900" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g transform="translate(1198 715) scale(0.5)">
+<path d="M -27 5 L -20 -15 L 20 -15 L 27 5 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="-31" y="5" width="62" height="15" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="-19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<line x1="0" y1="-15" x2="0" y2="-37" stroke="#1F2937" stroke-width="2" />
+<path d="M 0 -37 L 20 -31 L 0 -24 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g transform="translate(1300 715) scale(0.5)">
+<path d="M -27 5 L -20 -15 L 20 -15 L 27 5 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="-31" y="5" width="62" height="15" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="-19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<circle cx="19" cy="23" r="7" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<line x1="0" y1="-15" x2="0" y2="-37" stroke="#1F2937" stroke-width="2" />
+<path d="M 0 -37 L 20 -31 L 0 -24 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<line x1="1125" y1="719" x2="1150" y2="719" stroke="#1F2937" stroke-width="1.5" />
+<line x1="1235" y1="719" x2="1256" y2="719" stroke="#1F2937" stroke-width="1.5" />
+<rect x="1056" y="752" width="648" height="142" rx="10" fill="#FAF7F0" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1075" y="786" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">示例城：许昌城池格</text>
+<g transform="translate(1136 847) scale(0.63)">
+<path d="M -53 32 L -53 -24 L -37 -24 L -37 -39 L -22 -39 L -22 -24 L -7 -24 L -7 -39 L 8 -39 L 8 -24 L 23 -24 L 23 -39 L 38 -39 L 38 -24 L 53 -24 L 53 32 Z" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M -12 32 L -12 8 Q 0 -8 12 8 L 12 32" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+<line x1="-64" y1="33" x2="64" y2="33" stroke="#1F2937" stroke-width="2" />
+</g>
+<text x="1245" y="828" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">规模 Lv.5</text>
+<text x="1490" y="828" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">箭塔</text>
+<text x="1490" y="873" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">太守</text>
+<line x1="1172" y1="832" x2="1226" y2="821" stroke="#1F2937" stroke-width="1.5" />
+<path d="M 1172 842 L 1212 842 L 1212 800 L 1465 800 L 1465 821" fill="none" stroke="#D6CFC2" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" />
+<line x1="1172" y1="854" x2="1465" y2="866" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="1056" y="931" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">章节机制格：随章节规则变化</text>
+<rect x="1030" y="974" width="700" height="470" rx="16" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="1056" y="1014" font-size="27" font-weight="650" text-anchor="start" fill="#1F2937">卡片 C：踩城四择弹窗线框</text>
+<line x1="1056" y1="1032" x2="1704" y2="1032" stroke="#D6CFC2" stroke-width="1.5" />
+<rect x="1054" y="1050" width="652" height="370" rx="13" fill="#FAF7F0" stroke="#1F2937" stroke-width="2" />
+<text x="1080" y="1086" font-size="28" font-weight="700" text-anchor="start" fill="#1F2937">踩城四择</text>
+<rect x="1513" y="1061" width="168" height="38" rx="8" fill="#FFFFFF" stroke="#F2A900" stroke-width="2.5" />
+<text x="1597" y="1089" font-size="24" font-weight="700" text-anchor="middle" fill="#1F2937">胜算 65%</text>
+<rect x="1078" y="1114" width="604" height="60" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.8" data-choice-order="1" />
+<text x="1101" y="1153" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">1</text>
+<text x="1380" y="1153" font-size="26" font-weight="550" text-anchor="middle" fill="#1F2937">缴交过路费</text>
+<rect x="1078" y="1186" width="604" height="60" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.8" data-choice-order="2" />
+<text x="1101" y="1225" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">2</text>
+<text x="1380" y="1225" font-size="26" font-weight="550" text-anchor="middle" fill="#1F2937">骑木马单挑</text>
+<rect x="1078" y="1258" width="604" height="60" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.8" data-choice-order="3" />
+<text x="1101" y="1297" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">3</text>
+<text x="1380" y="1297" font-size="26" font-weight="550" text-anchor="middle" fill="#1F2937">地形野战</text>
+<rect x="1078" y="1330" width="604" height="60" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.8" data-choice-order="4" />
+<text x="1101" y="1369" font-size="24" font-weight="650" text-anchor="start" fill="#1F2937">4</text>
+<text x="1380" y="1369" font-size="26" font-weight="550" text-anchor="middle" fill="#1F2937">机关攻城</text>
+<rect x="1030" y="1464" width="700" height="286" rx="16" fill="#FFFFFF" stroke="#1F2937" stroke-width="2" />
+<text x="1056" y="1504" font-size="27" font-weight="650" text-anchor="start" fill="#1F2937">卡片 D：三基因视觉编码图例</text>
+<line x1="1056" y1="1522" x2="1704" y2="1522" stroke="#D6CFC2" stroke-width="1.5" />
+<rect x="1056" y="1534" width="46" height="42" rx="6" fill="#D9483B" stroke="none" stroke-width="0" />
+<text x="1124" y="1565" font-size="24" font-weight="550" text-anchor="start" fill="#1F2937">富甲朱 #D9483B</text>
+<rect x="1056" y="1598" width="46" height="42" rx="6" fill="#2F6FDE" stroke="none" stroke-width="0" />
+<text x="1124" y="1629" font-size="24" font-weight="550" text-anchor="start" fill="#1F2937">虚拟人生靛 #2F6FDE</text>
+<rect x="1056" y="1662" width="46" height="42" rx="6" fill="#F2A900" stroke="none" stroke-width="0" />
+<text x="1124" y="1693" font-size="24" font-weight="550" text-anchor="start" fill="#1F2937">Heroll 琥珀 #F2A900</text>
+</g>
+<rect x="70" y="1788" width="1660" height="110" rx="12" fill="#F4EFE6" stroke="#D6CFC2" stroke-width="1.5" />
+<text x="100" y="1828" font-size="25" font-weight="650" text-anchor="start" fill="#1F2937">8 × 8 方环棋盘 · 共 28 格 · 顺时针编号 0~27</text>
+<text x="100" y="1872" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">14 城 + 2 天命 + 2 奇遇 + 2 心魔 + 2 夜市摊 + 1 补习班 + 1 章节机制格</text>
+<line x1="70" y1="1930" x2="1730" y2="1930" stroke="#1F2937" stroke-width="2" />
+<text x="900" y="1973" font-size="28" font-weight="550" text-anchor="middle" fill="#1F2937">结构示意，不代表最终美术风格</text>
+</svg>

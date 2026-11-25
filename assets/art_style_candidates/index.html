@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>《富甲天下：十八啦！》美术方向挑选台（B+A 融合聚焦置顶 + A~E 全景对照）</title>
+  <style>
+    :root {
+      --bg: #FAF7F0;
+      --card: #FFFFFF;
+      --card-alt: #F4EFE5;
+      --ink: #1F2937;
+      --muted: #5B6472;
+      --border: #DDD5C7;
+      --red: #D9483B;
+      --blue: #2F6FDE;
+      --amber: #D98E00;
+      --gold-bg: #FFF9EB;
+      --radius: 14px;
+      --shadow: 0 6px 20px rgba(31, 41, 55, 0.07);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+      padding: 26px 24px 56px;
+    }
+
+    /* 遵循 AGENTS.md：页面处于后台隐藏状态时停止一切过渡与视觉活动 */
+    html[data-page-hidden="true"] *,
+    html[data-page-hidden="true"] *::before,
+    html[data-page-hidden="true"] *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .container {
+      max-width: 1760px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-top: 5px solid var(--red);
+      border-radius: var(--radius);
+      padding: 22px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .brand-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red);
+      background: #FDECEB;
+      border: 1px solid #F6C5C1;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin-top: 6px;
+      max-width: 1180px;
+    }
+
+    /* 置顶聚焦专区：B+A 融合方案 */
+    .spotlight {
+      background: linear-gradient(180deg, #FFFDF8 0%, #FFFFFF 100%);
+      border: 2.5px solid var(--red);
+      border-radius: 16px;
+      padding: 22px 26px 26px;
+      box-shadow: 0 10px 28px rgba(217, 72, 59, 0.10);
+      margin-bottom: 22px;
+    }
+
+    .spotlight-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+
+    .spotlight h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .spotlight-desc {
+      font-size: 14px;
+      color: #374151;
+      margin-top: 4px;
+      max-width: 1020px;
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.05fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 1200px) {
+      .spotlight-grid { grid-template-columns: 1fr 1fr; }
+      .spotlight-rationale { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 760px) {
+      .spotlight-grid { grid-template-columns: 1fr; }
+    }
+
+    .ba-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .ba-card-head {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card-alt);
+    }
+
+    .ba-card-head strong {
+      display: block;
+      font-size: 15.5px;
+      color: var(--ink);
+    }
+
+    .ba-card-head span {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .ba-rationale {
+      background: var(--card-alt);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13.5px;
+    }
+
+    .ba-rationale h3 {
+      font-size: 16.5px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .ba-pill-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .ba-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12.5px;
+    }
+
+    .ba-pill span {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .ba-pill strong {
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .quick-compare-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      box-shadow: 0 4px 14px rgba(31, 41, 55, 0.06);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button, select {
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 14px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    button:hover, select:hover {
+      border-color: var(--ink);
+      background: #EFE9DC;
+    }
+
+    button.active {
+      background: var(--ink);
+      color: #FFFFFF;
+      border-color: var(--ink);
+    }
+
+    button.copy-btn {
+      background: var(--red);
+      color: #FFFFFF;
+      border-color: var(--red);
+    }
+
+    button.copy-btn:hover {
+      background: #B8372B;
+      border-color: #B8372B;
+    }
+
+    .pick-summary {
+      font-size: 13.5px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-heading {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 8px 0 14px;
+      color: var(--ink);
+    }
+
+    /* 五向并排网格 */
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 1480px) {
+      .grid-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .grid-5 { grid-template-columns: 1fr; }
+    }
+
+    .style-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s ease;
+    }
+
+    .style-card.selected {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(217, 72, 59, 0.2), var(--shadow);
+    }
+
+    .card-head {
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .code-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 30px;
+      padding: 0 7px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 14px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .card-title-wrap { flex: 1; }
+    .card-title { font-size: 15.5px; font-weight: 800; line-height: 1.3; }
+    .card-anchor { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+    .pick-toggle {
+      padding: 5px 10px;
+      font-size: 12.5px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .style-card.selected .pick-toggle,
+    .pick-toggle.selected {
+      background: var(--red);
+      color: #FFFFFF;
+      border-color: var(--red);
+    }
+
+    .img-stage {
+      position: relative;
+      background: #F3EDE0;
+      aspect-ratio: 2 / 3;
+      width: 100%;
+      overflow: hidden;
+      cursor: zoom-in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 96px 硬门槛瞥视模拟模式 */
+    body.thumb-mode .img-stage {
+      aspect-ratio: auto;
+      height: 220px;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    body.thumb-mode .img-stage img {
+      width: 96px;
+      height: 144px;
+      object-fit: cover;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      background: rgba(31, 41, 55, 0.78);
+      color: #FFFFFF;
+      font-size: 12px;
+      padding: 4px 9px;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .card-body {
+      padding: 14px 16px 18px;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .metrics-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: var(--card-alt);
+      padding: 9px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .metrics-mini div span {
+      color: var(--muted);
+      display: block;
+      font-size: 11px;
+    }
+
+    .metrics-mini div strong {
+      color: var(--ink);
+      font-size: 12.5px;
+    }
+
+    .pros-cons p {
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    .pros-cons .tag-pro { color: #166534; font-weight: 700; }
+    .pros-cons .tag-con { color: #9A3412; font-weight: 700; }
+    .pros-cons .tag-aud { color: var(--blue); font-weight: 700; }
+
+    /* 双图同屏比对台 */
+    .compare-panel {
+      display: none;
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .compare-panel.visible { display: block; }
+
+    .compare-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+
+    .compare-slot {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .compare-slot img {
+      width: 100%;
+      max-height: 840px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #F3EDE0;
+      cursor: zoom-in;
+      display: block;
+      margin: 12px 0;
+    }
+
+    /* 第八篇六维评估总表 */
+    .matrix-section {
+      margin-top: 28px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    .matrix-section h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .matrix-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 980px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--card-alt);
+      font-weight: 700;
+    }
+
+    tr.highlight-col {
+      background: #FFF9F5;
+    }
+
+    /* 灯箱放大器 */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.88);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 94vw;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lightbox-inner img {
+      max-width: 90vw;
+      max-height: 84vh;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #FAF5EB;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .lightbox-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #FFFFFF;
+      font-size: 14px;
+    }
+
+    .lightbox-bar button {
+      background: rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .lightbox-bar button:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="brand-tag">《富甲天下：十八啦！》 · 美术风格同构基准与实机验证台</span>
+      <h1>候选美术方向挑选台（B+A 2.5D 立牌融合置顶 + A~E 全景对照）</h1>
+      <p class="subtitle">
+        聚焦最新混合验证方向 <strong>「B 的 2D 大头漫画爆笑颜艺 + A 的 3D 潮玩立体城池沙盘」</strong>（顶栏双图直看角色设定卡与 9:16 竖屏许昌实机帧），下方完整保留原 A~E 五向同构样图，支持一键拉入双图大屏同屏比对。
+      </p>
+    </header>
+
+    <div class="toolbar">
+      <div class="btn-group">
+        <button id="btnGrid" class="active" type="button">全景浏览模式</button>
+        <button id="btnCompare" type="button">AB 双图大屏比对台</button>
+        <button id="btnThumb" type="button">96px 小尺寸瞥视模拟</button>
+      </div>
+      <div class="pick-summary">
+        <span id="pickStatus">已默认勾选聚焦方向：方向 B+A</span>
+        <button id="btnCopy" class="copy-btn" type="button">复制意向代号</button>
+      </div>
+    </div>
+
+    <section id="comparePanel" class="compare-panel" aria-label="双图同屏比对台">
+      <div class="compare-controls">
+        <label for="selLeft">左侧样图：</label>
+        <select id="selLeft"></select>
+        <button id="btnSwap" type="button">⇄ 左右互换</button>
+        <label for="selRight">右侧样图：</label>
+        <select id="selRight"></select>
+        <button id="btnCloseCompare" type="button">收起比对台</button>
+      </div>
+      <div class="compare-grid">
+        <div id="slotLeft" class="compare-slot"></div>
+        <div id="slotRight" class="compare-slot"></div>
+      </div>
+    </section>
+
+    <!-- 置顶专区：B+A 融合新方向 -->
+    <section class="spotlight" aria-label="B+A 融合新方向置顶展示">
+      <div class="spotlight-head">
+        <div>
+          <span class="spotlight-badge">★ 聚焦混合新方向 · B+A 融合方案</span>
+          <h2>2D 粗墨线大头漫画立牌（方向 B）× 3D 潮玩立体城池沙盘（方向 A）</h2>
+          <p class="spotlight-desc">
+            核心融合语法：人物采用光谱《富甲天下 3/4》正统 2 头身粗黑墨线手绘漫画，外加<strong>厚实模切白边立牌（Die-Cut Standee）与柔和 3D 落地阴影</strong>，稳稳立于《MONOPOLY GO!》级温润 3D 立体城池棋盘与物理双骰之上——兼顾无上限颜艺喜剧感、立体掷骰置业爽感与可控角色量产成本！
+          </p>
+        </div>
+        <button id="btnPickBA" class="pick-toggle selected" type="button" data-pick="B+A">✓ 已选 B+A</button>
+      </div>
+
+      <div class="spotlight-grid">
+        <div class="ba-card">
+          <div class="ba-card-head">
+            <strong>① M05 赵云｜B+A 融合版同构设定卡</strong>
+            <span>2D 粗墨线带白边大头立牌 × 3D 弹簧木马元宝底座 &amp; 3D 城池格</span>
+          </div>
+          <div class="img-stage" data-zoom="0">
+            <img src="./style_BA_fusion_zhaoyun.png" alt="B+A 融合版 赵云设定卡" />
+            <span class="zoom-hint">点击高清放大</span>
+          </div>
+        </div>
+
+        <div class="ba-card">
+          <div class="ba-card-head">
+            <strong>② 9:16 竖屏实机基准帧（立项书 8.4 许昌命题）</strong>
+            <span>3D 许昌巨城棋盘 + 中央舞台张飞折凳骑木马单挑吕布 + 刘备肉痛四择</span>
+          </div>
+          <div class="img-stage" data-zoom="1">
+            <img src="./style_BA_fusion_xuchang_gameplay.png" alt="B+A 融合版 9:16 竖屏实机基准帧" />
+            <span class="zoom-hint">点击高清放大</span>
+          </div>
+        </div>
+
+        <div class="ba-rationale spotlight-rationale">
+          <h3>为什么「B+A 桌游立牌融合」精准命中立项痛点？</h3>
+          <div class="ba-pill-list">
+            <div class="ba-pill">
+              <span>颜艺喜剧上限（继承 B）</span>
+              <strong>★4~5 无上限五官变形</strong>
+            </div>
+            <div class="ba-pill">
+              <span>掷骰置业体积感（继承 A）</span>
+              <strong>★4~5 3D 物理双骰与拔高城楼</strong>
+            </div>
+            <div class="ba-pill">
+              <span>立绘与小人统一度（消除 E 痛点）</span>
+              <strong>★5 同维大头漫画，零割裂</strong>
+            </div>
+            <div class="ba-pill">
+              <span>单角色量产成本与周期</span>
+              <strong>约 0.95~1.10（免全身 3D 角色绑定）</strong>
+            </div>
+          </div>
+          <p><strong>1. 解决纯 A（全 3D）的表情偏乖与高周期难题：</strong>所有主公/名将/心魔怪全部走 2D Spine 手绘大头漫画，下巴掉地、瀑布汗、折凳拍脸、花裤衩跑路无需昂贵的 3D 面部骨骼绑定，5~6 周即可量产一位旗舰主公。</p>
+          <p><strong>2. 解决纯 B（全 2D）的掷骰与盖楼缺体积痛点：</strong>玩家一局按 60 次的 2D6 双骰碰撞、Lv.1→Lv.5 城池节节拔高、喷金铜钱全部拥有《MONOPOLY GO!》级 3D 物理触感。</p>
+          <p><strong>3. 模切白边 + 3D 接触阴影消弭跨维接缝：</strong>借鉴《纸片马里奥》与现代精品数字桌游美学，一圈厚白卡立牌边缘让 2D 角色在 3D 沙盘上既醒目高可读（28格不糊），又浑然天成。</p>
+          <div class="quick-compare-btns">
+            <button type="button" data-quick-pair="0,3">大屏对比：B+A vs 纯 B（2D漫画）</button>
+            <button type="button" data-quick-pair="0,2">大屏对比：B+A vs 纯 A（3D潮玩）</button>
+            <button type="button" data-quick-pair="0,6">大屏对比：B+A vs 原 E（7头身混合）</button>
+            <button type="button" data-quick-pair="0,1">大屏并排：B+A 赵云卡 + 9:16 实机帧</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-heading">原 A~E 五大基础候选方向同构对照（M05 赵云｜使命必达外送员）</h2>
+    <main id="cardsGrid" class="grid-5"></main>
+
+    <section class="matrix-section">
+      <h2>B+A 融合方案与原 A~E 六维区间全景对照表</h2>
+      <p class="matrix-note">注：星级 ★1~★5 为区间评估；成本系数以方向 B（每季美术约 22 人月）为 1.00 基准。</p>
+      <table>
+        <thead>
+          <tr>
+            <th>评估维度</th>
+            <th style="background:#FDECEB;color:#991B1B;">★ B+A 融合（2D大头立牌 + 3D城池棋盘）</th>
+            <th>A 现代潮玩盲盒 3D</th>
+            <th>B 手绘漫画大头 2D</th>
+            <th>C 市井剪纸民俗绘本</th>
+            <th>D 高清像素戏谑 HD-2D</th>
+            <th>E 原混合（7头身2D + 3D盘2D小人）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>① 颜艺喜剧上限</strong></td>
+            <td style="background:#FFF9F5;"><strong>★4~5</strong>｜2D 手绘逐帧换脸，变形无上限</td>
+            <td>★3~4｜受限于 3D 骨骼形变预算</td>
+            <td>★4~5｜逐帧换图，变形无上限</td>
+            <td>★3~4｜贴片换脸干脆</td>
+            <td>★2~4｜靠像素符号与独立头像</td>
+            <td>★4~5｜局外反差萌 + 局内同 B</td>
+          </tr>
+          <tr>
+            <td><strong>② 9:16 小屏可读性</strong></td>
+            <td style="background:#FFF9F5;"><strong>★4~5</strong>｜模切白边将 2D 角色从 3D 棋盘干净剥离</td>
+            <td>★3~4｜须控材质噪点加描边</td>
+            <td>★4｜粗黑轮廓大头清晰</td>
+            <td>★3~5｜需防花纹抢品阶色通道</td>
+            <td>★4~5｜像素为小屏而生</td>
+            <td>★3~4｜需处理立绘与小人跨维认知</td>
+          </tr>
+          <tr>
+            <td><strong>③ 掷骰置业体感与溢价</strong></td>
+            <td style="background:#FFF9F5;"><strong>★4</strong>｜3D 物理双骰与立体巨城质感拉满，情怀与休闲通吃</td>
+            <td>★3~4｜盲盒手办收藏感强</td>
+            <td>★2~4｜纯 2D 盘面体积感偏弱</td>
+            <td>★2~3｜独特艺术感强，“豪奢感”偏弱</td>
+            <td>★2~3｜纯像素难撑神品高溢价</td>
+            <td>★4~5｜7头身旗舰立绘撑满二游式溢价</td>
+          </tr>
+          <tr>
+            <td><strong>④ 角色量产成本与周期</strong></td>
+            <td style="background:#FFF9F5;"><strong>1.00~1.12</strong>｜单主公 5~6 周（仅棋盘用轻 3D 模块复用）</td>
+            <td>1.05~1.30｜8~10 周｜前置最重</td>
+            <td>1.00 基准｜5~6 周｜前置最轻</td>
+            <td>0.75~0.95｜4~5 周</td>
+            <td>0.80~1.05｜4~6 周</td>
+            <td>1.15~1.30｜7~9 周（双套角色资产）</td>
+          </tr>
+          <tr>
+            <td><strong>⑤ 买量首屏点击潜力</strong></td>
+            <td style="background:#FFF9F5;"><strong>★4~5</strong>｜3D 大富翁爽感 + 光谱爆笑木马折凳单挑同框</td>
+            <td>★3~5｜泛休闲广但同质化高</td>
+            <td>★3~4｜老光谱情怀极高</td>
+            <td>★2~4｜吸睛但转化两极</td>
+            <td>★2~4｜肉鸽刷子认亲</td>
+            <td>★3~4｜立绘向与实机向双剪</td>
+          </tr>
+          <tr>
+            <td><strong>⑥ 市场风格独占性</strong></td>
+            <td style="background:#FFF9F5;"><strong>★4</strong>｜2.5D 台味大头漫画立牌桌游感，鲜明区别于换皮三国</td>
+            <td>★2~3｜品类主流拥挤画法</td>
+            <td>★3~4｜光谱正统记忆点</td>
+            <td>★4~5｜几乎无人同台</td>
+            <td>★3｜像素肉鸽常见</td>
+            <td>★2~3｜卡牌手游通行配置</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      《富甲天下：十八啦！》美术候选方案对比挑选页 · 点击任意样图可全屏高清检视细节（支持键盘 ← / → 轮播全部 7 张样图、Esc 关闭）
+    </footer>
+  </div>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="高清样图预览">
+    <div class="lightbox-inner">
+      <img id="lbImg" src="" alt="" />
+      <div class="lightbox-bar">
+        <button id="lbPrev" type="button">← 上一张</button>
+        <span id="lbCaption"></span>
+        <button id="lbNext" type="button">下一张 →</button>
+        <button id="lbClose" type="button">关闭 (Esc)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // 全部可比对与灯箱展示的 7 张样图（0,1 为置顶 B+A 双图；2~6 为原 A~E 五图）
+      const ALL_ITEMS = [
+        {
+          code: "B+A",
+          color: "#D9483B",
+          name: "B+A 融合风 · 赵云同构设定卡",
+          file: "./style_BA_fusion_zhaoyun.png",
+          anchor: "2D 粗墨线模切白边大头立牌 × 3D 潮玩弹簧木马底座与 3D 城池格",
+          face: "★4~5",
+          read: "★4~5",
+          gacha: "★4",
+          cost: "1.00~1.12 (5~6周)",
+          pros: "2D 大头漫画颜艺无上限 + 模切白边立牌与《MONOPOLY GO!》级 3D 城池/双骰无缝咬合，免除 3D 角色面部绑定高成本。"
+        },
+        {
+          code: "B+A 实机",
+          color: "#B91C1C",
+          name: "B+A 融合风 · 9:16 竖屏许昌实机帧",
+          file: "./style_BA_fusion_xuchang_gameplay.png",
+          anchor: "立项书 8.4 同构命题：刘备踩曹操 Lv.5 许昌 + 张飞举折凳骑木马单挑吕布",
+          face: "★4~5",
+          read: "★4~5",
+          gacha: "★4",
+          cost: "实机单帧验证",
+          pros: "直观验证 9:16 竖屏下外圈 3D 立体棋盘、中央不切屏 2D 立牌骑木马对决、场边军师互喷与底部踩城四择同屏呼吸感。"
+        },
+        {
+          code: "A",
+          color: "#D9483B",
+          name: "现代潮玩盲盒 3D 风",
+          file: "./style_A_blindbox_3d_zhaoyun.png",
+          anchor: "《MONOPOLY GO!》材质光影 × 台湾庙会公仔/布袋戏偶比例",
+          face: "★3~4",
+          read: "★3~4",
+          gacha: "★3~4",
+          cost: "1.05~1.30 (8~10周)",
+          pros: "掷骰碰撞、城池拔高与喷金铜钱体积感最强；哑光 PVC 手办质感讨喜，风物贴纸可直接模型渲染。",
+          cons: "3D 管线前置最重（10~14人月）；夸张崩坏颜艺需额外骨骼形变绑定预算，否则表情易偏乖。",
+          aud: "③ 掷骰收集休闲客为主，② 竖屏肉鸽刷子次之"
+        },
+        {
+          code: "B",
+          color: "#2F6FDE",
+          name: "高帧率手绘漫画大头 2D 风",
+          file: "./style_B_comic_bighead_2d_zhaoyun.png",
+          anchor: "光谱《富甲天下 3/4》大头 Q 版正统进化 × 现代 2D Spine",
+          face: "★4~5",
+          read: "★4",
+          gacha: "★2~4",
+          cost: "1.00 基准 (5~6周)",
+          pros: "最贴近光谱原作灵魂记忆！2D 手绘五官变形无上限，「单挑放水」「忘带阿斗」爆笑颜艺张力天花板，管线前置最轻。",
+          cons: "纯 2D 棋盘在掷骰碰撞与城池拔高上的物理体积感弱于 3D 沙盘。",
+          aud: "① 老光谱情怀返场客、看重喜剧颜艺的核心玩家"
+        },
+        {
+          code: "C",
+          color: "#B45309",
+          name: "市井剪纸民俗绘本风",
+          file: "./style_C_folk_papercut_zhaoyun.png",
+          anchor: "台湾夜市霓虹招牌配色 × 民俗木刻版画/雕花剪纸/皮影戏混搭",
+          face: "★3~4",
+          read: "★3~5",
+          gacha: "★2~3",
+          cost: "0.75~0.95 (4~5周)",
+          pros: "与夜市摊、庙会棋盘、市井风物志贴纸天然一体！纸层叠影与皮影铆钉辨识度独步市场（独占性 ★4~5），恶搞符号化尺度稳。",
+          cons: "前期需立严密风格规范防花纹抢夺品阶色通道；传统商业卡牌“豪奢感”较弱。",
+          aud: "③ 偏爱集册与独特审美的玩家、港澳台及市井文化受众"
+        },
+        {
+          code: "D",
+          color: "#0F766E",
+          name: "高清像素戏谑 HD-2D 风",
+          file: "./style_D_pixel_hd2d_zhaoyun.png",
+          anchor: "《Heroll》高密度精致像素 × 现代 3D 暖色体积光与喷金粒子",
+          face: "★2~4",
+          read: "★4~5",
+          gacha: "★2~3",
+          cost: "0.80~1.05 (4~6周)",
+          pros: "像素棋子天生为小尺寸高可读而生，28 格同屏最锐利不糊；3D 金光配高对比像素喷金爽感极强。",
+          cons: "小人颜艺依赖像素符号，高精度表情需另配像素头像框；纯像素较难独立支撑高单价抽卡溢价。",
+          aud: "② 竖屏肉鸽刷子（《Heroll》等核心受众）"
+        },
+        {
+          code: "E",
+          color: "#7C3AED",
+          name: "原混合方案（7头身2D立绘 + 3D盘2D小人）",
+          file: "./style_E_hybrid_2d3d_zhaoyun.png",
+          anchor: "局外 7 头身商业旗舰 2D 立绘 + 局内轻 3D 棋盘配 2.5 头身 2D 小人",
+          face: "★4~5",
+          read: "★3~4",
+          gacha: "★4~5",
+          cost: "1.15~1.30 (7~9周)",
+          pros: "局外 7 头身帅气赵云配阿斗外送箱形成强烈反差萌并撑满 SSR/UR 抽卡价值；局内保留 3D 棋盘与 2D 木马小人。",
+          cons: "需维护 7 头身立绘与 2.5 头身小人两套跨比例资产，成本系数最高。",
+          aud: "习惯为二游/卡牌立绘付费的「田侨仔」「大头家」"
+        }
+      ];
+
+      const BASE_STYLES = ALL_ITEMS.slice(2); // A~E
+      const selected = new Set(["B+A"]);
+      let currentLbIndex = 0;
+
+      const cardsGrid = document.getElementById("cardsGrid");
+      const pickStatus = document.getElementById("pickStatus");
+      const btnPickBA = document.getElementById("btnPickBA");
+      const selLeft = document.getElementById("selLeft");
+      const selRight = document.getElementById("selRight");
+      const slotLeft = document.getElementById("slotLeft");
+      const slotRight = document.getElementById("slotRight");
+      const comparePanel = document.getElementById("comparePanel");
+      const lightbox = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbCaption = document.getElementById("lbCaption");
+
+      function updatePickStatus() {
+        const list = Array.from(selected);
+        if (list.length === 0) {
+          pickStatus.textContent = "当前未勾选意向方向（可点击卡片右上角「+ 候选」多选）";
+        } else {
+          pickStatus.textContent = "当前已选方向：" + list.map(c => "方向 " + c).join("、");
+        }
+        const baSel = selected.has("B+A");
+        btnPickBA.classList.toggle("selected", baSel);
+        btnPickBA.textContent = baSel ? "✓ 已选 B+A" : "+ 候选 B+A";
+      }
+
+      function toggleSelect(code) {
+        if (selected.has(code)) {
+          selected.delete(code);
+        } else {
+          selected.add(code);
+        }
+        renderGrid();
+        updatePickStatus();
+      }
+
+      function openLightbox(idx) {
+        currentLbIndex = (idx + ALL_ITEMS.length) % ALL_ITEMS.length;
+        const item = ALL_ITEMS[currentLbIndex];
+        lbImg.src = item.file;
+        lbImg.alt = item.name;
+        lbCaption.textContent = `[${currentLbIndex + 1}/${ALL_ITEMS.length}] ${item.code}｜${item.name}`;
+        lightbox.classList.add("open");
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+      }
+
+      function renderGrid() {
+        cardsGrid.innerHTML = "";
+        BASE_STYLES.forEach((item, i) => {
+          const allIdx = i + 2;
+          const isSel = selected.has(item.code);
+          const card = document.createElement("article");
+          card.className = "style-card" + (isSel ? " selected" : "");
+          card.innerHTML = `
+            <div class="card-head">
+              <span class="code-badge" style="background:${item.color}">${item.code}</span>
+              <div class="card-title-wrap">
+                <div class="card-title">${item.name}</div>
+                <div class="card-anchor">${item.anchor}</div>
+              </div>
+              <button class="pick-toggle" type="button" data-pick="${item.code}">
+                ${isSel ? "✓ 已选" : "+ 候选"}
+              </button>
+            </div>
+            <div class="img-stage" data-zoom="${allIdx}">
+              <img src="${item.file}" alt="方向 ${item.code} ${item.name}" loading="lazy" />
+              <span class="zoom-hint">点击放大检视</span>
+            </div>
+            <div class="card-body">
+              <div class="metrics-mini">
+                <div><span>颜艺喜剧上限</span><strong>${item.face}</strong></div>
+                <div><span>9:16 小屏可读</span><strong>${item.read}</strong></div>
+                <div><span>高单价抽卡溢价</span><strong>${item.gacha}</strong></div>
+                <div><span>成本系数 / 周期</span><strong>${item.cost}</strong></div>
+              </div>
+              <div class="pros-cons">
+                <p><span class="tag-pro">【契合亮点】</span>${item.pros}</p>
+                <p><span class="tag-con">【工程与商业注意点】</span>${item.cons}</p>
+                <p><span class="tag-aud">【核心受众】</span>${item.aud}</p>
+              </div>
+            </div>
+          `;
+          cardsGrid.appendChild(card);
+        });
+      }
+
+      function renderCompareSlot(container, idx) {
+        const item = ALL_ITEMS[idx];
+        container.innerHTML = `
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="code-badge" style="background:${item.color}">${item.code}</span>
+            <div>
+              <div style="font-size:17px;font-weight:800;">${item.name}</div>
+              <div style="font-size:12.5px;color:var(--muted);">${item.anchor}</div>
+            </div>
+          </div>
+          <img src="${item.file}" alt="${item.name}" data-zoom="${idx}" />
+          <div style="font-size:13px;color:#374151;">
+            <strong>颜艺 ${item.face} ｜ 可读性 ${item.read} ｜ 溢价 ${item.gacha} ｜ 成本 ${item.cost}</strong>
+            <p style="margin-top:6px;">${item.pros}</p>
+          </div>
+        `;
+      }
+
+      function openCompareWithPair(leftIdx, rightIdx) {
+        selLeft.value = String(leftIdx);
+        selRight.value = String(rightIdx);
+        renderCompareSlot(slotLeft, leftIdx);
+        renderCompareSlot(slotRight, rightIdx);
+        comparePanel.classList.add("visible");
+        document.getElementById("btnCompare").classList.add("active");
+        document.getElementById("btnGrid").classList.remove("active");
+        comparePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function initCompare() {
+        ALL_ITEMS.forEach((item, idx) => {
+          selLeft.add(new Option(`${item.code}：${item.name}`, String(idx)));
+          selRight.add(new Option(`${item.code}：${item.name}`, String(idx)));
+        });
+        selLeft.value = "0"; // B+A 赵云卡
+        selRight.value = "3"; // 纯 B 2D大头漫画
+        const refresh = () => {
+          renderCompareSlot(slotLeft, Number(selLeft.value));
+          renderCompareSlot(slotRight, Number(selRight.value));
+        };
+        selLeft.addEventListener("change", refresh);
+        selRight.addEventListener("change", refresh);
+        document.getElementById("btnSwap").addEventListener("click", () => {
+          const tmp = selLeft.value;
+          selLeft.value = selRight.value;
+          selRight.value = tmp;
+          refresh();
+        });
+        document.getElementById("btnCloseCompare").addEventListener("click", () => {
+          comparePanel.classList.remove("visible");
+          document.getElementById("btnGrid").classList.add("active");
+          document.getElementById("btnCompare").classList.remove("active");
+        });
+        refresh();
+      }
+
+      document.addEventListener("click", (e) => {
+        const pickBtn = e.target.closest("[data-pick]");
+        if (pickBtn) {
+          toggleSelect(pickBtn.getAttribute("data-pick"));
+          return;
+        }
+        const pairBtn = e.target.closest("[data-quick-pair]");
+        if (pairBtn) {
+          const parts = pairBtn.getAttribute("data-quick-pair").split(",").map(Number);
+          openCompareWithPair(parts[0], parts[1]);
+          return;
+        }
+        const zoomEl = e.target.closest("[data-zoom]");
+        if (zoomEl) {
+          openLightbox(Number(zoomEl.getAttribute("data-zoom")));
+        }
+      });
+
+      document.getElementById("btnGrid").addEventListener("click", function () {
+        comparePanel.classList.remove("visible");
+        this.classList.add("active");
+        document.getElementById("btnCompare").classList.remove("active");
+      });
+
+      document.getElementById("btnCompare").addEventListener("click", function () {
+        comparePanel.classList.add("visible");
+        this.classList.add("active");
+        document.getElementById("btnGrid").classList.remove("active");
+      });
+
+      document.getElementById("btnThumb").addEventListener("click", function () {
+        document.body.classList.toggle("thumb-mode");
+        this.classList.toggle("active");
+      });
+
+      document.getElementById("btnCopy").addEventListener("click", function () {
+        const list = Array.from(selected);
+        const text = list.length > 0
+          ? "《富甲天下：十八啦！》选定画风方向：" + list.join("、")
+          : "《富甲天下：十八啦！》待选方向：B+A 融合方案";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            const orig = this.textContent;
+            this.textContent = "已复制：" + (list.join(",") || "B+A");
+            setTimeout(() => { this.textContent = orig; }, 1600);
+          });
+        }
+      });
+
+      document.getElementById("lbPrev").addEventListener("click", () => openLightbox(currentLbIndex - 1));
+      document.getElementById("lbNext").addEventListener("click", () => openLightbox(currentLbIndex + 1));
+      document.getElementById("lbClose").addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") openLightbox(currentLbIndex - 1);
+        if (e.key === "ArrowRight") openLightbox(currentLbIndex + 1);
+      });
+
+      // 严格落实 AGENTS.md 后台休眠规范：页面不可见时标记休眠，零后台轮询或定时器
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          document.documentElement.setAttribute("data-page-hidden", "true");
+        } else {
+          document.documentElement.removeAttribute("data-page-hidden");
+        }
+      });
+
+      renderGrid();
+      initCompare();
+      updatePickStatus();
+    })();
+  </script>
+</body>
+</html>

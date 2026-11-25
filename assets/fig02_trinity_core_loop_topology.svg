@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Noto Sans SC, PingFang SC, sans-serif" role="img" aria-labelledby="figure-title figure-desc" width="2400" height="1600" viewBox="0 0 2400 1600">
+  <title id="figure-title">图二：三基因融合与局内外双循环拓扑</title>
+  <desc id="figure-desc">三大基因汇入局内循环。局内七节点、局外六节点各自顺时针闭合；两环间仅有局末结算和出征两条定向连线。跨线桥表示线路交叉且互不连接。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#1F2937" />
+    </marker>
+    <marker id="arrow-soft" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#8A8176" />
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="2400" height="1600" rx="0" fill="#FAF7F0" stroke="none" stroke-width="0" />
+  <text x="60" y="77" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="38" font-weight="600" text-anchor="start" fill="#1F2937">《富甲天下：十八啦！》</text>
+  <text x="2340" y="76" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="34" font-weight="500" text-anchor="end" fill="#1F2937">图二：三基因融合与局内外双循环拓扑</text>
+  <line x1="50" y1="109" x2="2350" y2="109" stroke="#1F2937" stroke-width="2" />
+  <rect x="50" y="140" width="510" height="1200" rx="24" fill="#FAF7F0" stroke="#D9D0C2" stroke-width="2" />
+  <rect x="610" y="140" width="970" height="1200" rx="24" fill="#FAF7F0" stroke="#D9D0C2" stroke-width="2" />
+  <rect x="1680" y="140" width="670" height="1200" rx="24" fill="#FAF7F0" stroke="#D9D0C2" stroke-width="2" />
+  <text x="80" y="187" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="32" font-weight="600" text-anchor="start" fill="#1F2937">三大基因</text>
+  <text x="650" y="187" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="32" font-weight="600" text-anchor="start" fill="#1F2937">局内循环</text>
+  <text x="1540" y="185" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="400" text-anchor="end" fill="#1F2937">七节点 · 顺时针</text>
+  <text x="1715" y="187" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="32" font-weight="600" text-anchor="start" fill="#1F2937">局外循环</text>
+  <text x="2315" y="185" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="400" text-anchor="end" fill="#1F2937">六节点 · 顺时针</text>
+  <path d="M 760 410 L 760 225 L 1830 225 L 1830 350" fill="none" stroke="#1F2937" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" data-kind="cross-loop" data-from="in-7" data-to="out-A" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1835,341 1830,351 1825,341" /><path d="M 746 260 C 746 242 774 242 774 260" fill="none" stroke="#FAF7F0" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1720 1059 L 1650 1059 L 1650 1320 L 630 1320 L 630 260 L 746 260 C 746 242 774 242 774 260 L 1175 260 L 1175 295" fill="none" stroke="#1F2937" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" data-kind="cross-loop" data-from="out-F" data-to="in-1" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1180,286 1175,296 1170,286" /><text x="1628" y="213" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937">局末结算</text>
+  <text x="1607" y="1307" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937">出征</text>
+  <path d="M 540 380 L 575 380 C 581 380 585 384 585 390 L 585 730 C 585 736 590 740 596 740" fill="none" stroke="#8A8176" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 8" data-kind="gene-input" data-from="gene-1" data-to="gene-junction" />
+  <path d="M 540 740 L 596 740" fill="none" stroke="#8A8176" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 8" data-kind="gene-input" data-from="gene-2" data-to="gene-junction" />
+  <path d="M 540 1100 L 575 1100 C 581 1100 585 1096 585 1090 L 585 750 C 585 744 590 740 596 740" fill="none" stroke="#8A8176" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 8" data-kind="gene-input" data-from="gene-3" data-to="gene-junction" />
+  <path d="M 596 740 L 612 740" fill="none" stroke="#8A8176" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+  <polygon fill="#8A8176" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="603,735 613,740 603,745" /><path d="M 1360 337 C 1470 337 1500 415 1405 465" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1360 337 C 1470 337 1500 415 1405 465" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-1" data-to="in-2" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1415.29299617,465.232873216 1404.11508178,465.465746433 1410.63553184,456.383690993" /><path d="M 1405 549 C 1405 610 1380 610 1380 665" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1405 549 C 1405 610 1380 610 1380 665" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-2" data-to="in-3" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1385,656 1380,666 1375,656" /><path d="M 1380 910 C 1380 960 1355 980 1355 1030" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1380 910 C 1380 960 1355 980 1355 1030" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-3" data-to="in-4" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1360,1021 1355,1031 1350,1021" /><path d="M 1355 1110 C 1355 1145 1260 1142 1240 1165" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1355 1110 C 1355 1145 1260 1142 1240 1165" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-4" data-to="in-5" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1249.67863605,1161.48944388 1239.34382129,1165.75460552 1242.13258082,1154.92765673" /><path d="M 810 1222 C 740 1222 750 1190 750 1130" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 810 1222 C 740 1222 750 1190 750 1130" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-5" data-to="in-6" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="745,1139 750,1129 755,1139" /><path d="M 750 1020 C 750 880 750 700 750 530" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 750 1020 C 750 880 750 700 750 530" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-6" data-to="in-7" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="745,539 750,529 755,539" /><path d="M 1010 410 C 1010 392 1035 388 1060 379" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1010 410 C 1010 392 1035 388 1060 379" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="inner-cycle" data-from="in-7" data-to="in-1" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1049.83841595,377.344038155 1060.94088741,378.661280532 1053.22561063,386.752912274" /><path d="M 1955 394 C 2020 394 2110 405 2160 440" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1955 394 C 2020 394 2110 405 2160 440" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="outer-cycle" data-from="out-A" data-to="out-B" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="2155.49422444,430.742679298 2160.81923192,440.573462344 2149.75960099,438.934998503" /><path d="M 2160 570 C 2160 635 2185 650 2185 720" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 2160 570 C 2160 635 2185 650 2185 720" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="outer-cycle" data-from="out-B" data-to="out-C" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="2190,711 2185,721 2180,711" /><path d="M 2185 808 C 2185 890 2175 940 2175 1015" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 2185 808 C 2185 890 2175 940 2175 1015" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="outer-cycle" data-from="out-C" data-to="out-D" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="2180,1006 2175,1016 2170,1006" /><path d="M 2175 1103 C 2175 1155 2090 1170 2050 1190" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 2175 1103 C 2175 1155 2090 1170 2050 1190" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="outer-cycle" data-from="out-D" data-to="out-E" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="2060.2859127,1190.4472136 2049.10557281,1190.4472136 2055.81377674,1181.50294169" /><path d="M 1880 1234 C 1800 1234 1840 1150 1840 1103" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1880 1234 C 1800 1234 1840 1150 1840 1103" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="outer-cycle" data-from="out-E" data-to="out-F" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1835,1112 1840,1102 1845,1112" /><path d="M 1780 1015 C 1700 950 1700 550 1780 438" fill="none" stroke="#E9E2D7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1780 1015 C 1700 950 1700 550 1780 438" fill="none" stroke="#1F2937" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" data-kind="outer-cycle" data-from="out-F" data-to="out-A" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1770.7001889,442.417410272 1780.58123819,437.186266529 1778.83752361,448.229792209" /><g id="gene-1">
+    <rect x="70" y="240" width="470" height="280" rx="18" fill="white" stroke="#D9D0C2" stroke-width="2" />
+    <rect x="70" y="257" width="10" height="246" rx="5" fill="#D9483B" stroke="none" stroke-width="0" />
+    <text x="106" y="295" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="32" font-weight="600" text-anchor="start" fill="#1F2937">富甲天下</text>
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937"><desc>富甲天下：占城收租、踩城四择、太守军师、台味</desc><text x="106" y="358" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">富甲天下：占城收租、</text><text x="106" y="402" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">踩城四择、太守军师、台味</text></g>
+    <text x="106" y="479" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="23" font-weight="500" text-anchor="start" fill="#D9483B">经营与互动</text>
+    <rect x="465" y="269" width="38" height="38" rx="7" fill="#FAF7F0" stroke="#D9483B" stroke-width="2" />
+  </g>
+  <line x1="106" y1="434" x2="504" y2="434" stroke="#E4DDD1" stroke-width="2" />
+  <line x1="475" y1="288" x2="493" y2="288" stroke="#D9483B" stroke-width="2" />
+  <line x1="484" y1="279" x2="484" y2="297" stroke="#D9483B" stroke-width="2" />
+  <g id="gene-2">
+    <rect x="70" y="600" width="470" height="280" rx="18" fill="white" stroke="#D9D0C2" stroke-width="2" />
+    <rect x="70" y="617" width="10" height="246" rx="5" fill="#2F6FDE" stroke="none" stroke-width="0" />
+    <text x="106" y="655" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="32" font-weight="600" text-anchor="start" fill="#1F2937">虚拟人生</text>
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937"><desc>虚拟人生：四维、命格转职、连续剧奇遇、终局检定</desc><text x="106" y="718" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">虚拟人生：四维、命格转职、</text><text x="106" y="762" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">连续剧奇遇、终局检定</text></g>
+    <text x="106" y="839" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="23" font-weight="500" text-anchor="start" fill="#2F6FDE">成长与叙事</text>
+    <rect x="465" y="629" width="38" height="38" rx="7" fill="#FAF7F0" stroke="#2F6FDE" stroke-width="2" />
+  </g>
+  <line x1="106" y1="794" x2="504" y2="794" stroke="#E4DDD1" stroke-width="2" />
+  <line x1="475" y1="648" x2="493" y2="648" stroke="#2F6FDE" stroke-width="2" />
+  <line x1="484" y1="639" x2="484" y2="657" stroke="#2F6FDE" stroke-width="2" />
+  <g id="gene-3">
+    <rect x="70" y="960" width="470" height="280" rx="18" fill="white" stroke="#D9D0C2" stroke-width="2" />
+    <rect x="70" y="977" width="10" height="246" rx="5" fill="#F2A900" stroke="none" stroke-width="0" />
+    <text x="106" y="1015" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="32" font-weight="600" text-anchor="start" fill="#1F2937">Heroll</text>
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937"><desc>Heroll：9:16 方环、中央舞台、过圈升阶、即换即融</desc><text x="106" y="1078" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">Heroll：9:16 方环、中央舞台、</text><text x="106" y="1122" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="400" text-anchor="start" fill="#1F2937">过圈升阶、即换即融</text></g>
+    <text x="106" y="1199" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="23" font-weight="500" text-anchor="start" fill="#F2A900">空间与节奏</text>
+    <rect x="465" y="989" width="38" height="38" rx="7" fill="#FAF7F0" stroke="#F2A900" stroke-width="2" />
+  </g>
+  <line x1="106" y1="1154" x2="504" y2="1154" stroke="#E4DDD1" stroke-width="2" />
+  <line x1="475" y1="1008" x2="493" y2="1008" stroke="#F2A900" stroke-width="2" />
+  <line x1="484" y1="999" x2="484" y2="1017" stroke="#F2A900" stroke-width="2" />
+  <g id="in-1" data-node="in-1">
+    <rect x="990" y="295" width="370" height="84" rx="18" fill="white" stroke="#F2A900" stroke-width="3.5" />
+    <text x="1175.0" y="347" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="28" font-weight="500" text-anchor="middle" fill="#1F2937">掷骰 2D6（可加注）</text>
+  </g>
+  <g id="in-2" data-node="in-2">
+    <rect x="1270" y="465" width="270" height="84" rx="18" fill="white" stroke="#F2A900" stroke-width="3.5" />
+    <text x="1405.0" y="517" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">落点预览</text>
+  </g>
+  <g id="in-3" data-node="in-3">
+    <rect x="1210" y="665" width="340" height="245" rx="20" fill="#F4EFE6" stroke="#B7AEA0" stroke-width="2" />
+    <rect x="1224" y="715" width="208" height="145" rx="13" fill="white" stroke="#D9483B" stroke-width="3" />
+    <rect x="1448" y="715" width="88" height="145" rx="13" fill="white" stroke="#F2A900" stroke-width="3" />
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937"><desc>城池格：占城置业 或 踩城四择</desc><text x="1328" y="754" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937">城池格：</text><text x="1328" y="793" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937">占城置业 或 </text><text x="1328" y="832" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937">踩城四择</text></g>
+    <text x="1492" y="797" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="22" font-weight="500" text-anchor="middle" fill="#1F2937">功能格</text>
+  </g>
+  <path d="M 1380 665 L 1380 686 L 1328 686 L 1328 715" fill="none" stroke="#1F2937" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1333,706 1328,716 1323,706" /><path d="M 1380 686 L 1492 686 L 1492 715" fill="none" stroke="#1F2937" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+  <polygon fill="#1F2937" stroke="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="miter" points="1497,706 1492,716 1487,706" /><path d="M 1328 860 L 1328 889 L 1380 889 L 1380 910" fill="none" stroke="#1F2937" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 1492 860 L 1492 889 L 1380 889" fill="none" stroke="#1F2937" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+  <g id="in-4" data-node="in-4">
+    <rect x="1220" y="1030" width="270" height="80" rx="18" fill="white" stroke="#2F6FDE" stroke-width="3.5" />
+    <text x="1355.0" y="1080" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">政见三选一</text>
+  </g>
+  <g id="in-5" data-node="in-5">
+    <rect x="810" y="1165" width="650" height="115" rx="18" fill="white" stroke="#F2A900" stroke-width="3.5" />
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="27" font-weight="500" text-anchor="middle" fill="#1F2937"><desc>过圈结算：俸禄税收→置业时间→霸主扩张→盘面升阶</desc><text x="1135.0" y="1209" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="27" font-weight="500" text-anchor="middle" fill="#1F2937">过圈结算：俸禄税收→</text><text x="1135.0" y="1250" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="27" font-weight="500" text-anchor="middle" fill="#1F2937">置业时间→霸主扩张→盘面升阶</text></g>
+  </g>
+  <g id="in-6" data-node="in-6">
+    <rect x="650" y="1020" width="440" height="110" rx="18" fill="white" stroke="#2F6FDE" stroke-width="3.5" />
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="27" font-weight="500" text-anchor="middle" fill="#1F2937"><desc>第 5、10 圈 踢馆宿敌→转职</desc><text x="870.0" y="1062" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="27" font-weight="500" text-anchor="middle" fill="#1F2937">第 5、10 圈 </text><text x="870.0" y="1101" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="27" font-weight="500" text-anchor="middle" fill="#1F2937">踢馆宿敌→转职</text></g>
+  </g>
+  <g id="in-7" data-node="in-7">
+    <rect x="665" y="410" width="440" height="120" rx="18" fill="white" stroke="#2F6FDE" stroke-width="3.5" />
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="28" font-weight="500" text-anchor="middle" fill="#1F2937"><desc>第 15 圈 天命魔王·决战三段</desc><text x="885.0" y="457" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="28" font-weight="500" text-anchor="middle" fill="#1F2937">第 15 圈 </text><text x="885.0" y="500" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="28" font-weight="500" text-anchor="middle" fill="#1F2937">天命魔王·决战三段</text></g>
+  </g>
+  <rect x="875" y="581" width="270" height="91" rx="13" fill="#FAF7F0" stroke="#1F2937" stroke-width="2.5" />
+  <text x="1010" y="620" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="30" font-weight="600" text-anchor="middle" fill="#1F2937">零等待</text>
+  <text x="1010" y="655" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="500" text-anchor="middle" fill="#1F2937">1 刻 = 1 掷</text>
+  <rect x="815" y="700" width="385" height="112" rx="16" fill="#F4EFE6" stroke="#1F2937" stroke-width="2" />
+  <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="500" text-anchor="middle" fill="#1F2937"><desc>霸主：金库、地盘、车驾（同步落子，1 刻 = 1 掷）</desc><text x="1007.5" y="745" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="500" text-anchor="middle" fill="#1F2937">霸主：金库、地盘、车驾</text><text x="1007.5" y="785" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="500" text-anchor="middle" fill="#1F2937">（同步落子，1 刻 = 1 掷）</text></g>
+  <rect x="815" y="840" width="385" height="61" rx="13" fill="white" stroke="#1F2937" stroke-width="2" />
+  <text x="1007.5" y="879" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="26" font-weight="500" text-anchor="middle" fill="#1F2937">资产炮火 = 身家 ÷ 10</text>
+  <rect x="815" y="928" width="385" height="62" rx="13" fill="white" stroke="#1F2937" stroke-width="2" />
+  <text x="1007.5" y="967" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="24" font-weight="500" text-anchor="middle" fill="#1F2937">魔王气血随主霸主残存率增减</text>
+  <g id="out-A" data-node="out-A">
+    <rect x="1720" y="350" width="235" height="88" rx="18" fill="white" stroke="#1F2937" stroke-width="3.5" />
+    <text x="1837.5" y="404" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">局末结算</text>
+  </g>
+  <g id="out-B" data-node="out-B">
+    <rect x="2020" y="440" width="280" height="130" rx="18" fill="white" stroke="#1F2937" stroke-width="3.5" />
+    <g font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="25" font-weight="500" text-anchor="middle" fill="#1F2937"><desc>五铢通宝、信物、风物贴纸</desc><text x="2160.0" y="491" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="25" font-weight="500" text-anchor="middle" fill="#1F2937">五铢通宝、信物、</text><text x="2160.0" y="534" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="25" font-weight="500" text-anchor="middle" fill="#1F2937">风物贴纸</text></g>
+  </g>
+  <g id="out-C" data-node="out-C">
+    <rect x="2070" y="720" width="230" height="88" rx="18" fill="white" stroke="#1F2937" stroke-width="3.5" />
+    <text x="2185.0" y="775" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">五维养成</text>
+  </g>
+  <g id="out-D" data-node="out-D">
+    <rect x="2060" y="1015" width="230" height="88" rx="18" fill="white" stroke="#1F2937" stroke-width="3.5" />
+    <text x="2175.0" y="1070" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">出征配置</text>
+  </g>
+  <g id="out-E" data-node="out-E">
+    <rect x="1880" y="1190" width="280" height="88" rx="18" fill="white" stroke="#1F2937" stroke-width="3.5" />
+    <text x="2020.0" y="1245" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">行军包子</text>
+  </g>
+  <g id="out-F" data-node="out-F">
+    <rect x="1720" y="1015" width="240" height="88" rx="18" fill="white" stroke="#1F2937" stroke-width="3.5" />
+    <text x="1840.0" y="1070" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="29" font-weight="500" text-anchor="middle" fill="#1F2937">出征</text>
+  </g>
+  <rect x="50" y="1375" width="2300" height="140" rx="20" fill="#F4EFE6" stroke="#C9BFAF" stroke-width="2" />
+  <line x1="820" y1="1396" x2="820" y2="1494" stroke="#C9BFAF" stroke-width="2" />
+  <text x="435" y="1457" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="31" font-weight="500" text-anchor="middle" fill="#1F2937">银两：局内通货，不带出</text>
+  <text x="1585" y="1434" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="31" font-weight="500" text-anchor="middle" fill="#1F2937">1 元 = 10 传国玉璧 = 100 金元宝</text>
+  <text x="1585" y="1482" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#1F2937">= 10,000 五铢通宝｜局外货币不直购银两</text>
+  <line x1="50" y1="1540" x2="2350" y2="1540" stroke="#D9D0C2" stroke-width="2" />
+  <text x="1200" y="1580" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="25" font-weight="400" text-anchor="middle" fill="#1F2937">结构示意，不代表最终美术风格</text>
+</svg>
