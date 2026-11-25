@@ -7,20 +7,27 @@
 
   var FTX = (root.FTX = root.FTX || {});
 
-  // 28 张真实 PNG 资产标准相对路径映射（与 @codex-assets / @codex-world / @mvp-ui 100% 对齐）
+  // 68 张精修 PNG 资产标准相对路径映射（chars 22张 + world 30张 + ui 16张 = 68张，100% 对齐 #75/#77）
   var ASSETS = {
     chars: {
       liubei_piece: './assets/chars/liubei_piece.png',
       liubei_happy: './assets/chars/liubei_happy.png',
       liubei_cry: './assets/chars/liubei_cry.png',
       dongzhuo_piece: './assets/chars/dongzhuo_piece.png',
+      dongzhuo_happy: './assets/chars/dongzhuo_happy.png',
+      dongzhuo_cry: './assets/chars/dongzhuo_cry.png',
       caocao_chariot: './assets/chars/caocao_chariot.png',
+      caocao_cry: './assets/chars/caocao_cry.png',
       sunquan_chariot: './assets/chars/sunquan_chariot.png',
       bankrupt_pants: './assets/chars/bankrupt_pants.png',
       zhangfei_horse: './assets/chars/zhangfei_horse.png',
       zhaoyun_horse: './assets/chars/zhaoyun_horse.png',
+      guanyu_horse: './assets/chars/guanyu_horse.png',
       lvbu_horse: './assets/chars/lvbu_horse.png',
+      zhouyu_horse: './assets/chars/zhouyu_horse.png',
       xiahoudun_horse: './assets/chars/xiahoudun_horse.png',
+      ganning_horse: './assets/chars/ganning_horse.png',
+      lusu_horse: './assets/chars/lusu_horse.png',
       zhugeliang_fan: './assets/chars/zhugeliang_fan.png',
       guojia_fan: './assets/chars/guojia_fan.png',
       mind_demon: './assets/chars/mind_demon.png',
@@ -28,19 +35,62 @@
     },
     world: {
       board_backdrop: './assets/world/board_backdrop.png',
+      stage_courtyard_arena: './assets/world/stage_courtyard_arena.png',
+      stage_dice_bowl: './assets/world/stage_dice_bowl.png',
+      dice_3d_1: './assets/world/dice_3d_1.png',
+      dice_3d_2: './assets/world/dice_3d_2.png',
+      dice_3d_3: './assets/world/dice_3d_3.png',
+      dice_3d_4: './assets/world/dice_3d_4.png',
+      dice_3d_5: './assets/world/dice_3d_5.png',
+      dice_3d_6: './assets/world/dice_3d_6.png',
       city_lv1: './assets/world/city_lv1.png',
+      city_lv2: './assets/world/city_lv2.png',
       city_lv3: './assets/world/city_lv3.png',
+      city_lv4: './assets/world/city_lv4.png',
       city_lv5: './assets/world/city_lv5.png',
       corner_start: './assets/world/corner_start.png',
       corner_pot: './assets/world/corner_pot.png',
       corner_casino: './assets/world/corner_casino.png',
       corner_gov: './assets/world/corner_gov.png',
-      bldg_arrow_tower: './assets/world/bldg_arrow_tower.png',
-      bldg_poop_god: './assets/world/bldg_poop_god.png',
+      bldg_granary: './assets/world/bldg_granary.png',
       bldg_market: './assets/world/bldg_market.png',
+      bldg_pirate_toll: './assets/world/bldg_pirate_toll.png',
+      bldg_arrow_tower: './assets/world/bldg_arrow_tower.png',
+      bldg_altar: './assets/world/bldg_altar.png',
+      bldg_wind_pearl: './assets/world/bldg_wind_pearl.png',
+      bldg_poop_god: './assets/world/bldg_poop_god.png',
       icon_fortune: './assets/world/icon_fortune.png',
+      icon_event_pavilion: './assets/world/icon_event_pavilion.png',
+      icon_school: './assets/world/icon_school.png',
+      icon_tollgate: './assets/world/icon_tollgate.png',
       icon_debt_team: './assets/world/icon_debt_team.png'
+    },
+    ui: {
+      ui_silver_ingot: './assets/ui/ui_silver_ingot.png',
+      ui_troops_flag: './assets/ui/ui_troops_flag.png',
+      ui_luck_sticks: './assets/ui/ui_luck_sticks.png',
+      ui_fame_mirror: './assets/ui/ui_fame_mirror.png',
+      ui_btn_log: './assets/ui/ui_btn_log.png',
+      ui_btn_auto: './assets/ui/ui_btn_auto.png',
+      ui_policy_scroll: './assets/ui/ui_policy_scroll.png',
+      eq_slot_weapon: './assets/ui/eq_slot_weapon.png',
+      eq_slot_helm: './assets/ui/eq_slot_helm.png',
+      eq_slot_armor: './assets/ui/eq_slot_armor.png',
+      eq_slot_mount: './assets/ui/eq_slot_mount.png',
+      card_step_control: './assets/ui/card_step_control.png',
+      card_turtle_block: './assets/ui/card_turtle_block.png',
+      card_steal_wealth: './assets/ui/card_steal_wealth.png',
+      card_tactic_swap: './assets/ui/card_tactic_swap.png',
+      card_tactic_sandal: './assets/ui/card_tactic_sandal.png'
     }
+  };
+
+  // 四大装备部位插画图标映射（零 Emoji）
+  var EQUIP_SLOT_ICONS = {
+    weapon: ASSETS.ui.eq_slot_weapon,
+    helm: ASSETS.ui.eq_slot_helm,
+    armor: ASSETS.ui.eq_slot_armor,
+    mount: ASSETS.ui.eq_slot_mount
   };
 
   // 品阶色标与双编码圆点（守总纲 3.2 色弱友好规范）
@@ -52,12 +102,12 @@
     UR: { code: 'UR', name: '神品', color: '#E8452C', dots: 4, sellFactor: 8.0 }
   };
 
-  // 城池规模 Lv.1~5 阶梯表（对齐总纲 3.4 与 02 表 4-1~4-3）
+  // 城池规模 Lv.1~5 阶梯表（1对1 对应 city_lv1.png ~ city_lv5.png！）
   var CITY_SCALE = {
     1: { level: 1, stepCostFactor: 1.0, cumCostFactor: 1.0, tollMult: 0.25, taxRate: 0.05, slots: 1, garrisonFactor: 0.30, defenseFactor: 0.00, img: ASSETS.world.city_lv1 },
-    2: { level: 2, stepCostFactor: 0.5, cumCostFactor: 1.5, tollMult: 0.50, taxRate: 0.08, slots: 1, garrisonFactor: 0.40, defenseFactor: 0.10, img: ASSETS.world.city_lv1 },
+    2: { level: 2, stepCostFactor: 0.5, cumCostFactor: 1.5, tollMult: 0.50, taxRate: 0.08, slots: 1, garrisonFactor: 0.40, defenseFactor: 0.10, img: ASSETS.world.city_lv2 },
     3: { level: 3, stepCostFactor: 1.0, cumCostFactor: 2.5, tollMult: 1.00, taxRate: 0.12, slots: 2, garrisonFactor: 0.55, defenseFactor: 0.20, img: ASSETS.world.city_lv3 },
-    4: { level: 4, stepCostFactor: 2.0, cumCostFactor: 4.5, tollMult: 2.00, taxRate: 0.18, slots: 2, garrisonFactor: 0.70, defenseFactor: 0.35, img: ASSETS.world.city_lv3 },
+    4: { level: 4, stepCostFactor: 2.0, cumCostFactor: 4.5, tollMult: 2.00, taxRate: 0.18, slots: 2, garrisonFactor: 0.70, defenseFactor: 0.35, img: ASSETS.world.city_lv4 },
     5: { level: 5, stepCostFactor: 4.0, cumCostFactor: 8.5, tollMult: 4.00, taxRate: 0.25, slots: 3, garrisonFactor: 0.85, defenseFactor: 0.50, img: ASSETS.world.city_lv5 }
   };
 
@@ -103,26 +153,26 @@
     { idx: 5, name: '庙口夜市摊', type: 'market', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.bldg_market, desc: '混摆神兵行头、棋盘锦囊与补兵大烧饼，魅力越高杀价越狠！' },
     { idx: 6, name: '成都', type: 'city', tier: '州府', region: 'yizhou', basePrice: 1200, terrain: 'land', initOwner: null, initLevel: 0, worldImg: ASSETS.world.city_lv1, desc: '西边天府地王！凑齐益州 4 城即享全州垄断 ×2.0 暴利收租。' },
     { idx: 7, name: '风水聚宝盆', type: 'pot', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.corner_pot, desc: '初始底池 1,500 两；全盘每次交过路费或赌场输钱注资 20%，踩中整碗抱走（吃加注放大）！' },
-    { idx: 8, name: '洛阳', type: 'city', tier: '州府', region: 'zhongyuan', basePrice: 1200, terrain: 'land', initOwner: 'caocao', initLevel: 2, initGov: 'xiahoudun', worldImg: ASSETS.world.city_lv1, desc: '北边中原高危区开端！中原仅 3 城即可凑满垄断。' },
+    { idx: 8, name: '洛阳', type: 'city', tier: '州府', region: 'zhongyuan', basePrice: 1200, terrain: 'land', initOwner: 'caocao', initLevel: 2, initGov: 'xiahoudun', worldImg: ASSETS.world.city_lv2, desc: '北边中原高危区开端！中原仅 3 城即可凑满垄断。' },
     { idx: 9, name: '街头心魔巷', type: 'demon', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.chars.mind_demon, desc: '刷出贪财小鬼与穷神，快斩爆装备触发左旧右新「即换即融」！' },
     { idx: 10, name: '陈留', type: 'city', tier: '郡城', region: 'zhongyuan', basePrice: 900, terrain: 'land', initOwner: null, initLevel: 0, worldImg: ASSETS.world.city_lv1, desc: '夹在洛阳与许昌之间的黄金钉子户地块，盖尊屎王神专熏曹老板！' },
-    { idx: 11, name: '红尘奇遇亭', type: 'event', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_fortune, desc: '市井两难抉择，前半程种下的因，后半程在渡口必结出爆笑因果！' },
-    { idx: 12, name: '官渡补习班', type: 'school', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.corner_gov, desc: '缴交 1 份当圈俸禄学费，在体魄、谋略、魅力中任选一维永久 +6！' },
-    { idx: 13, name: '许昌', type: 'city', tier: '州府', region: 'zhongyuan', basePrice: 1200, terrain: 'land', initOwner: 'caocao', initLevel: 2, isCapital: true, initGov: 'lvbu', worldImg: ASSETS.world.city_lv1, desc: '全盘头号鬼门关！大魏建设集团总部大楼，曹老板最爱升满 Lv.5 宰客。' },
+    { idx: 11, name: '红尘奇遇亭', type: 'event', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_event_pavilion, desc: '市井两难抉择，前半程种下的因，后半程在渡口必结出爆笑因果！' },
+    { idx: 12, name: '官渡补习班', type: 'school', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_school, desc: '缴交 1 份当圈俸禄学费，在体魄、谋略、魅力中任选一维永久 +6！' },
+    { idx: 13, name: '许昌', type: 'city', tier: '州府', region: 'zhongyuan', basePrice: 1200, terrain: 'land', initOwner: 'caocao', initLevel: 2, isCapital: true, initGov: 'lvbu', worldImg: ASSETS.world.city_lv2, desc: '全盘头号鬼门关！大魏建设集团总部大楼，曹老板最爱升满 Lv.5 宰客。' },
     { idx: 14, name: '皇家大赌场', type: 'casino', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.corner_casino, desc: '十八啦大碗公：押大(×2)、押小(×2)、押七点或欢喜对(×4)，戒赌走人领 150 两茶水钱。' },
-    { idx: 15, name: '建业', type: 'city', tier: '州府', region: 'jiangdong', basePrice: 1200, terrain: 'water', initOwner: 'sunquan', initLevel: 2, isCapital: true, initGov: 'zhouyu', worldImg: ASSETS.world.city_lv1, desc: '江东水产行总部大本营，旱鸭子在此打地形野战吃大亏！' },
+    { idx: 15, name: '建业', type: 'city', tier: '州府', region: 'jiangdong', basePrice: 1200, terrain: 'water', initOwner: 'sunquan', initLevel: 2, isCapital: true, initGov: 'zhouyu', worldImg: ASSETS.world.city_lv2, desc: '江东水产行总部大本营，旱鸭子在此打地形野战吃大亏！' },
     { idx: 16, name: '吴郡', type: 'city', tier: '县城', region: 'jiangdong', basePrice: 600, terrain: 'water', initOwner: null, initLevel: 0, worldImg: ASSETS.world.city_lv1, desc: '江南富庶水乡县城，低门槛凑江东连城倍率。' },
-    { idx: 17, name: '虎牢黑心收费站', type: 'special', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.chars.lvbu_horse, desc: '章节异变点：吕布拦路收道路养护费，可交钱拿减租贴，或骑木马单挑端走整箱买路财！' },
-    { idx: 18, name: '会稽', type: 'city', tier: '县城', region: 'jiangdong', basePrice: 600, terrain: 'forest', initOwner: 'sunquan', initLevel: 1, initGov: 'taishici', worldImg: ASSETS.world.city_lv1, desc: '孙少东第二据点，与建业开局即形成江东 2 连城（×1.5）小垄断。' },
+    { idx: 17, name: '虎牢黑心收费站', type: 'special', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_tollgate, desc: '章节异变点：吕布拦路收道路养护费，可交钱拿减租贴，或骑木马单挑端走整箱买路财！' },
+    { idx: 18, name: '会稽', type: 'city', tier: '县城', region: 'jiangdong', basePrice: 600, terrain: 'forest', initOwner: 'sunquan', initLevel: 1, initGov: 'lusu', worldImg: ASSETS.world.city_lv1, desc: '孙少东第二据点，与建业开局即形成江东 2 连城（×1.5）小垄断。' },
     { idx: 19, name: '城隍夜市摊', type: 'market', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.bldg_market, desc: '下半圈决战前补齐战斗奇策、攻城加农炮与神兵的关键夜市！' },
     { idx: 20, name: '柴桑', type: 'city', tier: '郡城', region: 'jiangdong', basePrice: 900, terrain: 'water', initOwner: null, initLevel: 0, worldImg: ASSETS.world.city_lv1, desc: '紧邻官府的江东水寨重镇，水战名将驻守固若金汤。' },
     { idx: 21, name: '州牧大官府', type: 'gov', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.corner_gov, desc: '三合一政务厅：免费领治安赏金补兵、踢馆补考、或半价捡漏破产霸主的法拍屋！' },
-    { idx: 22, name: '襄阳', type: 'city', tier: '州府', region: 'jingzhou', basePrice: 1200, terrain: 'water', initOwner: 'caocao', initLevel: 1, initGov: 'zhangliao', worldImg: ASSETS.world.city_lv1, desc: '曹老板跨州南下飞地，水陆通衢的荆州州府。' },
+    { idx: 22, name: '襄阳', type: 'city', tier: '州府', region: 'jingzhou', basePrice: 1200, terrain: 'water', initOwner: 'caocao', initLevel: 1, initGov: 'xiahoudun', worldImg: ASSETS.world.city_lv1, desc: '曹老板跨州南下飞地，水陆通衢的荆州州府。' },
     { idx: 23, name: '荒郊心魔林', type: 'demon', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.chars.mind_demon, desc: '出没算盘精与发财心魔，盘面升阶后必掉高阶奇品/绝品行头！' },
     { idx: 24, name: '江陵', type: 'city', tier: '郡城', region: 'jingzhou', basePrice: 900, terrain: 'water', initOwner: null, initLevel: 0, worldImg: ASSETS.world.city_lv1, desc: '荆州水路腰眼郡城，夺下江陵往往决定南线垄断归属。' },
     { idx: 25, name: '半仙算命摊', type: 'fortune', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_fortune, desc: '过起点前最后一次求签改命、搏上上签横财的摊位。' },
     { idx: 26, name: '长沙', type: 'city', tier: '县城', region: 'jingzhou', basePrice: 600, terrain: 'forest', initOwner: null, initLevel: 0, worldImg: ASSETS.world.city_lv1, desc: '距起点仅 2 步的收官县城，盖座箭塔专门拦截即将过圈的霸主车驾！' },
-    { idx: 27, name: '江湖奇遇渡', type: 'event', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_fortune, desc: '因果重逢渡口：此前在红尘奇遇亭种下的善恶因果，极高概率在此兑现！' }
+    { idx: 27, name: '江湖奇遇渡', type: 'event', region: null, basePrice: 0, terrain: null, initOwner: null, initLevel: 0, worldImg: ASSETS.world.icon_event_pavilion, desc: '因果重逢渡口：此前在红尘奇遇亭种下的善恶因果，极高概率在此兑现！' }
   ];
 
   var TILES = RAW_TILES.map(function (t) {
@@ -135,18 +185,18 @@
     });
   });
 
-  // 17 号格双章节异变配置（虎牢黑心收费站 / 赤壁连环船）
+  // 17 号格双章节异变配置（虎牢黑心收费站 -> icon_tollgate / 赤壁连环战船 -> bldg_wind_pearl）
   var SPECIAL_MODES = {
     hulao: {
       id: 'hulao',
       tileName: '虎牢黑心收费站',
-      worldImg: ASSETS.chars.lvbu_horse,
+      worldImg: ASSETS.world.icon_tollgate,
       desc: '经过必停！吕布拦路收「道路养护费」（0.8倍俸禄），交钱享本圈过路费8折，或骑木马单挑赢走整箱买路财！'
     },
     chibi: {
       id: 'chibi',
       tileName: '赤壁连环战船',
-      worldImg: ASSETS.world.bldg_arrow_tower,
+      worldImg: ASSETS.world.bldg_wind_pearl,
       desc: '水城铁索连环（同势力≥2水城过路费+25%）；踩中可「借东风」破除关底曹操水战装甲并获赠战斗奇策《火上浇油》！'
     }
   };
@@ -190,8 +240,8 @@
       color: '#9333EA',
       badgeShape: 'diamond', // 菱形标
       pieceImg: ASSETS.chars.dongzhuo_piece,
-      happyImg: ASSETS.chars.dongzhuo_piece,
-      cryImg: ASSETS.chars.liubei_cry,
+      happyImg: ASSETS.chars.dongzhuo_happy,
+      cryImg: ASSETS.chars.dongzhuo_cry,
       startTile: 10, // 起手占 10 号中原陈留砂石场
       initSilver: 3600,
       initTroops: 1300,
@@ -223,6 +273,7 @@
       color: '#DC2626',
       badgeShape: 'square', // 方标
       chariotImg: ASSETS.chars.caocao_chariot,
+      cryImg: ASSETS.chars.caocao_cry,
       bankruptImg: ASSETS.chars.bankrupt_pants,
       homeTile: 13, // 许昌主城
       initVault: 6800,
@@ -250,6 +301,7 @@
       color: '#2563EB',
       badgeShape: 'triangle', // 三角标
       chariotImg: ASSETS.chars.sunquan_chariot,
+      cryImg: ASSETS.chars.sunquan_chariot,
       bankruptImg: ASSETS.chars.bankrupt_pants,
       homeTile: 15, // 建业主城
       initVault: 5200,
@@ -327,21 +379,15 @@
     }
   };
 
-  // 太守与守将名册（含我方 6 位候补太守 + 敌方镇守名将）
+  // 太守池：严格使用 6 位拥有 1对1 专属木马立牌的名将（关羽/吕布/周瑜/夏侯惇/甘宁/鲁肃，彻底杜绝任何张冠李戴！）
   var GOVERNORS = {
-    guanyu: { id: 'guanyu', name: '关羽', title: '美髯公账房总管', faction: 'player', duel: 98, field: 0.25, siege: 0.25, ecoBonus: 0.18, terrainApt: { land: 1.15, water: 1.15, forest: 1.0 }, horseImg: ASSETS.chars.zhangfei_horse, bondWith: ['zhangfei', 'zhaoyun', 'huangzhong'], desc: '经营 +18%，镇守威慑极高' },
-    huangzhong: { id: 'huangzhong', name: '黄忠', title: '定军山神射阿伯', faction: 'player', duel: 86, field: 0.20, siege: 0.30, ecoBonus: 0.12, terrainApt: { land: 1.15, water: 0.85, forest: 1.30 }, horseImg: ASSETS.chars.zhaoyun_horse, bondWith: ['guanyu', 'weiyan'], desc: '经营 +12%，林战王牌 ×1.3' },
-    weiyan: { id: 'weiyan', name: '魏延', title: '子午谷抄近路狂人', faction: 'player', duel: 84, field: 0.22, siege: 0.22, ecoBonus: 0.10, terrainApt: { land: 1.15, water: 0.85, forest: 1.30 }, horseImg: ASSETS.chars.zhangfei_horse, bondWith: ['huangzhong'], desc: '经营 +10%，反骨凶悍善守山林' },
-    ganning: { id: 'ganning', name: '甘宁', title: '锦帆海鲜大盘商', faction: 'player', duel: 85, field: 0.26, siege: 0.20, ecoBonus: 0.15, terrainApt: { land: 0.90, water: 1.30, forest: 1.00 }, horseImg: ASSETS.chars.zhaoyun_horse, bondWith: ['lusu'], desc: '经营 +15%，水战王牌 ×1.3' },
-    lusu: { id: 'lusu', name: '鲁肃', title: '东吴散财老好人', faction: 'player', duel: 52, field: 0.18, siege: 0.15, ecoBonus: 0.25, terrainApt: { land: 1.00, water: 1.15, forest: 1.00 }, horseImg: ASSETS.chars.zhaoyun_horse, bondWith: ['ganning'], desc: '经营 +25%，包租流金牌掌柜' },
-    diaochan: { id: 'diaochan', name: '貂蝉', title: '郿坞讨薪头牌歌姬', faction: 'player', duel: 58, field: 0.15, siege: 0.15, ecoBonus: 0.30, terrainApt: { land: 1.15, water: 1.00, forest: 1.00 }, horseImg: ASSETS.chars.zhaoyun_horse, bondWith: ['guanyu'], desc: '经营 +30%，决战连携对魔王特攻' },
-    // 敌方专属守将
-    lvbu: { id: 'lvbu', name: '吕布', title: '虎牢收费站扛霸子', faction: 'enemy', duel: 112, field: 0.20, siege: 0.20, ecoBonus: 0.10, terrainApt: { land: 1.30, water: 0.80, forest: 1.00 }, horseImg: ASSETS.chars.lvbu_horse, desc: '单挑凶神，水战旱鸭子' },
-    xiahoudun: { id: 'xiahoudun', name: '夏侯惇', title: '独眼拆迁工头', faction: 'enemy', duel: 84, field: 0.22, siege: 0.25, ecoBonus: 0.12, terrainApt: { land: 1.15, water: 0.85, forest: 1.00 }, horseImg: ASSETS.chars.xiahoudun_horse, desc: '大魏铁卫，拔矢啖睛' },
-    zhangliao: { id: 'zhangliao', name: '张辽', title: '合肥止啼店长', faction: 'enemy', duel: 88, field: 0.28, siege: 0.25, ecoBonus: 0.15, terrainApt: { land: 1.30, water: 1.00, forest: 1.15 }, horseImg: ASSETS.chars.xiahoudun_horse, desc: '威震逍遥津，能守善战' },
-    zhouyu: { id: 'zhouyu', name: '周瑜', title: '江东水军总账房', faction: 'enemy', duel: 76, field: 0.32, siege: 0.25, ecoBonus: 0.20, terrainApt: { land: 1.00, water: 1.30, forest: 1.00 }, horseImg: ASSETS.chars.xiahoudun_horse, desc: '江东水战王牌统帅' },
-    taishici: { id: 'taishici', name: '太史慈', title: '神亭岭快闪骑手', faction: 'enemy', duel: 82, field: 0.20, siege: 0.18, ecoBonus: 0.12, terrainApt: { land: 1.15, water: 1.15, forest: 1.15 }, horseImg: ASSETS.chars.lvbu_horse, desc: '弓马娴熟水陆皆通' },
-    lizhangbo: { id: 'lizhangbo', name: '看门里长伯', title: '穿汗衫摇蒲扇大爷', faction: 'neutral', duel: 32, field: 0.0, siege: 0.0, ecoBonus: 0.0, terrainApt: { land: 1.0, water: 1.0, forest: 1.0 }, horseImg: ASSETS.chars.xiahoudun_horse, desc: '没派太守时临时看门的大爷' }
+    guanyu: { id: 'guanyu', name: '关羽', title: '美髯公账房总管', faction: 'player', duel: 98, field: 0.25, siege: 0.28, ecoBonus: 0.22, terrainApt: { land: 1.15, water: 1.15, forest: 1.15 }, horseImg: ASSETS.chars.guanyu_horse, bondWith: ['ganning', 'lusu'], desc: '经营 +22%，青龙刀镇守威慑极高' },
+    ganning: { id: 'ganning', name: '甘宁', title: '锦帆海鲜大盘商', faction: 'player', duel: 88, field: 0.28, siege: 0.22, ecoBonus: 0.18, terrainApt: { land: 1.00, water: 1.30, forest: 1.15 }, horseImg: ASSETS.chars.ganning_horse, bondWith: ['lusu', 'zhouyu', 'guanyu'], desc: '经营 +18%，水战王牌 ×1.3' },
+    lusu: { id: 'lusu', name: '鲁肃', title: '东吴散财大掌柜', faction: 'player', duel: 62, field: 0.20, siege: 0.18, ecoBonus: 0.30, terrainApt: { land: 1.00, water: 1.15, forest: 1.00 }, horseImg: ASSETS.chars.lusu_horse, bondWith: ['ganning', 'zhouyu'], desc: '经营 +30%，包租流头号财神掌柜' },
+    zhouyu: { id: 'zhouyu', name: '周瑜', title: '江东水军总账房', faction: 'both', duel: 78, field: 0.32, siege: 0.25, ecoBonus: 0.24, terrainApt: { land: 1.00, water: 1.30, forest: 1.00 }, horseImg: ASSETS.chars.zhouyu_horse, bondWith: ['lusu', 'ganning'], desc: '经营 +24%，江东水战王牌统帅' },
+    xiahoudun: { id: 'xiahoudun', name: '夏侯惇', title: '独眼拆迁大工头', faction: 'both', duel: 85, field: 0.22, siege: 0.28, ecoBonus: 0.15, terrainApt: { land: 1.15, water: 0.85, forest: 1.15 }, horseImg: ASSETS.chars.xiahoudun_horse, bondWith: ['lvbu'], desc: '经营 +15%，大魏铁卫守城硬汉' },
+    lvbu: { id: 'lvbu', name: '吕布', title: '虎牢收费站扛霸子', faction: 'both', duel: 112, field: 0.20, siege: 0.25, ecoBonus: 0.12, terrainApt: { land: 1.30, water: 0.80, forest: 1.00 }, horseImg: ASSETS.chars.lvbu_horse, bondWith: ['xiahoudun'], desc: '经营 +12%，单挑凶神镇场王' },
+    lizhangbo: { id: 'lizhangbo', name: '看门里长伯', title: '摇蒲扇守门大爷', faction: 'neutral', duel: 35, field: 0.0, siege: 0.0, ecoBonus: 0.0, terrainApt: { land: 1.0, water: 1.0, forest: 1.0 }, horseImg: ASSETS.chars.lusu_horse, desc: '没派太守时临时看门的大爷' }
   };
 
   // 12 条军师场边「口斗技」地道台味互喷库（对齐 02 表 9-7，诸葛亮 vs 郭嘉）
@@ -360,7 +406,7 @@
     { id: 'K12', name: '《骂死王朗》', stat: 'strategy', req: 60, myMorale: 30, enemyMorale: -30, zhugeLine: '诸葛亮：「皓首匹夫、苍髯老贼！占着茅坑不交税，今天连人带木马一并收归国有！」', guojiaReply: '郭嘉当场翻白眼把扇子一丢：「紧酸！这嘴皮子比机关炮还猛！」' }
   ];
 
-  // 七种四系建筑蓝图（对齐 02 表 4-5）
+  // 七种四系建筑蓝图（1对1 对应各自专属 3D 精修图标！）
   var BUILDINGS = {
     granary: {
       id: 'granary',
@@ -371,7 +417,7 @@
       tollBonus: 0.0,
       taxBonus: 0.50,
       garrisonBonus: 0.30,
-      worldImg: ASSETS.world.bldg_market,
+      worldImg: ASSETS.world.bldg_granary,
       desc: '该城税收+50%、守军+30%，每次过圈为主公额外征兵「规模×40」。',
       note: '有粮才有兵，有兵讲话才大声。'
     },
@@ -397,7 +443,7 @@
       tollBonus: 0.25,
       taxBonus: 0.0,
       garrisonBonus: 0.0,
-      worldImg: ASSETS.world.bldg_market,
+      worldImg: ASSETS.world.bldg_pirate_toll,
       desc: '该城过路费+25%；霸主车驾路过不停照拔毛该城过路费的 10%！',
       note: '路过也算踩，这叫高速公路使用者付费。'
     },
@@ -422,7 +468,7 @@
       slots: 2,
       tollBonus: 0.10,
       taxBonus: 0.0,
-      worldImg: ASSETS.world.icon_fortune,
+      worldImg: ASSETS.world.bldg_altar,
       desc: '过路费+10%；踩中交租者另被抽 5% 现金当香油钱（上限0.5T），守城单挑开场斗志+20。',
       note: '心诚则灵，钱包诚更灵。'
     },
@@ -434,7 +480,7 @@
       slots: 1,
       tollBonus: 0.0,
       taxBonus: 0.15,
-      worldImg: ASSETS.world.corner_pot,
+      worldImg: ASSETS.world.bldg_wind_pearl,
       desc: '该城免疫点名类「霸主手笔」（恶意并购/拆迁/落雷）与屎王神恶臭！',
       note: '风平浪静百毒不侵，专治曹老板强买强拆。'
     },
@@ -484,7 +530,7 @@
     { id: 'P28', name: '稳赚不赔，骗你是小狗', rarity: 'SSR', school: '老千', desc: '每圈首回在加注 ×2/×3 下交过路费或赔款时，支出只按 ×1 计算！' }
   ];
 
-  // ≥6 张棋盘锦囊（上限持 3 张，溢出自动折银 250 两）
+  // ≥6 张棋盘锦囊（绑定对应 card_*.png 高精插画，上限持 3 张，溢出自动折银 250 两）
   var BOARD_CARDS = {
     step_control: {
       id: 'step_control',
@@ -492,6 +538,8 @@
       rarity: 'SR',
       needParam: 'steps', // 1~6 步遥控
       price: 450,
+      cardImg: ASSETS.ui.card_step_control,
+      img: ASSETS.ui.card_step_control,
       desc: '遥控骰子：指定下一次移动精准走 1~6 步（指哪打哪，专踩聚宝盆或躲鬼门关）！',
       quote: '算命仙顾骰子啰，说走几步就走几步！'
     },
@@ -501,6 +549,8 @@
       rarity: 'R',
       needParam: null,
       price: 380,
+      cardImg: ASSETS.ui.card_steal_wealth,
+      img: ASSETS.ui.card_steal_wealth,
       desc: '妙手空空：当场从当前最有钱的霸主金库顺走 22% 现金（保底 600 两）塞进自己口袋！',
       quote: '曹老板荷包太鼓走路会歪，帮他减轻一点负担啦！'
     },
@@ -510,6 +560,8 @@
       rarity: 'SSR',
       needParam: null,
       price: 750,
+      cardImg: ASSETS.ui.card_steal_wealth,
+      img: ASSETS.ui.card_steal_wealth,
       desc: '社会主义铁拳：将主公与场上所有未破产霸主的现金加总后平分！（先花光钱盖楼再开直接暴富！）',
       quote: '有福同享有钱同花，各位大老板把金库交出来平分啰！'
     },
@@ -517,8 +569,10 @@
       id: 'turtle_block',
       name: '《路障乌龟》',
       rarity: 'R',
-      needParam: 'tileIdx', // 可选格号，不传默认放在前方或自家最肥巨城上
+      needParam: 'tileIdx',
       price: 320,
+      cardImg: ASSETS.ui.card_turtle_block,
+      img: ASSETS.ui.card_turtle_block,
       desc: '在自家最贵巨城（或指定格）摆一只慢吞吞路障乌龟：霸主车驾路过必被绊停踩雷交租！',
       quote: '乌龟爬马路——曹老板踩刹车，住一晚交钱再走啦！'
     },
@@ -528,6 +582,8 @@
       rarity: 'SR',
       needParam: null,
       price: 500,
+      cardImg: ASSETS.ui.card_tactic_swap,
+      img: ASSETS.ui.card_tactic_swap,
       desc: '一把大火烧向主霸主最高级城池：蒸发其 40% 守军、挂 2 圈溃散白旗，并烧毁 1 座敌建筑！',
       quote: '风干物燥小心火烛，给大魏总部放个大烟花！'
     },
@@ -537,18 +593,22 @@
       rarity: 'SR',
       needParam: null,
       price: 480,
+      cardImg: ASSETS.ui.card_step_control,
+      img: ASSETS.ui.card_step_control,
       desc: '妈祖保佑 3 刻：期间踩敌城免交过路费 1 次，且收到过路费与聚宝盆收益 +50%！',
       quote: '天灵灵地灵灵，财神关公齐附体，逢凶化吉发大财！'
     }
   };
 
-  // ≥4 张战斗奇策（木马单挑 2 秒高光窗 & 关底决战第三段可拍出，上限持 2 张）
+  // ≥4 张战斗奇策（绑定对应 card_tactic_*.png 高精插画，上限持 2 张）
   var COMBAT_CARDS = {
     swap_dragon: {
       id: 'swap_dragon',
       name: '《偷龙转凤》',
       rarity: 'SSR',
       price: 450,
+      cardImg: ASSETS.ui.card_tactic_swap,
+      img: ASSETS.ui.card_tactic_swap,
       winRateBonus: 0.30,
       moraleSwing: 40,
       desc: '把敌太守手里的兵器掉包成夜市烤香肠！本场单挑胜算直接飙升 +30%（封顶95%）！',
@@ -559,6 +619,8 @@
       name: '《火上浇油》',
       rarity: 'SR',
       price: 360,
+      cardImg: ASSETS.ui.card_tactic_sandal,
+      img: ASSETS.ui.card_tactic_sandal,
       winRateBonus: 0.20,
       plunderRatio: 0.40,
       desc: '往木马弹簧喷辣椒油：单挑胜算 +20%，若获胜额外从敌霸主金库爆出 0.5T 金币（决战加2连击）！',
@@ -569,6 +631,8 @@
       name: '《草鞋糊脸》',
       rarity: 'R',
       price: 280,
+      cardImg: ASSETS.ui.card_tactic_sandal,
+      img: ASSETS.ui.card_tactic_sandal,
       winRateBonus: 0.18,
       preventDoubleLoss: true,
       desc: '陈年包浆草鞋糊脸：单挑胜算 +18%，且万一失手落败也免除双倍惩罚（0 赔付全身而退）！',
@@ -579,6 +643,8 @@
       name: '《底牌重开》',
       rarity: 'SR',
       price: 380,
+      cardImg: ASSETS.ui.card_tactic_swap,
+      img: ASSETS.ui.card_tactic_swap,
       winRateBonus: 0.22,
       twiceRoll: true,
       desc: '老千翻桌重算：胜算 +22% 并执行「两次检定取最优」（只要有一次过就判我方大胜）！',
@@ -586,59 +652,59 @@
     }
   };
 
-  // 10 件即换即融四槽装备（含 brief 全部点名装备：牙签、木折凳、菜市场杀猪刀、青龙偃月刀、光剑、金箍棒、藤甲、虎头帽 + 纸箱甲、赤兔木马）
+  // 10 件即换即融四槽装备（绑定各自部位 eq_slot_*.png 插画图标）
   var EQUIPMENTS = {
     toothpick: {
-      id: 'toothpick', name: '牙签', rarity: 'N', slot: 'weapon', bonus: 6, isStreet: true,
+      id: 'toothpick', name: '牙签', rarity: 'N', slot: 'weapon', slotImg: ASSETS.ui.eq_slot_weapon, bonus: 6, isStreet: true,
       perk: '市井凡品：配政见《厨房就是军火库》加值翻三倍',
       note: '吃完卤肉饭顺手剔牙带的，伤害不高，侮辱性极强。'
     },
     butcher_knife: {
-      id: 'butcher_knife', name: '菜市场杀猪刀', rarity: 'R', slot: 'weapon', bonus: 42, isStreet: true,
+      id: 'butcher_knife', name: '菜市场杀猪刀', rarity: 'R', slot: 'weapon', slotImg: ASSETS.ui.eq_slot_weapon, bonus: 42, isStreet: true,
       perk: '市井良品：配《厨房就是军火库》暴涨至 +126 砍翻名将！',
       note: '猪肉荣赞助前期砍人性价比之王，砍完记得洗干净还厨房。'
     },
     stool: {
-      id: 'stool', name: '木折凳', rarity: 'SR', slot: 'weapon', bonus: 65, isStreet: false,
+      id: 'stool', name: '木折凳', rarity: 'SR', slot: 'weapon', slotImg: ASSETS.ui.eq_slot_weapon, bonus: 65, isStreet: false,
       moraleBonus: 20,
       perk: '七大武器之首：单挑开场斗志 +20',
       note: '藏于民居唾手可得，能打能坐，打赢直接坐着等对方赔钱！'
     },
     green_dragon: {
-      id: 'green_dragon', name: '青龙偃月刀', rarity: 'SSR', slot: 'weapon', bonus: 120, isStreet: false,
+      id: 'green_dragon', name: '青龙偃月刀', rarity: 'SSR', slot: 'weapon', slotImg: ASSETS.ui.eq_slot_weapon, bonus: 120, isStreet: false,
       perk: '武圣威压：单挑获胜额外恢复 120 兵力',
       note: '号称八十二斤，夜市摊老板悄悄说这把是铝合金空心的。'
     },
     lightsaber: {
-      id: 'lightsaber', name: '光剑', rarity: 'UR', slot: 'weapon', bonus: 165, isStreet: false,
+      id: 'lightsaber', name: '光剑', rarity: 'UR', slot: 'weapon', slotImg: ASSETS.ui.eq_slot_weapon, bonus: 165, isStreet: false,
       lowCashDouble: true,
       perk: '跨次元神兵：主公银两低于 1,500 两时加值翻倍至 +330！',
       note: '嗡——！来路不明的发光灯管，夜间切西瓜照明两用。'
     },
     golden_cudgel: {
-      id: 'golden_cudgel', name: '金箍棒', rarity: 'UR', slot: 'weapon', bonus: 199, isStreet: false,
+      id: 'golden_cudgel', name: '金箍棒', rarity: 'UR', slot: 'weapon', slotImg: ASSETS.ui.eq_slot_weapon, bonus: 199, isStreet: false,
       maxPhysique: true,
       perk: '定海神珍：穿戴期间主公体魄直接按 99 满值计算！',
       note: '向东海姓孙的大哥借的，脾气不太好，打完魔王记得归还。'
     },
     tiger_hat: {
-      id: 'tiger_hat', name: '虎头帽', rarity: 'R', slot: 'helm', bonus: 26, isStreet: false,
+      id: 'tiger_hat', name: '虎头帽', rarity: 'R', slot: 'helm', slotImg: ASSETS.ui.eq_slot_helm, bonus: 26, isStreet: false,
       perk: '庙会辟邪：骑木马防摔护头，心魔战奖励 +25%',
       note: '阿嬷一针一线缝的，张飞戴上萌中带凶，官府免开罚单。'
     },
     cardboard_armor: {
-      id: 'cardboard_armor', name: '纸箱甲', rarity: 'N', slot: 'armor', bonus: 10, isStreet: false,
+      id: 'cardboard_armor', name: '纸箱甲', rarity: 'N', slot: 'armor', slotImg: ASSETS.ui.eq_slot_armor, bonus: 10, isStreet: false,
       perk: '防风保暖，不防水更不防刀',
       note: '水果摊收摊捡的富士苹果纸箱，剪两个洞就能上阵。'
     },
     rattan_armor: {
-      id: 'rattan_armor', name: '藤甲', rarity: 'SR', slot: 'armor', bonus: 55, isStreet: false,
+      id: 'rattan_armor', name: '藤甲', rarity: 'SR', slot: 'armor', slotImg: ASSETS.ui.eq_slot_armor, bonus: 55, isStreet: false,
       lossDiscount: 0.25,
       perk: '刀枪不入：单挑落败赔付减免 25%（请远离烤香肠炭火摊）',
       note: '南蛮进口手工编织，轻便透气，就是千万别挨火烧。'
     },
     red_hare: {
-      id: 'red_hare', name: '赤兔弹簧木马', rarity: 'SSR', slot: 'mount', bonus: 82, isStreet: false,
+      id: 'red_hare', name: '赤兔弹簧木马', rarity: 'SSR', slot: 'mount', slotImg: ASSETS.ui.eq_slot_mount, bonus: 82, isStreet: false,
       perk: '进口粗弹簧：决战先锋冲阵连击数 +1',
       note: '人中吕布马中赤兔，这匹底座装了德系减震大弹簧！'
     }
@@ -781,6 +847,7 @@
 
   FTX.DATA = {
     ASSETS: ASSETS,
+    EQUIP_SLOT_ICONS: EQUIP_SLOT_ICONS,
     RARITY: RARITY,
     CITY_SCALE: CITY_SCALE,
     DICE_2D6_WAYS: DICE_2D6_WAYS,

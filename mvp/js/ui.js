@@ -1,14 +1,88 @@
 /**
- * 《富甲天下：十八啦！》9:16 竖屏交互界面与 B+A 舞台演出主控制器 (mvp/js/ui.js)
- * - 100% 兼容 file:// 直接打开（零 ES Module / 零 fetch）
- * - 严守 /Users/kamisola/.codex/AGENTS.md 后台休眠规范：
- *   页面隐藏时立即暂停 requestAnimationFrame 粒子循环、自动连掷与倒计时器并通知 FTX.Audio.setHidden(true)，
- *   恢复可见时平滑恢复，且单例监听绝不重复绑定！
+ * 《富甲天下：十八啦！》9:16 竖屏交互界面与 B+A 舞台演出主控制器（68 图精修版）
+ * - 接入全部 68 张高精资产：3D 青石擂台 + 红陶描金碗公与 6 面立体朱砂骨骰 + 16 张 UI/装备/卡面插画（零系统 Emoji）
+ * - 28 格棋盘精修排版：零西式 $ 号、2~3 字格名全宽居中 100% 完整不截断、Lv.1~5 五阶城池与七大建筑独立徽标
+ * - 专属颜艺联动：董卓开局哭笑颜艺 + 曹操踩玩家巨城大出血弹出 caocao_cry.png 肉痛吐槽特写
+ * - 100% 兼容 file:// 直接打开 & 严守 /Users/kamisola/.codex/AGENTS.md 后台休眠规范
  */
 (function (root) {
   'use strict';
 
   var FTX = (root.FTX = root.FTX || {});
+
+  // ==================== 68 张精修资产默认映射兜底表（与 data.js 双向无缝对齐） ====================
+  var FALLBACK_UI_ICONS = {
+    silver: './assets/ui/ui_silver_ingot.png',
+    troops: './assets/ui/ui_troops_flag.png',
+    sticks: './assets/ui/ui_luck_sticks.png',
+    fame: './assets/ui/ui_fame_mirror.png',
+    btnLog: './assets/ui/ui_btn_log.png',
+    btnAuto: './assets/ui/ui_btn_auto.png',
+    policyScroll: './assets/ui/ui_policy_scroll.png',
+    slot_weapon: './assets/ui/eq_slot_weapon.png',
+    slot_helm: './assets/ui/eq_slot_helm.png',
+    slot_armor: './assets/ui/eq_slot_armor.png',
+    slot_mount: './assets/ui/eq_slot_mount.png',
+    card_step_control: './assets/ui/card_step_control.png',
+    card_turtle_block: './assets/ui/card_turtle_block.png',
+    card_steal_wealth: './assets/ui/card_steal_wealth.png',
+    card_tactic_swap: './assets/ui/card_tactic_swap.png',
+    card_tactic_sandal: './assets/ui/card_tactic_sandal.png'
+  };
+
+  function getDiceImgSrc(faceVal) {
+    var f = Math.max(1, Math.min(6, Math.round(Number(faceVal) || 6)));
+    var W = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.world) || {};
+    return W['dice_3d_' + f] || ('./assets/world/dice_3d_' + f + '.png');
+  }
+
+  function getCityScaleImgSrc(level, fallback) {
+    var lv = Math.max(1, Math.min(5, Math.round(Number(level) || 1)));
+    var W = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.world) || {};
+    return W['city_lv' + lv] || ('./assets/world/city_lv' + lv + '.png') || fallback;
+  }
+
+  function getLordPortraitSrc(lordId, isHappy) {
+    var C = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.chars) || {};
+    var lordCfg = FTX.DATA && FTX.DATA.LORDS && FTX.DATA.LORDS[lordId];
+    if (lordId === 'dongzhuo') {
+      return isHappy
+        ? (C.dongzhuo_happy || (lordCfg && lordCfg.happyImg) || './assets/chars/dongzhuo_happy.png')
+        : (C.dongzhuo_cry || (lordCfg && lordCfg.cryImg) || './assets/chars/dongzhuo_cry.png');
+    }
+    return isHappy
+      ? ((lordCfg && lordCfg.happyImg) || C.liubei_happy || './assets/chars/liubei_happy.png')
+      : ((lordCfg && lordCfg.cryImg) || C.liubei_cry || './assets/chars/liubei_cry.png');
+  }
+
+  function getBoardCardIllustSrc(cardCfg) {
+    if (!cardCfg) return FALLBACK_UI_ICONS.card_steal_wealth;
+    if (cardCfg.cardImg || cardCfg.uiImg || cardCfg.img) {
+      return cardCfg.cardImg || cardCfg.uiImg || cardCfg.img;
+    }
+    var U = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.ui) || {};
+    var cid = cardCfg.id || cardCfg.cardId || '';
+    if (cid === 'step_control') return U.card_step_control || FALLBACK_UI_ICONS.card_step_control;
+    if (cid === 'turtle_block') return U.card_turtle_block || FALLBACK_UI_ICONS.card_turtle_block;
+    return U.card_steal_wealth || FALLBACK_UI_ICONS.card_steal_wealth;
+  }
+
+  function getCombatCardIllustSrc(cardCfg) {
+    if (!cardCfg) return FALLBACK_UI_ICONS.card_tactic_swap;
+    if (cardCfg.cardImg || cardCfg.uiImg || cardCfg.img) {
+      return cardCfg.cardImg || cardCfg.uiImg || cardCfg.img;
+    }
+    var U = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.ui) || {};
+    var cid = cardCfg.id || cardCfg.cardId || '';
+    if (cid === 'straw_slap') return U.card_tactic_sandal || FALLBACK_UI_ICONS.card_tactic_sandal;
+    return U.card_tactic_swap || FALLBACK_UI_ICONS.card_tactic_swap;
+  }
+
+  function getEquipSlotIconSrc(slotKey) {
+    var S = (FTX.DATA && FTX.DATA.EQUIP_SLOT_ICONS) || {};
+    var U = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.ui) || {};
+    return S[slotKey] || U['eq_slot_' + slotKey] || FALLBACK_UI_ICONS['slot_' + slotKey] || FALLBACK_UI_ICONS.slot_weapon;
+  }
 
   // ==================== 运行态与后台休眠受管句柄 ====================
   var uiBound = false;
@@ -17,7 +91,6 @@
   var isBusy = false;
   var autoRollEnabled = false;
 
-  // 开局配置选项
   var startConfig = {
     lordId: 'liubei',
     vanguardId: 'zhangfei',
@@ -25,26 +98,33 @@
     specialMode: 'hulao'
   };
 
-  // 受管定时器与 RAF 句柄
   var activeTimers = [];
   var autoRollTimer = null;
+  var diceFlickerInterval = null;
   var duelInterval = null;
   var duelRemainingMs = 0;
   var duelPendingCallback = null;
+  var bleedHideTimer = null;
   var rafId = null;
   var silverAnimId = null;
 
-  // 粒子池與银两缓存
   var particles = [];
   var displayedSilver = null;
   var lastFinaleReport = null;
   var finaleCheerMode = false;
   var finaleCheerHits = 0;
-  var activeBoardCardToUse = null;
 
   // ==================== 工具辅助函数 ====================
   function $(id) {
     return document.getElementById(id);
+  }
+
+  function setImgSrcSafe(imgEl, src) {
+    if (!imgEl || !src) return;
+    if (imgEl.getAttribute('src') !== src) {
+      delete imgEl.dataset.fallbackApplied;
+      imgEl.setAttribute('src', src);
+    }
   }
 
   function fmtNum(n) {
@@ -83,6 +163,13 @@
     }
   }
 
+  function clearDiceFlicker() {
+    if (diceFlickerInterval !== null) {
+      clearInterval(diceFlickerInterval);
+      diceFlickerInterval = null;
+    }
+  }
+
   function clearDuelTimer() {
     if (duelInterval !== null) {
       clearInterval(duelInterval);
@@ -113,6 +200,31 @@
     if (el && msg) el.textContent = msg;
   }
 
+  function showCaocaoBleedPopup(hegemonId, amount, quote, customCryImg) {
+    var pop = $('caocao-bleed-popup');
+    if (!pop) return;
+    var C = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.chars) || {};
+    var avatarSrc = customCryImg || (hegemonId === 'sunquan'
+      ? (C.sunquan_chariot || './assets/chars/sunquan_chariot.png')
+      : (C.caocao_cry || './assets/chars/caocao_cry.png'));
+    var hName = hegemonId === 'sunquan' ? '孙权' : '曹操';
+
+    setImgSrcSafe($('bleed-avatar-img'), avatarSrc);
+    if ($('bleed-amount-text')) {
+      $('bleed-amount-text').textContent = hName + '肉痛交租 +' + fmtNum(amount) + ' 两！';
+    }
+    if ($('bleed-quote-text')) {
+      $('bleed-quote-text').textContent = quote || '夭寿哦，这过路费比抢劫还狠！开发票！';
+    }
+
+    pop.classList.remove('hidden');
+    if (bleedHideTimer) clearTimeout(bleedHideTimer);
+    bleedHideTimer = setTimeout(function () {
+      bleedHideTimer = null;
+      pop.classList.add('hidden');
+    }, speedDiv(1650));
+  }
+
   function shakeScreen() {
     var vp = $('app-viewport');
     if (!vp || isPageHidden) return;
@@ -124,6 +236,7 @@
     }, 380);
   }
 
+  // 严格保证所有 28 格显示精炼 2~3 字名称，100% 绝不截断！
   function shortTileName(name) {
     if (!name) return '';
     return name
@@ -228,7 +341,6 @@
       ctx.rotate(p.rot);
 
       if (p.kind === 'coin') {
-        // 绘制金元宝 / 方孔铜钱
         ctx.fillStyle = p.color;
         ctx.strokeStyle = '#78350F';
         ctx.lineWidth = 1.4;
@@ -320,12 +432,31 @@
     silverAnimId = requestAnimationFrame(tickSilver);
   }
 
-  // ==================== 8×8 方环棋盘构建与实时同步 ====================
+  // ==================== 8×8 方环棋盘精修构建与同步 ====================
+  function resolveSpecialTileWorldImg(tileStatic, state) {
+    var W = (FTX.DATA && FTX.DATA.ASSETS && FTX.DATA.ASSETS.world) || {};
+    if (tileStatic.idx === 11 || tileStatic.idx === 27) {
+      return W.icon_event_pavilion || tileStatic.worldImg || './assets/world/icon_event_pavilion.png';
+    }
+    if (tileStatic.idx === 12) {
+      return W.icon_school || tileStatic.worldImg || './assets/world/icon_school.png';
+    }
+    if (tileStatic.idx === 17) {
+      if (state && state.specialMode && FTX.DATA.SPECIAL_MODES && FTX.DATA.SPECIAL_MODES[state.specialMode]) {
+        if (state.specialMode === 'hulao') {
+          return W.icon_tollgate || FTX.DATA.SPECIAL_MODES.hulao.worldImg || './assets/world/icon_tollgate.png';
+        }
+        return FTX.DATA.SPECIAL_MODES[state.specialMode].worldImg;
+      }
+      return W.icon_tollgate || tileStatic.worldImg || './assets/world/icon_tollgate.png';
+    }
+    return tileStatic.worldImg || W.city_lv1;
+  }
+
   function buildBoardDOM() {
     var grid = $('board-grid');
     if (!grid || !FTX.DATA || !FTX.DATA.TILES) return;
 
-    // 清理旧格子，保留 #center-stage
     var oldTiles = grid.querySelectorAll('.board-tile');
     for (var i = 0; i < oldTiles.length; i++) {
       oldTiles[i].parentNode.removeChild(oldTiles[i]);
@@ -342,18 +473,17 @@
       cell.style.gridRow = String(t.gridRow);
       cell.style.gridColumn = String(t.gridCol);
 
-      var imgSrc = t.worldImg || FTX.DATA.ASSETS.world.city_lv1;
+      var imgSrc = resolveSpecialTileWorldImg(t, null);
       cell.innerHTML =
-        '<span class="tile-owner-flag hidden" data-role="flag"></span>' +
+        '<span class="tile-top-tag hidden" data-role="toptag"></span>' +
         '<span class="reach-badge hidden" data-role="reach"></span>' +
         '<div class="tile-model-wrap">' +
           '<img class="tile-model-img" data-role="model" src="' + escHtml(imgSrc) + '" alt="' + escHtml(t.name) + '" onerror="FTX_IMG_FALLBACK(this, \'' + escHtml(shortTileName(t.name)) + '\')" />' +
         '</div>' +
-        '<span class="tile-fx-tag" data-role="fx"></span>' +
+        '<div class="tile-fx-badges" data-role="fx"></div>' +
         '<div class="tile-bldg-badges" data-role="bldgs"></div>' +
         '<div class="tile-footer">' +
           '<span class="tile-name" data-role="name">' + escHtml(shortTileName(t.name)) + '</span>' +
-          '<span class="tile-lv" data-role="lv"></span>' +
         '</div>';
 
       cell.addEventListener('click', function () {
@@ -365,19 +495,11 @@
     });
   }
 
-  function getCityModelSrc(level, fallback) {
-    var W = FTX.DATA.ASSETS.world;
-    if (level >= 5) return W.city_lv5;
-    if (level >= 3) return W.city_lv3;
-    return fallback || W.city_lv1;
-  }
-
   function syncBoardTiles(state) {
     if (!state || !state.board) return;
     var grid = $('board-grid');
     if (!grid) return;
 
-    // 落点预览映射（仅 IDLE 阶段展示前方 2~12 步）
     var reachMap = {};
     if (state.phase === 'IDLE' && FTX.Engine && FTX.Engine.getReachPreview) {
       var list = FTX.Engine.getReachPreview() || [];
@@ -392,65 +514,64 @@
       var el = grid.querySelector('.board-tile[data-idx="' + i + '"]');
       if (!el) continue;
 
-      // 1. 势力归属色边 + 几何旗标双编码
-      el.classList.remove('owner-player', 'owner-caocao', 'owner-sunquan', 'tile-lv5', 'is-smoked', 'reach-peak7', 'reach-danger');
-      var flagEl = el.querySelector('[data-role="flag"]');
-      if (b.owner === 'player') {
-        el.classList.add('owner-player');
-        if (flagEl) {
-          flagEl.className = 'tile-owner-flag player';
-          flagEl.textContent = state.player.lordId === 'dongzhuo' ? '●董' : '●汉';
+      el.classList.remove(
+        'owner-player', 'owner-caocao', 'owner-sunquan',
+        'tile-lv4', 'tile-lv5', 'is-smoked', 'reach-peak7', 'reach-danger'
+      );
+
+      // 1. 左上角势力等级双编码角标 / 无主城琥珀地价标（零 $ 符号！）
+      var topTag = el.querySelector('[data-role="toptag"]');
+      if (staticTile.type === 'city') {
+        var lv = b.level || 1;
+        if (b.owner === 'player') {
+          el.classList.add('owner-player');
+          if (topTag) {
+            topTag.className = 'tile-top-tag player';
+            topTag.textContent = '●Lv' + lv;
+          }
+        } else if (b.owner === 'caocao') {
+          el.classList.add('owner-caocao');
+          if (topTag) {
+            topTag.className = 'tile-top-tag caocao';
+            topTag.textContent = '◆Lv' + lv;
+          }
+        } else if (b.owner === 'sunquan') {
+          el.classList.add('owner-sunquan');
+          if (topTag) {
+            topTag.className = 'tile-top-tag sunquan';
+            topTag.textContent = '▲Lv' + lv;
+          }
+        } else if (topTag) {
+          topTag.className = 'tile-top-tag price';
+          topTag.textContent = staticTile.basePrice + '两';
         }
-      } else if (b.owner === 'caocao') {
-        el.classList.add('owner-caocao');
-        if (flagEl) {
-          flagEl.className = 'tile-owner-flag caocao';
-          flagEl.textContent = '◆魏';
-        }
-      } else if (b.owner === 'sunquan') {
-        el.classList.add('owner-sunquan');
-        if (flagEl) {
-          flagEl.className = 'tile-owner-flag sunquan';
-          flagEl.textContent = '▲吴';
-        }
-      } else if (flagEl) {
-        flagEl.className = 'tile-owner-flag hidden';
+      } else if (staticTile.type === 'pot' && topTag) {
+        topTag.className = 'tile-top-tag pot';
+        topTag.textContent = (state.jackpotPot || 1500) + '两';
+      } else if (topTag) {
+        topTag.className = 'tile-top-tag hidden';
       }
 
+      if (b.level === 4) el.classList.add('tile-lv4');
       if (b.level >= 5) el.classList.add('tile-lv5');
       if (b.smoked) el.classList.add('is-smoked');
 
-      // 2. 3D 模型图标更新
+      // 2. 五阶城池模型与专属功能格图标同步
       var modelEl = el.querySelector('[data-role="model"]');
       var nameEl = el.querySelector('[data-role="name"]');
-      var lvEl = el.querySelector('[data-role="lv"]');
-
-      var targetSrc = staticTile.worldImg;
+      var targetSrc = resolveSpecialTileWorldImg(staticTile, state);
       var shortNm = shortTileName(b.name || staticTile.name);
+
       if (staticTile.type === 'city') {
-        targetSrc = b.cityImg || getCityModelSrc(b.level || 1, staticTile.worldImg);
+        targetSrc = getCityScaleImgSrc(b.owner ? (b.level || 1) : 1, b.cityImg || staticTile.worldImg);
       } else if (i === 17 && state.specialMode && FTX.DATA.SPECIAL_MODES[state.specialMode]) {
-        targetSrc = FTX.DATA.SPECIAL_MODES[state.specialMode].worldImg;
         shortNm = shortTileName(FTX.DATA.SPECIAL_MODES[state.specialMode].tileName);
       }
-      if (modelEl && modelEl.getAttribute('src') !== targetSrc) {
-        delete modelEl.dataset.fallbackApplied;
-        modelEl.setAttribute('src', targetSrc);
-      }
+
+      setImgSrcSafe(modelEl, targetSrc);
       if (nameEl) nameEl.textContent = shortNm;
 
-      // 底部右侧微标：城池显示 Lv1..5 或空地价；聚宝盆显示奖池
-      if (lvEl) {
-        if (staticTile.type === 'city') {
-          lvEl.textContent = b.owner ? ('L' + (b.level || 1)) : ('$' + staticTile.basePrice);
-        } else if (staticTile.type === 'pot') {
-          lvEl.textContent = fmtNum(state.jackpotPot || 1500);
-        } else {
-          lvEl.textContent = '';
-        }
-      }
-
-      // 3. 城防建筑微缩角标（箭塔、屎王神带绿烟、市集等）
+      // 3. 七种 3D 城防建筑专属小徽标（含屎王神绿烟）
       var bldgsBox = el.querySelector('[data-role="bldgs"]');
       if (bldgsBox) {
         var bList = b.buildings || [];
@@ -472,16 +593,19 @@
         }
       }
 
-      // 4. 异变与状态角标（溃散白旗、乡民红包、五折夜市、路障乌龟、精英心魔）
+      // 4. 状态微印章与路障乌龟真图（零 Emoji）
       var fxEl = el.querySelector('[data-role="fx"]');
       if (fxEl) {
-        var tags = '';
-        if (b.brokenLoops > 0) tags += '🏳️';
-        if (b.turtleBlock) tags += '🐢';
-        if (b.bonusRedPacket > 0) tags += '🧧';
-        if (b.halfPriceLoops > 0) tags += '🏷️';
-        if (b.eliteDemon) tags += '👹';
-        fxEl.textContent = tags;
+        var fxHtml = '';
+        if (b.turtleBlock) {
+          var tSrc = ((FTX.DATA.ASSETS && FTX.DATA.ASSETS.ui && FTX.DATA.ASSETS.ui.card_turtle_block) || FALLBACK_UI_ICONS.card_turtle_block);
+          fxHtml += '<img class="fx-turtle-img" src="' + escHtml(tSrc) + '" alt="路障乌龟" onerror="FTX_IMG_FALLBACK(this, \'龟\')" />';
+        }
+        if (b.brokenLoops > 0) fxHtml += '<span class="fx-mini-seal broken">溃</span>';
+        if (b.bonusRedPacket > 0) fxHtml += '<span class="fx-mini-seal redpkt">赏</span>';
+        if (b.halfPriceLoops > 0) fxHtml += '<span class="fx-mini-seal sale">半价</span>';
+        if (b.eliteDemon) fxHtml += '<span class="fx-mini-seal elite">精英</span>';
+        fxEl.innerHTML = fxHtml;
       }
 
       // 5. 前方 2~12 步落点预览角标
@@ -541,15 +665,11 @@
     var pPlayerFlag = $('piece-player-flag');
     var lordCfg = FTX.DATA.LORDS[state.player.lordId] || FTX.DATA.LORDS.liubei;
 
-    if (pPlayerImg && pPlayerImg.getAttribute('src') !== lordCfg.pieceImg) {
-      delete pPlayerImg.dataset.fallbackApplied;
-      pPlayerImg.setAttribute('src', lordCfg.pieceImg);
-    }
+    setImgSrcSafe(pPlayerImg, lordCfg.pieceImg);
     if (pPlayerFlag) {
       pPlayerFlag.textContent = '●' + lordCfg.name;
     }
 
-    // 统计同格棋子错位排布
     var occCount = {};
     function nextSlotOffset(pos) {
       var c = occCount[pos] || 0;
@@ -566,7 +686,6 @@
     var offP = nextSlotOffset(state.player.pos);
     placePieceAt(pPlayer, state.player.pos, offP.dx, offP.dy, false);
 
-    // 曹操与孙权车驾
     var hegMap = [
       { id: 'caocao', elId: 'piece-caocao', stId: 'piece-caocao-status' },
       { id: 'sunquan', elId: 'piece-sunquan', stId: 'piece-sunquan-status' }
@@ -585,7 +704,7 @@
         placePieceAt(hEl, hState.pos, offH.dx, offH.dy, false);
         if (stEl) {
           if (hState.paralyzedTicks > 0) {
-            stEl.textContent = '💤' + hState.paralyzedTicks;
+            stEl.textContent = '瘫' + hState.paralyzedTicks;
             stEl.classList.remove('hidden');
           } else {
             stEl.classList.add('hidden');
@@ -594,7 +713,6 @@
       }
     }
 
-    // 讨债队恶霸棋子（第 11 圈起逆时针拦截）
     var debtBox = $('pieces-debt-container');
     if (debtBox) {
       var debts = state.debtTeams || [];
@@ -622,7 +740,7 @@
     var pPlayer = $('piece-player');
     var grid = $('board-grid');
     var idx = 0;
-    var stepInterval = speedDiv(95);
+    var stepInterval = speedDiv(92);
 
     function nextHop() {
       if (idx >= pathArr.length) {
@@ -653,7 +771,6 @@
   function syncHUD(state) {
     if (!state) return;
 
-    // 1. 圈数与宿敌倒计时
     var loopEl = $('ui-loop-text');
     var examEl = $('ui-exam-tag');
     if (loopEl) loopEl.textContent = '第 ' + state.loop + '/' + state.maxLoops + ' 圈';
@@ -666,7 +783,6 @@
       }
     }
 
-    // 2. 霸主手笔明牌预警胶囊
     var alertTxt = $('ui-hegemon-alert-text');
     if (alertTxt) {
       var cMove = state.hegemons && state.hegemons.caocao && !state.hegemons.caocao.bankrupt ? state.hegemons.caocao.nextMoveCard : null;
@@ -674,14 +790,13 @@
       var activeMove = cMove || sMove;
       if (activeMove) {
         var ownerNm = activeMove.owner === 'sunquan' ? '孙权' : '曹操';
-        alertTxt.textContent = '⚠️ ' + ownerNm + '下圈手笔：《' + activeMove.name + '》[点看反制]';
+        alertTxt.textContent = ownerNm + '下圈手笔：《' + activeMove.name + '》[点看反制]';
       } else {
         var stageLabel = state.loop <= 5 ? '圈地期' : (state.loop <= 10 ? '筑防期' : '围剿期');
         alertTxt.textContent = '霸主动态：' + stageLabel + '（点看金库详情）';
       }
     }
 
-    // 3. 第三幕（或全程后半局）火力 vs 魔王气血对比条
     var bossWrap = $('ui-boss-bar-wrap');
     if (bossWrap && state.bossPreview) {
       var showBossBar = state.loop >= Math.max(4, state.maxLoops - 5) || state.phase === 'BOSS_FINALE';
@@ -696,19 +811,20 @@
       }
     }
 
-    // 4. 倍速与音效按钮
     if ($('btn-speed')) $('btn-speed').textContent = (state.speed || 1) + 'x';
-    if ($('btn-audio') && FTX.Audio) {
-      $('btn-audio').textContent = FTX.Audio.isMuted() ? '🔇' : '🔊';
+    if (FTX.Audio) {
+      var isMuted = FTX.Audio.isMuted();
+      if ($('icon-sound-on')) $('icon-sound-on').classList.toggle('hidden', isMuted);
+      if ($('icon-sound-off')) $('icon-sound-off').classList.toggle('hidden', !isMuted);
     }
 
-    // 5. 核心资源数字（银两、兵力、气运签、正邪名望）
     updateSilverDisplay(state.player.silver);
     if ($('ui-troops')) $('ui-troops').textContent = fmtNum(state.player.troops);
     if ($('ui-sticks')) {
       var maxSt = state.player.maxLuckSticks || 3;
       $('ui-sticks').textContent = state.player.luckSticks + '/' + maxSt;
     }
+
     var fameBadge = $('ui-fame-badge');
     if (fameBadge) {
       var fm = state.player.stats ? state.player.stats.fame : 0;
@@ -720,23 +836,17 @@
         fameBadge.textContent = '邪道 ' + fm;
       } else {
         fameBadge.className = 'fame-badge neutral';
-        fameBadge.textContent = '名望 ' + (fm > 0 ? '+' + fm : fm);
+        fameBadge.textContent = '中庸 ' + (fm > 0 ? '+' + fm : fm);
       }
     }
 
-    // 6. 中央舞台霸主小报与聚宝盆底池
     if ($('ui-pot-amount')) $('ui-pot-amount').textContent = fmtNum(state.jackpotPot || 1500);
     syncRivalMiniStrip(state);
 
-    // 7. 构筑与手牌舱：先锋切换头像 + 四件装备槽 + 政见计数 + 锦囊/奇策双轨手牌
     var vgCfg = FTX.DATA.VANGUARDS[state.player.vanguardId] || FTX.DATA.VANGUARDS.zhangfei;
-    var vgImg = $('ui-vanguard-img');
-    if (vgImg && vgImg.getAttribute('src') !== vgCfg.horseImg) {
-      delete vgImg.dataset.fallbackApplied;
-      vgImg.setAttribute('src', vgCfg.horseImg);
-    }
+    setImgSrcSafe($('ui-vanguard-img'), vgCfg.horseImg);
     if ($('ui-vanguard-name')) {
-      $('ui-vanguard-name').innerHTML = escHtml(vgCfg.name) + ' <small>🔄换将</small>';
+      $('ui-vanguard-name').innerHTML = escHtml(vgCfg.name) + ' <small class="swap-pill">换将</small>';
     }
     var eqBonus = calcPlayerEquipBonus(state);
     if ($('ui-vanguard-power')) {
@@ -749,7 +859,6 @@
     renderEquipSlots(state);
     renderHandCards(state);
 
-    // 8. 底部拇指区：加注档位、气运签改命救急钮、ROLL 键状态
     var bet = state.betMultiplier || 1;
     var betBtns = document.querySelectorAll('.bet-btn');
     for (var b = 0; b < betBtns.length; b++) {
@@ -764,19 +873,19 @@
       if (finaleCheerMode) {
         rollBtn.disabled = false;
         rollBtn.classList.add('cheer-mode');
-        if ($('ui-roll-title')) $('ui-roll-title').textContent = '🥁 擂鼓助威！(' + finaleCheerHits + '/5)';
+        if ($('ui-roll-title')) $('ui-roll-title').textContent = '擂鼓助威！(' + finaleCheerHits + '/5)';
         if ($('ui-roll-sub')) $('ui-roll-sub').textContent = '狂点为先锋冲阵加伤 +20%！';
       } else {
         rollBtn.classList.remove('cheer-mode');
         rollBtn.disabled = isBusy || state.phase !== 'IDLE';
         if ($('ui-roll-title')) {
-          $('ui-roll-title').textContent = state.extraRollPending ? '🎊 免费再掷 · 十八啦！' : '掷骰 十八啦！';
+          $('ui-roll-title').textContent = state.extraRollPending ? '免费再掷 · 十八啦！' : '掷骰 十八啦！';
         }
         if ($('ui-roll-sub')) {
           $('ui-roll-sub').textContent = state.extraRollPending
             ? '好事成双！本把对子赠送免费再掷一次！'
             : (bet > 1
-              ? ('🔥 当前加注 ×' + bet + ' · 收支同乘' + bet + '倍')
+              ? ('当前加注 ×' + bet + ' · 收支同乘 ' + bet + ' 倍')
               : '单手一击 · 霸主同步落子');
         }
       }
@@ -802,13 +911,13 @@
       $('mini-hegemon-caocao').classList.toggle('is-bankrupt', Boolean(cc.bankrupt));
       $('ui-caocao-vault').textContent = cc.bankrupt
         ? '裤衩破产退场！'
-        : ('¥' + fmtNum(cc.vault) + ' · ' + cityCount.caocao + '城');
+        : (fmtNum(cc.vault) + '两 · ' + cityCount.caocao + '城');
     }
     if (sq && $('ui-sunquan-vault')) {
       $('mini-hegemon-sunquan').classList.toggle('is-bankrupt', Boolean(sq.bankrupt));
       $('ui-sunquan-vault').textContent = sq.bankrupt
         ? '裤衩破产退场！'
-        : ('¥' + fmtNum(sq.vault) + ' · ' + cityCount.sunquan + '城');
+        : (fmtNum(sq.vault) + '两 · ' + cityCount.sunquan + '城');
     }
   }
 
@@ -829,27 +938,37 @@
     return map[rarityCode] || 'tier-1';
   }
 
+  function shortEquipName(name) {
+    if (!name) return '';
+    return name
+      .replace('菜市场杀猪刀', '杀猪刀')
+      .replace('青龙偃月刀', '青龙刀')
+      .replace('赤兔弹簧木马', '赤兔马')
+      .slice(0, 3);
+  }
+
   function renderEquipSlots(state) {
     var box = $('ui-equip-slots');
     if (!box) return;
     var eq = (state.player && state.player.equipment) || {};
     var defs = [
-      { key: 'weapon', icon: '🗡️', emptyTxt: '兵器' },
-      { key: 'helm', icon: '🪖', emptyTxt: '头冠' },
-      { key: 'armor', icon: '🥋', emptyTxt: '衣甲' },
-      { key: 'mount', icon: '🐴', emptyTxt: '木马' }
+      { key: 'weapon', emptyTxt: '兵器' },
+      { key: 'helm', emptyTxt: '头冠' },
+      { key: 'armor', emptyTxt: '衣甲' },
+      { key: 'mount', emptyTxt: '木马' }
     ];
 
     box.innerHTML = '';
     defs.forEach(function (d) {
       var raw = eq[d.key];
       var cfg = raw ? (typeof raw === 'string' ? FTX.DATA.EQUIPMENTS[raw] : (FTX.DATA.EQUIPMENTS[raw.id] || raw)) : null;
+      var iconSrc = (cfg && (cfg.iconImg || cfg.slotImg)) || getEquipSlotIconSrc(d.key);
       var slotDiv = document.createElement('div');
       if (cfg) {
         slotDiv.className = 'equip-slot ' + rarityTierClass(cfg.rarity);
         slotDiv.innerHTML =
-          '<span class="slot-icon">' + d.icon + '</span>' +
-          '<span class="slot-name">' + escHtml(cfg.name.slice(0, 4)) + '+' + cfg.bonus + '</span>';
+          '<img class="eq-slot-img" src="' + escHtml(iconSrc) + '" alt="' + escHtml(cfg.name) + '" onerror="FTX_IMG_FALLBACK(this, \'' + d.emptyTxt + '\')" />' +
+          '<span class="slot-name">' + escHtml(shortEquipName(cfg.name)) + '+' + cfg.bonus + '</span>';
         slotDiv.addEventListener('click', function () {
           if (FTX.Audio) FTX.Audio.playUiClick();
           showToast(cfg.name + '（+' + cfg.bonus + '）：' + (cfg.perk || cfg.note || ''));
@@ -857,7 +976,7 @@
       } else {
         slotDiv.className = 'equip-slot empty';
         slotDiv.innerHTML =
-          '<span class="slot-icon">' + d.icon + '</span>' +
+          '<img class="eq-slot-img" src="' + escHtml(iconSrc) + '" alt="' + d.emptyTxt + '" onerror="FTX_IMG_FALLBACK(this, \'' + d.emptyTxt + '\')" />' +
           '<span class="slot-name">' + d.emptyTxt + '</span>';
       }
       box.appendChild(slotDiv);
@@ -877,11 +996,15 @@
       btn.type = 'button';
       if (bc) {
         var cfg = FTX.DATA.BOARD_CARDS[bc.cardId || bc.id] || bc;
+        var cardImg = getBoardCardIllustSrc(cfg);
         btn.className = 'hand-card';
         btn.dataset.instanceId = bc.instanceId || bc.id;
         btn.innerHTML =
-          '<span class="hc-name">' + escHtml((cfg.name || '').replace(/[《》]/g, '')) + '</span>' +
-          '<span class="hc-hint">' + (cfg.needParam === 'steps' ? '遥控1~6步' : '点此施放') + '</span>';
+          '<img class="hc-illust" src="' + escHtml(cardImg) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'锦囊\')" />' +
+          '<div class="hc-texts">' +
+            '<span class="hc-name">' + escHtml((cfg.name || '').replace(/[《》]/g, '')) + '</span>' +
+            '<span class="hc-hint">' + (cfg.needParam === 'steps' ? '遥控1~6步' : '点此施放') + '</span>' +
+          '</div>';
         (function (cardObj, cardCfg) {
           btn.addEventListener('click', function () {
             onClickBoardCard(cardObj, cardCfg);
@@ -904,11 +1027,15 @@
       cBtn.type = 'button';
       if (cc) {
         var cCfg = FTX.DATA.COMBAT_CARDS[cc.cardId || cc.id] || cc;
+        var tacticImg = getCombatCardIllustSrc(cCfg);
         cBtn.className = 'hand-card combat' + (inDuelWindow ? ' ready-glow' : '');
         cBtn.dataset.instanceId = cc.instanceId || cc.id;
         cBtn.innerHTML =
-          '<span class="hc-name">' + escHtml((cCfg.name || '').replace(/[《》]/g, '')) + '</span>' +
-          '<span class="hc-hint">' + (inDuelWindow ? '⚡立即拍出' : '单挑/决战用') + '</span>';
+          '<img class="hc-illust" src="' + escHtml(tacticImg) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'奇策\')" />' +
+          '<div class="hc-texts">' +
+            '<span class="hc-name">' + escHtml((cCfg.name || '').replace(/[《》]/g, '')) + '</span>' +
+            '<span class="hc-hint">' + (inDuelWindow ? '立即拍出' : '单挑/决战') + '</span>' +
+          '</div>';
         (function (cardObj, cardCfg) {
           cBtn.addEventListener('click', function () {
             if (duelPendingCallback) {
@@ -947,16 +1074,11 @@
   function playStageMiniShow(opts, durationMs, cb) {
     setStageMode('show');
     if ($('show-title-badge')) $('show-title-badge').textContent = opts.badge || '盘面事件';
-    var mainImg = $('show-main-img');
+    setImgSrcSafe($('show-main-img'), opts.mainImg);
     var subImg = $('show-sub-img');
-    if (mainImg && opts.mainImg) {
-      delete mainImg.dataset.fallbackApplied;
-      mainImg.setAttribute('src', opts.mainImg);
-    }
     if (subImg) {
       if (opts.subImg) {
-        delete subImg.dataset.fallbackApplied;
-        subImg.setAttribute('src', opts.subImg);
+        setImgSrcSafe(subImg, opts.subImg);
         subImg.classList.remove('hidden');
       } else {
         subImg.classList.add('hidden');
@@ -970,11 +1092,10 @@
     }, speedDiv(durationMs || 950));
   }
 
-  // ==================== 核心动作 1：掷骰与霸主同步落子 ====================
+  // ==================== 核心动作 1：3D 骨骰入碗翻滚与霸主同步落子 ====================
   function handleRollClick() {
     if (FTX.Audio) FTX.Audio.unlock();
 
-    // 决战第三段擂鼓助威模式
     if (finaleCheerMode) {
       if (finaleCheerHits < 5) {
         finaleCheerHits++;
@@ -1006,6 +1127,7 @@
     setStageMode('idle');
     syncHUD(FTX.Engine.getState());
 
+    var bowl = $('ceramic-bowl');
     var die1 = $('die-1');
     var die2 = $('die-2');
     var banner = $('ui-dice-banner');
@@ -1014,38 +1136,60 @@
     if (banner) banner.classList.add('hidden');
     if (FTX.Audio) FTX.Audio.playDiceRoll();
 
+    if (bowl) {
+      bowl.classList.remove('bowl-shake');
+      void bowl.offsetWidth;
+      bowl.classList.add('bowl-shake');
+    }
+
     if (die1 && die2) {
       die2.classList.remove('hidden');
+      die1.classList.remove('settle-pop');
+      die2.classList.remove('settle-pop');
       die1.classList.add('rolling');
       die2.classList.add('rolling');
+
+      clearDiceFlicker();
+      var fTick = 0;
+      diceFlickerInterval = setInterval(function () {
+        if (isPageHidden) return;
+        fTick++;
+        setImgSrcSafe(die1, getDiceImgSrc((fTick % 6) + 1));
+        setImgSrcSafe(die2, getDiceImgSrc(((fTick + 3) % 6) + 1));
+      }, 75);
     }
+
     if (sumTag) sumTag.textContent = '十八啦摇碗中…';
 
     var rollAnimMs = speedDiv(420);
     managedTimeout(function () {
+      clearDiceFlicker();
       if (die1 && die2) {
         die1.classList.remove('rolling');
         die2.classList.remove('rolling');
-        die1.dataset.face = String(res.dice[0] || 1);
+        setImgSrcSafe(die1, getDiceImgSrc(res.dice[0] || 1));
+        die1.classList.add('settle-pop');
+
         if (res.dice[1] === 0) {
           die2.classList.add('hidden');
         } else {
           die2.classList.remove('hidden');
-          die2.dataset.face = String(res.dice[1]);
+          setImgSrcSafe(die2, getDiceImgSrc(res.dice[1]));
+          die2.classList.add('settle-pop');
         }
       }
 
       var pairTxt = '';
       if (res.pairType === 'shibala') {
-        pairTxt = '🎉 十八啦——豹子通杀！';
+        pairTxt = '十八啦——豹子通杀！';
         if (FTX.Audio) FTX.Audio.playGong(true);
         spawnParticles('coin', 32, 0.5, 0.36);
         shakeScreen();
       } else if (res.pairType === 'snake') {
-        pairTxt = '🎋 衰尾对！补气运签+再掷！';
+        pairTxt = '衰尾对！补气运签+再掷！';
         if (FTX.Audio) FTX.Audio.playGong(false);
       } else if (res.pairType === 'happy') {
-        pairTxt = '🎊 欢喜对！敲锣免费再掷！';
+        pairTxt = '欢喜对！敲锣免费再掷！';
         if (FTX.Audio) FTX.Audio.playGong(false);
         spawnParticles('coin', 16, 0.5, 0.38);
       }
@@ -1060,24 +1204,25 @@
           : (res.dice[0] + ' + ' + res.dice[1] + ' = ' + res.sum + ' 点！');
       }
 
-      // 主公逐格跳跃 + 同刻霸主车驾同步落子！
+      // 主公逐格跳跃 + 同刻霸主车驾同步落子
       var latestState = FTX.Engine.getState();
       animatePlayerPath(res.path || [], function () {
         syncBoardTiles(latestState);
         syncPiecesPositions(latestState);
         syncHUD(latestState);
 
-        // 播报霸主同步落子趣事（如踩玩家城交租、挨箭塔瘫痪、或破产穿花裤衩跑路！）
         var bankruptHeg = findBankruptEvent(res.hegemonActions || res.events || []);
         if (res.hegemonActions && res.hegemonActions.length > 0) {
           var firstNote = res.hegemonActions[0].summary || res.hegemonActions[0].message || res.hegemonActions[0].quote;
           if (firstNote) setTicker(firstNote);
-          // 若霸主踩我方城交了过路费，爆金币音效
+
+          // 检测曹操/霸主踩玩家巨城大出血，弹出 caocao_cry.png 肉痛吐槽特写！
           for (var i = 0; i < res.hegemonActions.length; i++) {
             var ha = res.hegemonActions[i];
             if (ha.silverToPlayer > 0 || ha.type === 'pay_player_toll' || ha.type === 'trouble_lose') {
               if (FTX.Audio) FTX.Audio.playCoin(true);
-              spawnParticles('coin', 18, 0.5, 0.25);
+              spawnParticles('coin', 20, 0.5, 0.25);
+              showCaocaoBleedPopup(ha.hegemonId || 'caocao', ha.silverToPlayer || ha.deltaSilver || 0, ha.quote, ha.cryImg);
               break;
             }
           }
@@ -1086,7 +1231,7 @@
         if (bankruptHeg) {
           if (FTX.Audio) FTX.Audio.playGong(true);
           playStageMiniShow({
-            badge: '🩲 霸主破产跑路！',
+            badge: '霸主破产跑路！',
             mainImg: FTX.DATA.ASSETS.chars.bankrupt_pants,
             caption: bankruptHeg
           }, 1150, function () {
@@ -1129,7 +1274,7 @@
     }
     if (sheetBtn) {
       sheetBtn.classList.toggle('hidden', !visible);
-      sheetBtn.textContent = '🎋 耗1签改命重摇(' + sticks + ')';
+      if ($('ui-sheet-reroll-txt')) $('ui-sheet-reroll-txt').textContent = '耗1签改命重摇(' + sticks + ')';
     }
   }
 
@@ -1161,7 +1306,6 @@
     syncPiecesPositions(st);
     syncHUD(st);
 
-    // 先收起所有非常驻面板
     $('sheet-landing').classList.add('hidden');
     $('sheet-equip').classList.add('hidden');
     $('modal-estate').classList.remove('active');
@@ -1186,7 +1330,6 @@
     } else if (st.phase === 'GAME_OVER') {
       openGameOverModal(st, lastFinaleReport);
     } else {
-      // IDLE 待机态
       syncRerollButtons(false);
       setStageMode('idle');
       syncHUD(st);
@@ -1194,12 +1337,11 @@
     }
   }
 
-  // ==================== 核心动作 2：落点面板 & 踩城四择 ====================
+  // ==================== 核心动作 2：落点面板 & 踩城四择（含董卓/刘备专属哭笑颜艺） ====================
   function openLandingSheet() {
     var opts = FTX.Engine.getLandingOptions ? FTX.Engine.getLandingOptions() : null;
     var st = FTX.Engine.getState();
     if (!opts) {
-      // 某些落点已在 rollDice 中直接自动结清
       routeByEnginePhase();
       return;
     }
@@ -1227,7 +1369,6 @@
 
     sheet.classList.remove('hidden');
 
-    // 自动连掷智能代操（仅普通非致命格自动点首推项；敌城若胜算高可自动单挑或交钱）
     if (autoRollEnabled && !isPageHidden) {
       managedTimeout(function () {
         if (!autoRollEnabled || isPageHidden || st.phase !== 'LANDING') return;
@@ -1237,16 +1378,14 @@
   }
 
   function renderEnemyFourChoice(opts, st) {
-    var lordCfg = FTX.DATA.LORDS[st.player.lordId] || FTX.DATA.LORDS.liubei;
-    var moodImg = $('landing-mood-img');
-    var imgSrc = opts.mood === 'happy' ? lordCfg.happyImg : lordCfg.cryImg;
-    if (moodImg) {
-      delete moodImg.dataset.fallbackApplied;
-      moodImg.setAttribute('src', imgSrc);
-    }
+    var lordId = st.player.lordId;
+    var lordCfg = FTX.DATA.LORDS[lordId] || FTX.DATA.LORDS.liubei;
+    var isHappy = opts.mood === 'happy' || (opts.actions && opts.actions[0] && opts.actions[0].fameRewrite === 'bounced_check');
+    var imgSrc = getLordPortraitSrc(lordId, isHappy);
+    setImgSrcSafe($('landing-mood-img'), imgSrc);
 
     if ($('landing-toll-num')) {
-      $('landing-toll-num').textContent = '-' + fmtNum(opts.tollAmount || 0);
+      $('landing-toll-num').textContent = '-' + fmtNum(opts.tollAmount || 0) + '两';
     }
     if ($('landing-sub-quote')) {
       $('landing-sub-quote').textContent = opts.subtitle || lordCfg.quotes.payToll[0];
@@ -1268,7 +1407,7 @@
         if (act.fameRewrite === 'bounced_check') {
           colorCls = 'c-bounced';
           sendKey = 'bounced_check';
-          mainLabel = '💜 开芭乐票（邪道免付！）';
+          mainLabel = '开芭乐票（邪道免付！）';
         } else {
           colorCls = 'c-pay';
         }
@@ -1332,15 +1471,12 @@
   }
 
   function renderGeneralLanding(opts, st) {
-    var lordCfg = FTX.DATA.LORDS[st.player.lordId] || FTX.DATA.LORDS.liubei;
-    var genImg = $('gen-landing-img');
+    var lordId = st.player.lordId;
     var tileStatic = FTX.DATA.TILES[opts.tileIdx] || {};
+    var tileImg = resolveSpecialTileWorldImg(tileStatic, st);
     var iconSrc = opts.iconImg ||
-      (opts.mood === 'cry' ? lordCfg.cryImg : (tileStatic.worldImg || lordCfg.happyImg));
-    if (genImg) {
-      delete genImg.dataset.fallbackApplied;
-      genImg.setAttribute('src', iconSrc);
-    }
+      (opts.mood === 'cry' ? getLordPortraitSrc(lordId, false) : (tileImg || getLordPortraitSrc(lordId, true)));
+    setImgSrcSafe($('gen-landing-img'), iconSrc);
 
     if ($('gen-landing-headline')) $('gen-landing-headline').textContent = opts.title || tileStatic.name || '棋盘奇遇';
     if ($('gen-landing-desc')) $('gen-landing-desc').textContent = opts.subtitle || tileStatic.desc || '';
@@ -1402,7 +1538,6 @@
     syncRerollButtons(false);
     $('sheet-landing').classList.add('hidden');
 
-    // 骑木马单挑（或 17 号虎牢关与吕布骑木马单挑）走中央舞台两段式 2.0s 奇策交互窗！
     if ((actionKey === 'duel' || actionKey === 'hulao_duel') && FTX.Engine.startDuel) {
       runTwoStageHorseDuel(actionKey);
       return;
@@ -1427,7 +1562,6 @@
       showToast(res.headline || res.quote);
     }
 
-    // 按动作类型呈现中央舞台微演出与音效
     if (actionKey === 'pay_toll') {
       if (FTX.Audio) FTX.Audio.playTollCry();
       shakeScreen();
@@ -1435,8 +1569,8 @@
     } else if (actionKey === 'bounced_check') {
       if (FTX.Audio) FTX.Audio.playGong(false);
       playStageMiniShow({
-        badge: '💜 邪道开芭乐票！',
-        mainImg: FTX.DATA.LORDS[st.player.lordId].happyImg,
+        badge: '邪道开芭乐票！',
+        mainImg: getLordPortraitSrc(st.player.lordId, true),
         caption: res.quote || '开张空头支票住霸王店，大摇大摆溜走啰！'
       }, 850, finishLandingTurn);
     } else if (actionKey === 'field_battle') {
@@ -1444,7 +1578,7 @@
       if (res.win) spawnParticles('coin', 16, 0.5, 0.4);
       shakeScreen();
       playStageMiniShow({
-        badge: res.win ? '🏳️ 地形野战大捷！' : '💥 地形野战受挫',
+        badge: res.win ? '地形野战大捷！' : '地形野战受挫',
         mainImg: FTX.DATA.VANGUARDS[st.player.vanguardId].horseImg,
         subImg: FTX.DATA.ASSETS.chars.xiahoudun_horse,
         caption: res.quote || res.headline || ''
@@ -1454,7 +1588,7 @@
       shakeScreen();
       if (res.win) spawnParticles('coin', 28, 0.5, 0.38);
       playStageMiniShow({
-        badge: res.win ? '🏯 破城易帜夺店面！' : '💣 攻城失利赔三倍',
+        badge: res.win ? '破城易帜夺店面！' : '攻城失利赔三倍',
         mainImg: FTX.DATA.VANGUARDS[st.player.vanguardId].horseImg,
         subImg: FTX.DATA.ASSETS.world.city_lv5,
         caption: res.quote || res.headline || ''
@@ -1464,7 +1598,7 @@
       spawnParticles('coin', res.silverDelta >= 1000 ? 28 : 14, 0.5, 0.42);
       if (actionKey.indexOf('pot') >= 0 || (st.board[st.player.pos] && st.board[st.player.pos].type === 'pot')) {
         playStageMiniShow({
-          badge: '💰 风水聚宝盆爆金！',
+          badge: '风水聚宝盆爆金！',
           mainImg: FTX.DATA.ASSETS.world.corner_pot,
           caption: res.quote || ('整碗抱走 +' + fmtNum(res.silverDelta) + ' 两！')
         }, 950, finishLandingTurn);
@@ -1477,7 +1611,7 @@
     } else if (st.board[st.player.pos] && st.board[st.player.pos].type === 'demon') {
       if (FTX.Audio) FTX.Audio.playDuelHit('stool');
       playStageMiniShow({
-        badge: '👻 痛扁街头心魔！',
+        badge: '痛扁街头心魔！',
         mainImg: FTX.DATA.VANGUARDS[st.player.vanguardId].horseImg,
         subImg: FTX.DATA.ASSETS.chars.mind_demon,
         caption: res.quote || res.headline || '算盘小鬼抱头鼠窜！'
@@ -1501,7 +1635,6 @@
     isBusy = true;
     var duelInit = FTX.Engine.startDuel(actionKey);
     if (!duelInit || !duelInit.ok) {
-      // 兜底直接一步结算
       var fallbackRes = FTX.Engine.resolveLanding(actionKey, {});
       isBusy = false;
       if (fallbackRes && fallbackRes.quote) showToast(fallbackRes.quote);
@@ -1514,32 +1647,22 @@
     var vgCfg = duelInit.playerVanguard || FTX.DATA.VANGUARDS[st.player.vanguardId] || FTX.DATA.VANGUARDS.zhangfei;
     var enemyGov = duelInit.enemyGovernor || FTX.DATA.GOVERNORS.lvbu;
 
-    // 填充立牌图片与名字（全部来自真实 15 张 chars PNG）
-    var allyImg = $('duel-ally-img');
-    var enemyImg = $('duel-enemy-img');
     var allyFighter = $('duel-ally-fighter');
     var crowsLayer = $('duel-crows-layer');
     if (allyFighter) allyFighter.classList.remove('slip-fall');
     if (crowsLayer) crowsLayer.classList.add('hidden');
 
-    if (allyImg) {
-      delete allyImg.dataset.fallbackApplied;
-      allyImg.setAttribute('src', vgCfg.horseImg || FTX.DATA.ASSETS.chars.zhangfei_horse);
-    }
-    if (enemyImg) {
-      delete enemyImg.dataset.fallbackApplied;
-      enemyImg.setAttribute('src', enemyGov.horseImg || FTX.DATA.ASSETS.chars.lvbu_horse);
-    }
+    setImgSrcSafe($('duel-ally-img'), vgCfg.horseImg || FTX.DATA.ASSETS.chars.zhangfei_horse);
+    setImgSrcSafe($('duel-enemy-img'), enemyGov.horseImg || FTX.DATA.ASSETS.chars.lvbu_horse);
     if ($('duel-ally-name')) $('duel-ally-name').textContent = vgCfg.name || '先锋';
     if ($('duel-enemy-name')) $('duel-enemy-name').textContent = enemyGov.name || '太守';
 
-    // 两侧军师摇扇口斗互喷气泡
     var clash = duelInit.advisorClash || {};
     if ($('duel-ally-bubble')) {
       $('duel-ally-bubble').textContent = (clash.skillName || '《夜市叫卖》') + ' 斗志↑';
     }
     if ($('duel-enemy-bubble')) {
-      $('duel-enemy-bubble').textContent = '郭嘉：气急败坏！斗志↓';
+      $('duel-enemy-bubble').textContent = '郭嘉：气急败坏↓';
     }
     if (clash.playerLine) setTicker(clash.playerLine);
 
@@ -1552,7 +1675,6 @@
       managedTimeout(function () { FTX.Audio.playDuelHit('fan'); }, 220);
     }
 
-    // 开启 2.0 秒发光「拍出战斗奇策！」交互窗口
     var tacticWin = $('duel-tactic-window');
     var btnBox = $('duel-tactic-buttons');
     var timerFill = $('duel-timer-fill');
@@ -1564,11 +1686,14 @@
     if (availCards.length > 0) {
       availCards.forEach(function (cc) {
         var cfg = FTX.DATA.COMBAT_CARDS[cc.cardId || cc.id] || cc;
+        var tacticIcon = getCombatCardIllustSrc(cfg);
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'glow-tactic-btn';
         var bonusPct = Math.round((cfg.winRateBonus || 0.2) * 100);
-        b.textContent = '⚡ 拍出' + cfg.name + ' (+' + bonusPct + '%胜算)';
+        b.innerHTML =
+          '<img src="' + escHtml(tacticIcon) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'奇策\')" />' +
+          '<span>拍出' + escHtml(cfg.name) + ' (+' + bonusPct + '%)</span>';
         b.addEventListener('click', function () {
           triggerDuelCardChoice(cc.instanceId || cc.id);
         });
@@ -1578,7 +1703,7 @@
       var directBtn = document.createElement('button');
       directBtn.type = 'button';
       directBtn.className = 'glow-tactic-btn';
-      directBtn.textContent = '⚡ 折凳拍脸硬刚！（无手牌奇策）';
+      directBtn.textContent = '折凳拍脸硬刚！（当前无手牌奇策）';
       directBtn.addEventListener('click', function () {
         triggerDuelCardChoice(null);
       });
@@ -1594,7 +1719,6 @@
     });
     if (availCards.length > 0) btnBox.appendChild(skipBtn);
 
-    // 同步点亮手牌区的奇策卡槽
     renderHandCards(st);
 
     var totalWindowMs = autoRollEnabled ? 550 : speedDiv(2000);
@@ -1663,18 +1787,17 @@
     var spark = $('duel-clash-spark');
 
     if (res.isSlipComedy) {
-      // 放水摔马喜剧演出：金光扑街 + 三只黑乌鸦飞过！
       if (allyFighter) allyFighter.classList.add('slip-fall');
       if (crowsLayer) crowsLayer.classList.remove('hidden');
-      if (spark) spark.textContent = '🍌扑街！';
+      if (spark) spark.textContent = '扑街';
       if (FTX.Audio) FTX.Audio.playDuelHit('slip');
     } else if (res.win) {
-      if (spark) spark.textContent = '🪑暴击免单！';
+      if (spark) spark.textContent = '免单';
       if (FTX.Audio) FTX.Audio.playDuelHit('stool');
       shakeScreen();
       spawnParticles('coin', 24, 0.5, 0.42);
     } else {
-      if (spark) spark.textContent = '💥惜败赔款';
+      if (spark) spark.textContent = '惜败';
       if (FTX.Audio) FTX.Audio.playTollCry();
       shakeScreen();
     }
@@ -1690,7 +1813,7 @@
     syncHUD(st);
 
     managedTimeout(function () {
-      if (spark) spark.textContent = '⚡VS🔥';
+      if (spark) spark.textContent = '对决';
       if (allyFighter) allyFighter.classList.remove('slip-fall');
       setStageMode('idle');
       isBusy = false;
@@ -1796,7 +1919,8 @@
       var row = document.createElement('div');
       row.className = 'estate-city-row';
 
-      var curGov = c.governorId && FTX.DATA.GOVERNORS[c.governorId] ? FTX.DATA.GOVERNORS[c.governorId].name : '里长伯看门';
+      var curGovCfg = c.governorId && FTX.DATA.GOVERNORS[c.governorId] ? FTX.DATA.GOVERNORS[c.governorId] : null;
+      var curGovName = curGovCfg ? curGovCfg.name : '里长伯看门';
       var upBtnHtml = c.level >= 5
         ? '<span class="ecr-upgrade-btn" style="background:#DCFCE7">已满级 Lv.5</span>'
         : ('<button type="button" class="ecr-upgrade-btn" data-up-tile="' + c.tileIdx + '" ' +
@@ -1806,19 +1930,23 @@
       (c.availableBuildings || []).forEach(function (b) {
         var alreadyBuilt = (c.buildings || []).indexOf(b.id) >= 0;
         if (alreadyBuilt) {
-          bldgsHtml += '<span class="bldg-chip-btn built"><img src="' + escHtml(b.worldImg) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'楼\')" />' + escHtml(b.name) + '✓</span>';
+          bldgsHtml += '<span class="bldg-chip-btn built"><img src="' + escHtml(b.worldImg) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'楼\')" />' + escHtml(b.name) + '·已建</span>';
         } else {
           bldgsHtml += '<button type="button" class="bldg-chip-btn" data-bldg-tile="' + c.tileIdx + '" data-bldg-id="' + b.id + '" ' +
             (b.canBuild ? '' : 'disabled') + '>' +
             '<img src="' + escHtml(b.worldImg) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'楼\')" />' +
-            escHtml(b.name) + '(' + fmtNum(b.cost) + ')' +
+            escHtml(b.name) + '(' + fmtNum(b.cost) + '两)' +
             '</button>';
         }
       });
 
+      var govAvatarHtml = curGovCfg && curGovCfg.horseImg
+        ? '<img src="' + escHtml(curGovCfg.horseImg) + '" alt="" onerror="FTX_IMG_FALLBACK(this, \'将\')" />'
+        : '';
+
       var govBtnHtml = govPool.length > 0
-        ? ('<button type="button" class="bldg-chip-btn" data-gov-tile="' + c.tileIdx + '">👤 太守：' + escHtml(curGov) + ' [轮换]</button>')
-        : ('<span class="bldg-chip-btn">👤 太守：' + escHtml(curGov) + '</span>');
+        ? ('<button type="button" class="bldg-chip-btn" data-gov-tile="' + c.tileIdx + '">' + govAvatarHtml + '太守：' + escHtml(curGovName) + ' [轮换]</button>')
+        : ('<span class="bldg-chip-btn">' + govAvatarHtml + '太守：' + escHtml(curGovName) + '</span>');
 
       row.innerHTML =
         '<div class="ecr-top">' +
@@ -1830,7 +1958,6 @@
       listEl.appendChild(row);
     });
 
-    // 绑定升级、盖楼、换太守事件
     var upBtns = listEl.querySelectorAll('[data-up-tile]');
     for (var i = 0; i < upBtns.length; i++) {
       upBtns[i].addEventListener('click', function () {
@@ -1931,7 +2058,7 @@
       btn.type = 'button';
       btn.className = 'policy-choice-card ' + rarityTierClass(p.rarity);
       btn.dataset.policyId = p.id;
-      var pollTag = p.isPollGuaranteed ? ' · 🗳️民调保送' : '';
+      var pollTag = p.isPollGuaranteed ? ' · 民调保送' : '';
       btn.innerHTML =
         '<div class="pcc-head">' +
           '<span class="pcc-name">' + escHtml(p.name) + '</span>' +
@@ -1948,7 +2075,9 @@
     var refBtn = $('btn-refresh-policy');
     if (refBtn) {
       refBtn.disabled = st.player.luckSticks <= 0;
-      refBtn.textContent = '🎋 耗 1 支气运签重抽政见 (剩 ' + st.player.luckSticks + ' 支)';
+      if ($('ui-refresh-policy-txt')) {
+        $('ui-refresh-policy-txt').textContent = '耗 1 支气运签重抽政见 (剩 ' + st.player.luckSticks + ' 支)';
+      }
     }
   }
 
@@ -1974,11 +2103,7 @@
     modal.classList.add('active');
 
     if ($('rival-exam-title')) $('rival-exam-title').textContent = exam.name || '踢馆宿敌';
-    var rImg = $('rival-exam-img');
-    if (rImg && exam.img) {
-      delete rImg.dataset.fallbackApplied;
-      rImg.setAttribute('src', exam.img);
-    }
+    setImgSrcSafe($('rival-exam-img'), exam.img);
     if ($('rival-exam-quote')) $('rival-exam-quote').textContent = exam.taunt || '';
 
     var actBox = $('rival-exam-actions');
@@ -2038,7 +2163,6 @@
     }
     if (FTX.Audio) FTX.Audio.playUiClick();
 
-    activeBoardCardToUse = cardObj;
     var sheet = $('sheet-card-use');
     $('card-use-title').textContent = '施放 ' + cardCfg.name;
     $('card-use-desc').textContent = cardCfg.desc;
@@ -2048,7 +2172,6 @@
     var instId = cardObj.instanceId || cardObj.id;
 
     if (cardCfg.needParam === 'steps') {
-      // 《安步当车》：1~6 步指哪打哪，明示每步目标格名与归属！
       for (var s = 1; s <= 6; s++) {
         var targetIdx = (st.player.pos + s) % 28;
         var bTile = st.board[targetIdx];
@@ -2057,7 +2180,7 @@
         stepBtn.type = 'button';
         stepBtn.className = 'step-pick-btn';
         stepBtn.dataset.stepVal = String(s);
-        stepBtn.innerHTML = '🎲 走 <b>' + s + '</b> 步 → ' + escHtml(shortTileName(bTile.name || FTX.DATA.TILES[targetIdx].name)) +
+        stepBtn.innerHTML = '走 <b>' + s + '</b> 步 → ' + escHtml(shortTileName(bTile.name || FTX.DATA.TILES[targetIdx].name)) +
           ' <small>(' + ownerTag + ')</small>';
         (function (stepsChosen) {
           stepBtn.addEventListener('click', function () {
@@ -2067,7 +2190,6 @@
         optBox.appendChild(stepBtn);
       }
     } else if (cardCfg.needParam === 'tileIdx') {
-      // 《路障乌龟》：优先列出自家高过路费城池或当前格
       var myCities = st.board.filter(function (c) { return c.owner === 'player'; });
       myCities.sort(function (a, b) { return (b.currentToll || 0) - (a.currentToll || 0); });
       var targets = myCities.slice(0, 3);
@@ -2077,7 +2199,7 @@
         var tBtn = document.createElement('button');
         tBtn.type = 'button';
         tBtn.className = 'step-pick-btn';
-        tBtn.innerHTML = '🐢 摆在 <b>' + escHtml(shortTileName(tc.name || FTX.DATA.TILES[tc.idx].name)) + '</b>';
+        tBtn.innerHTML = '摆在 <b>' + escHtml(shortTileName(tc.name || FTX.DATA.TILES[tc.idx].name)) + '</b>';
         tBtn.addEventListener('click', function () {
           executeBoardCard(instId, { tileIdx: tc.idx });
         });
@@ -2088,7 +2210,7 @@
       confirmBtn.type = 'button';
       confirmBtn.className = 'primary-cta-btn';
       confirmBtn.style.gridColumn = '1 / -1';
-      confirmBtn.textContent = '✨ 立即打出 ' + cardCfg.name;
+      confirmBtn.textContent = '立即打出 ' + cardCfg.name;
       confirmBtn.addEventListener('click', function () {
         executeBoardCard(instId, {});
       });
@@ -2113,7 +2235,6 @@
       setTicker(res.message);
     }
 
-    // 若《安步当车》直接返回了一次移动结果（含 path / dice），播放走棋序列；若是预埋下一次骰子，则自动触发掷骰！
     if (res.dice && res.path) {
       playRollSequence(res);
     } else if (param && param.steps && FTX.Engine.getState().phase === 'IDLE') {
@@ -2130,24 +2251,15 @@
     isBusy = true;
     setStageMode('finale');
 
-    var bossImg = $('finale-boss-img');
-    var allyImg = $('finale-ally-img');
     var vgCfg = FTX.DATA.VANGUARDS[st.player.vanguardId] || FTX.DATA.VANGUARDS.zhangfei;
-    if (bossImg) {
-      delete bossImg.dataset.fallbackApplied;
-      bossImg.setAttribute('src', FTX.DATA.ASSETS.chars.boss_caocao_mecha);
-    }
-    if (allyImg) {
-      delete allyImg.dataset.fallbackApplied;
-      allyImg.setAttribute('src', vgCfg.horseImg);
-    }
+    setImgSrcSafe($('finale-boss-img'), FTX.DATA.ASSETS.chars.boss_caocao_mecha);
+    setImgSrcSafe($('finale-ally-img'), vgCfg.horseImg);
 
-    // 开启短暂擂鼓助威窗口，同时自动将手中全部战斗奇策投入决战第三段爆发！
     finaleCheerMode = true;
     finaleCheerHits = autoRollEnabled ? 5 : 2;
     syncHUD(st);
 
-    if ($('finale-stage-tag')) $('finale-stage-tag').textContent = '⚠️ 天命魔王降临 · 准备三段总清算！';
+    if ($('finale-stage-tag')) $('finale-stage-tag').textContent = '天命魔王降临 · 准备三段总清算！';
     if ($('finale-log-line')) $('finale-log-line').textContent = '狂点下方红色擂鼓键为先锋助威加伤！';
 
     managedTimeout(function () {
@@ -2189,7 +2301,7 @@
       if ($('finale-log-line')) $('finale-log-line').textContent = logTxt;
     }
 
-    setBossBar(maxHp, isRetry ? '🎋 逆天续命 · 重轰决战！' : '第一段 · 资产万炮齐发！', '全盘名下产业化作重炮轰击魔舰！');
+    setBossBar(maxHp, isRetry ? '逆天续命 · 重轰决战！' : '第一段 · 资产万炮齐发！', '全盘名下产业化作重炮轰击魔舰！');
     if (FTX.Audio) FTX.Audio.playCannon(true);
     shakeScreen();
     spawnParticles('fire', 26, 0.72, 0.42);
@@ -2211,7 +2323,7 @@
           var rem3 = rem2 - d3;
           setBossBar(
             rem3,
-            report.victory ? '🏆 轰沉魔舰 · 十八啦大捷！' : '💥 炮火耗尽 · 魔王残存',
+            report.victory ? '轰沉魔舰 · 十八啦大捷！' : '炮火耗尽 · 魔王残存',
             report.summaryQuote || (report.victory ? '万炮齐发轰翻曹丞相铁索巨舰！' : '就差一点身家炮火！')
           );
           if (FTX.Audio) {
@@ -2237,21 +2349,18 @@
     modal.classList.add('active');
 
     var win = report ? Boolean(report.victory) : Boolean(st.victory);
-    var lordCfg = FTX.DATA.LORDS[st.player.lordId] || FTX.DATA.LORDS.liubei;
+    var lordId = st.player.lordId;
+    var lordCfg = FTX.DATA.LORDS[lordId] || FTX.DATA.LORDS.liubei;
 
     if ($('go-grade')) $('go-grade').textContent = (report && report.grade) || (win ? 'S' : 'B');
     if ($('go-headline')) {
-      $('go-headline').textContent = win ? '🏆 富甲天下 · 十八啦大捷！' : '💸 惜败收摊 · 下局再讨回来！';
+      $('go-headline').textContent = win ? '富甲天下 · 十八啦大捷！' : '惜败收摊 · 下局再讨回来！';
     }
     if ($('go-quote')) {
       $('go-quote').textContent = (report && report.summaryQuote) ||
         (win ? '十座满级店面化作万门火炮，天命魔王连裤衩都赔光啦！' : lordCfg.quotes.bankrupt[0]);
     }
-    var goAvatar = $('go-avatar');
-    if (goAvatar) {
-      delete goAvatar.dataset.fallbackApplied;
-      goAvatar.setAttribute('src', win ? lordCfg.happyImg : lordCfg.cryImg);
-    }
+    setImgSrcSafe($('go-avatar'), getLordPortraitSrc(lordId, win));
 
     var bd = $('go-breakdown');
     if (bd) {
@@ -2262,16 +2371,16 @@
         var d3 = (report.stage3_vanguard && report.stage3_vanguard.damage) != null ? report.stage3_vanguard.damage : (report.stage3Damage || 0);
         var maxHp = (report.boss && (report.boss.maxHp || report.boss.totalHp)) || 10000;
         bd.innerHTML =
-          '<div>💰 <b>终局总身家</b>：' + fmtNum(st.player.netWorth || st.player.silver) + ' 两（名下 ' + myCities + ' 座城池）</div>' +
-          '<div>🔥 <b>第一段·资产炮火 (D1)</b>：' + fmtNum(d1) + ' 点</div>' +
-          '<div>🏯 <b>第二段·太守连携 (D2)</b>：' + fmtNum(d2) + ' 点</div>' +
-          '<div>🐴 <b>第三段·先锋收尾 (D3)</b>：' + fmtNum(d3) + ' 点</div>' +
+          '<div><b>终局总身家</b>：' + fmtNum(st.player.netWorth || st.player.silver) + ' 两（名下 ' + myCities + ' 座城池）</div>' +
+          '<div><b>第一段·资产炮火 (D1)</b>：' + fmtNum(d1) + ' 点</div>' +
+          '<div><b>第二段·太守连携 (D2)</b>：' + fmtNum(d2) + ' 点</div>' +
+          '<div><b>第三段·先锋收尾 (D3)</b>：' + fmtNum(d3) + ' 点</div>' +
           '<hr style="margin:5px 0;border:none;border-top:1px dashed #D6CFC2"/>' +
-          '<div>🎯 <b>总计轰出火力</b>：<b>' + fmtNum(report.totalDamage || (d1 + d2 + d3)) + '</b> vs 魔王气血 <b>' + fmtNum(maxHp) + '</b></div>';
+          '<div><b>总计轰出火力</b>：<b>' + fmtNum(report.totalDamage || (d1 + d2 + d3)) + '</b> vs 魔王气血 <b>' + fmtNum(maxHp) + '</b></div>';
       } else {
         bd.innerHTML =
-          '<div>💰 <b>结算现银</b>：' + fmtNum(st.player.silver) + ' 两</div>' +
-          '<div>🏯 <b>名下产业</b>：' + myCities + ' 座城池｜坚持至第 ' + st.loop + ' 圈</div>';
+          '<div><b>结算现银</b>：' + fmtNum(st.player.silver) + ' 两</div>' +
+          '<div><b>名下产业</b>：' + myCities + ' 座城池｜坚持至第 ' + st.loop + ' 圈</div>';
       }
     }
 
@@ -2294,15 +2403,15 @@
     $('pop-tile-title').textContent = tileIdx + ' · ' + (b.name || t.name);
     var html = '';
     if (t.type === 'city') {
-      var ownerMap = { player: '我方主公', caocao: '◆曹操（魏）', sunquan: '▲孙权（吴）' };
+      var ownerMap = { player: '●我方主公', caocao: '◆曹操（魏）', sunquan: '▲孙权（吴）' };
       var govObj = b.governorId && FTX.DATA.GOVERNORS[b.governorId] ? FTX.DATA.GOVERNORS[b.governorId] : FTX.DATA.GOVERNORS.lizhangbo;
       var bNames = (b.buildings || []).map(function (id) { return FTX.DATA.BUILDINGS[id] ? FTX.DATA.BUILDINGS[id].name : id; });
       html =
-        '<div>📍 州域：<b>' + escHtml(t.regionName) + '</b>｜地形：<b>' + escHtml(t.terrainName) + '</b>｜地价 P=' + t.basePrice + '两</div>' +
-        '<div>🚩 归属：<b>' + (ownerMap[b.owner] || '无主空城') + '</b>' + (b.owner ? ('（Lv.' + b.level + '）') : '') + '</div>' +
-        (b.owner ? ('<div>💸 当前过路费：<b>' + fmtNum(b.currentToll || 0) + ' 两</b>｜太守：' + escHtml(govObj.name) + '</div>') : '') +
-        (b.owner ? ('<div>🛡️ 守军：' + fmtNum(b.garrison || 0) + '｜城防：' + fmtNum(b.defense || 0) + '</div>') : '') +
-        '<div>🏗️ 城内建筑：' + (bNames.length ? escHtml(bNames.join('、')) : '暂无') + (b.smoked ? ' <b style="color:#65A30D">[被屎王神熏-25%]</b>' : '') + '</div>';
+        '<div>州域：<b>' + escHtml(t.regionName) + '</b>｜地形：<b>' + escHtml(t.terrainName) + '</b>｜地价：' + t.basePrice + '两</div>' +
+        '<div>归属：<b>' + (ownerMap[b.owner] || '无主空城') + '</b>' + (b.owner ? ('（Lv.' + b.level + '）') : '') + '</div>' +
+        (b.owner ? ('<div>当前过路费：<b>' + fmtNum(b.currentToll || 0) + ' 两</b>｜太守：' + escHtml(govObj.name) + '</div>') : '') +
+        (b.owner ? ('<div>守军：' + fmtNum(b.garrison || 0) + '｜城防：' + fmtNum(b.defense || 0) + '</div>') : '') +
+        '<div>城内建筑：' + (bNames.length ? escHtml(bNames.join('、')) : '暂无') + (b.smoked ? ' <b style="color:#65A30D">[被屎王神熏-25%]</b>' : '') + '</div>';
     } else {
       var desc = tileIdx === 17 && FTX.DATA.SPECIAL_MODES[st.specialMode]
         ? FTX.DATA.SPECIAL_MODES[st.specialMode].desc
@@ -2330,31 +2439,31 @@
     var html = '';
 
     if (kind === 'hegemon') {
-      titleEl.textContent = '⚠️ 霸主下圈手笔明牌与金库情报';
+      titleEl.textContent = '霸主下圈手笔明牌与金库情报';
       ['caocao', 'sunquan'].forEach(function (hid) {
         var h = st.hegemons[hid];
         var cfg = FTX.DATA.HEGEMONS[hid];
         if (!h || !cfg) return;
         html += '<div class="estate-city-row">' +
           '<strong>' + escHtml(cfg.name + ' · ' + cfg.title) + '</strong>' +
-          '<div>状态：' + (h.bankrupt ? '🩲 已破产跑路' : ('金库 ' + fmtNum(h.vault) + ' 两｜护卫 HP ' + Math.round(h.guardHp || 0) + '/' + Math.round(h.maxGuardHp || 300))) + '</div>';
+          '<div>状态：' + (h.bankrupt ? '已穿花裤衩破产跑路' : ('金库 ' + fmtNum(h.vault) + ' 两｜护卫 HP ' + Math.round(h.guardHp || 0) + '/' + Math.round(h.maxGuardHp || 300))) + '</div>';
         if (h.nextMoveCard && !h.bankrupt) {
-          html += '<div style="color:#B91C1C;font-weight:800">📢 下圈预告：《' + escHtml(h.nextMoveCard.name) + '》— ' + escHtml(h.nextMoveCard.effectDesc) + '</div>' +
-            '<div style="color:#15803D;font-weight:800">💡 ' + escHtml(h.nextMoveCard.counterTip) + '</div>';
+          html += '<div style="color:#B91C1C;font-weight:800">下圈预告：《' + escHtml(h.nextMoveCard.name) + '》— ' + escHtml(h.nextMoveCard.effectDesc) + '</div>' +
+            '<div style="color:#15803D;font-weight:800">' + escHtml(h.nextMoveCard.counterTip) + '</div>';
         } else {
-          html += '<div>📢 当前暂无点名手笔预告。</div>';
+          html += '<div>当前暂无点名手笔预告。</div>';
         }
         html += '</div>';
       });
     } else if (kind === 'policies') {
-      titleEl.textContent = '📜 主公四维命格与已选政见构筑';
+      titleEl.textContent = '主公四维命格与已选政见构筑';
       var lordCfg = FTX.DATA.LORDS[st.player.lordId] || FTX.DATA.LORDS.liubei;
       var s = st.player.stats || {};
       html += '<div class="estate-city-row">' +
         '<strong>' + escHtml(lordCfg.name + ' · ' + lordCfg.traitName) + '</strong>' +
         '<div>' + escHtml(lordCfg.traitDesc) + '</div>' +
-        '<div>📊 四维：体魄 <b>' + s.physique + '</b>｜谋略 <b>' + s.strategy + '</b>｜魅力 <b>' + s.charm + '</b>｜名望 <b>' + s.fame + '</b></div>' +
-        '<div>💰 当前预估总身家：<b>' + fmtNum(st.player.netWorth || st.player.silver) + ' 两</b></div>' +
+        '<div>四维：体魄 <b>' + s.physique + '</b>｜谋略 <b>' + s.strategy + '</b>｜魅力 <b>' + s.charm + '</b>｜名望 <b>' + s.fame + '</b></div>' +
+        '<div>当前预估总身家：<b>' + fmtNum(st.player.netWorth || st.player.silver) + ' 两</b></div>' +
         '</div>';
 
       var pols = st.player.policies || [];
@@ -2370,15 +2479,15 @@
         });
       }
     } else {
-      titleEl.textContent = '📖 核心规则速查与实时战报';
+      titleEl.textContent = '核心规则速查与实时战报';
       html += '<div class="estate-city-row">' +
-        '<strong>🎲 三秒上手指南</strong>' +
+        '<strong>三秒上手指南</strong>' +
         '<div>1. <b>同步落子零等待</b>：按「掷骰」，你走 2D6，曹操孙权同步走 1D6（7点概率最高琥珀高亮）。</div>' +
         '<div>2. <b>踩城四择真博弈</b>：踩敌城不一定要交钱！胜算高就点「骑木马单挑」免单，「机关攻城」直接抢他店面！名望 ≤-30 解锁「开芭乐票」白住赖账，≥+30 解锁「开城劝降」。</div>' +
-        '<div>3. <b>缺德基建 & 关底万炮</b>：盖箭塔射瘫霸主车驾，盖屎王神熏臭邻居降租；第 ' + st.maxLoops + ' 圈拿全部身家化作火炮轰天命魔王！</div>' +
+        '<div>3. <b>缺德基建与关底万炮</b>：盖箭塔射瘫霸主车驾，盖屎王神熏臭邻居降租；第 ' + st.maxLoops + ' 圈拿全部身家化作火炮轰天命魔王！</div>' +
         '</div>';
       var logs = (st.logs || []).slice(-12).reverse();
-      html += '<div class="estate-city-row"><strong>📢 最近盘面战报</strong>' +
+      html += '<div class="estate-city-row"><strong>最近盘面战报</strong>' +
         (logs.length ? logs.map(function (l) { return '<div>• ' + escHtml(typeof l === 'string' ? l : l.text) + '</div>'; }).join('') : '<div>刚刚开局，祝主公把把十八啦！</div>') +
         '</div>';
     }
@@ -2394,9 +2503,9 @@
     if (FTX.Audio) FTX.Audio.playUiClick();
     if (!autoRollEnabled) {
       clearAutoRollTimer();
-      showToast('已关闭自动连掷托管');
+      showToast('已关闭木牛流马自动连掷');
     } else {
-      showToast('已开启自动连掷（阿伯自动盖楼，随时再点可停）');
+      showToast('木牛流马上发条：开启自动连掷（阿伯代办盖楼）');
       scheduleAutoRollIfNeeded();
     }
     syncHUD(FTX.Engine.getState());
@@ -2426,19 +2535,18 @@
     }
 
     if (isPageHidden) {
-      // 立即暂停全部 requestAnimationFrame 与自动连掷定时器
       stopParticleLoop();
       if (silverAnimId) {
         cancelAnimationFrame(silverAnimId);
         silverAnimId = null;
       }
       clearAutoRollTimer();
+      clearDiceFlicker();
       if (duelInterval !== null) {
         clearInterval(duelInterval);
         duelInterval = null;
       }
     } else {
-      // 页面恢复可见：平滑恢复未完粒子、单挑倒计时或自动连掷，绝不重绑监听器
       if (particles.length > 0) ensureParticleLoop();
       if (duelPendingCallback && duelRemainingMs > 0) {
         startDuelCountdownTick(duelRemainingMs);
@@ -2452,7 +2560,6 @@
     if (uiBound) return;
     uiBound = true;
 
-    // 1. 后台休眠单例监听（严防重复绑定）
     if (!visibilityBound) {
       visibilityBound = true;
       isPageHidden = Boolean(document.hidden);
@@ -2467,7 +2574,6 @@
       if (st) syncPiecesPositions(st);
     });
 
-    // 2. 开局选主公与模式配置页
     var lordCards = document.querySelectorAll('.lord-pick-card');
     for (var i = 0; i < lordCards.length; i++) {
       lordCards[i].addEventListener('click', function () {
@@ -2512,7 +2618,6 @@
       startNewMatch();
     });
 
-    // 3. 顶栏交互
     $('btn-speed').addEventListener('click', function () {
       if (FTX.Audio) FTX.Audio.playUiClick();
       var st = FTX.Engine.getState();
@@ -2537,7 +2642,6 @@
     $('btn-loop-info').addEventListener('click', function () { openInfoDrawer('hegemon'); });
     $('btn-lord-stats').addEventListener('click', function () { openInfoDrawer('policies'); });
 
-    // 4. 构筑舱与手牌区
     $('btn-switch-vanguard').addEventListener('click', function () {
       var st = FTX.Engine.getState();
       if (!st || st.phase !== 'IDLE' || isBusy) {
@@ -2560,7 +2664,6 @@
       $('modal-info-drawer').classList.add('hidden');
     });
 
-    // 5. 底部大拇指热区
     $('btn-roll').addEventListener('click', handleRollClick);
     $('btn-luck-reroll').addEventListener('click', handleRerollClick);
     $('btn-sheet-reroll').addEventListener('click', handleRerollClick);
@@ -2575,13 +2678,12 @@
         var mult = Number(this.dataset.bet);
         FTX.Engine.setBetMultiplier(mult);
         if (FTX.Audio) FTX.Audio.playUiClick();
-        showToast(mult === 1 ? '切回稳健 ×1 倍率' : ('🔥 开启加注 ×' + mult + '！本刻收支同乘 ' + mult + ' 倍！'));
+        showToast(mult === 1 ? '切回稳健 ×1 倍率' : ('开启加注 ×' + mult + '！本刻收支同乘 ' + mult + ' 倍！'));
         syncBoardTiles(FTX.Engine.getState());
         syncHUD(FTX.Engine.getState());
       });
     });
 
-    // 6. 即换即融、过圈置业、政见刷新与结算重开
     $('btn-equip-sell').addEventListener('click', function () { handleEquipDecision('sell'); });
     $('btn-equip-wear').addEventListener('click', function () { handleEquipDecision('equip'); });
     $('btn-uncle-auto').addEventListener('click', handleUncleAutoEstate);
@@ -2629,8 +2731,10 @@
     lastFinaleReport = null;
     finaleCheerMode = false;
     clearAutoRollTimer();
+    clearDiceFlicker();
     clearDuelTimer();
 
+    if ($('caocao-bleed-popup')) $('caocao-bleed-popup').classList.add('hidden');
     $('modal-start').classList.remove('active');
     $('modal-start').classList.add('hidden');
     $('modal-gameover').classList.remove('active');
@@ -2647,6 +2751,9 @@
     setTicker(lordCfg.name + '：「' + lordCfg.quotes.start + '」');
     if ($('ui-dice-banner')) $('ui-dice-banner').classList.add('hidden');
     if ($('ui-bowl-sum')) $('ui-bowl-sum').textContent = '待掷骰 · 7点最高频';
+    setImgSrcSafe($('die-1'), getDiceImgSrc(6));
+    setImgSrcSafe($('die-2'), getDiceImgSrc(6));
+    if ($('die-2')) $('die-2').classList.remove('hidden');
 
     resizeCanvas();
     routeByEnginePhase();
@@ -2658,7 +2765,6 @@
     bindEventsOnce();
     resizeCanvas();
 
-    // 预初始化一局默认盘面在背景展示，使开局弹窗背后也是鲜活的 3D 沙盘棋盘！
     FTX.Engine.newGame({
       lordId: startConfig.lordId,
       vanguardId: startConfig.vanguardId,
@@ -2688,7 +2794,8 @@
         autoRollEnabled: autoRollEnabled,
         rafActive: rafId !== null,
         autoRollTimerActive: autoRollTimer !== null,
-        duelTimerActive: duelInterval !== null
+        duelTimerActive: duelInterval !== null,
+        diceFlickerActive: diceFlickerInterval !== null
       };
     }
   };

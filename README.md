@@ -45,7 +45,7 @@
 | **[`docs/04_commercialization_and_liveops.md`](./docs/04_commercialization_and_liveops.md)** | 分册 04：混合变现漏斗、产消对账单、单人长线赛季、里程碑与美术风格矩阵 |
 | **[`assets/fig01~fig04_*.svg`](./assets/)** | 四幅高分辨率工程线框与系统拓扑矢量图（`fig01`~`fig04`） |
 | **[`assets/art_style_candidates/`](./assets/art_style_candidates/)** | B+A 融合方案（赵云同构设定卡 + 许昌 9:16 实机基准帧）与 A~E 候选画风对比页 |
-| **[`mvp/`](./mvp/)** | B+A 真实资产可玩 MVP 完整源码与 28 张高清透明底立牌/微缩沙盘 PNG 资产 |
+| **[`mvp/`](./mvp/)** | B+A 真实资产可玩 MVP 完整源码与 68 张高精透明底立牌/微缩沙盘/3D碗公骨骰/UI卡面 PNG 资产 |
 
 ---
 

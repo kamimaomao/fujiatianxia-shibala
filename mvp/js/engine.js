@@ -654,6 +654,7 @@
         color: hDef.color,
         badgeShape: hDef.badgeShape,
         chariotImg: hDef.chariotImg,
+        cryImg: hDef.cryImg || hDef.chariotImg,
         bankruptImg: hDef.bankruptImg,
         pos: hDef.homeTile,
         homeTile: hDef.homeTile,
@@ -720,7 +721,7 @@
         alignmentLabel: getAlignmentLabel(lordDef.stats.fame),
         vanguardId: vanguardId,
         advisorId: advisorId,
-        rosterGovernors: ['guanyu', 'huangzhong', 'weiyan', 'ganning', 'lusu', 'diaochan'],
+        rosterGovernors: ['guanyu', 'ganning', 'lusu', 'zhouyu', 'xiahoudun', 'lvbu'],
         equipment: {
           weapon: 'toothpick', // 开局手持凡品牙签，等心魔/夜市掉折凳菜刀触发即换即融！
           helm: null,
@@ -1186,7 +1187,7 @@
       deficit -= val;
       if (creditorId && creditorId !== 'system' && getHegemonById(creditorId, state) && !getHegemonById(creditorId, state).bankrupt) {
         cCity.owner = creditorId;
-        cCity.governorId = creditorId === 'caocao' ? 'xiahoudun' : 'taishici';
+        cCity.governorId = creditorId === 'caocao' ? 'xiahoudun' : 'zhouyu';
       } else {
         cCity.owner = null;
         cCity.governorId = null;
@@ -1717,7 +1718,7 @@
             heg.vault -= landTile.basePrice;
             landTile.owner = heg.id;
             landTile.level = heg.ambitionStage >= 3 && heg.vault > landTile.basePrice ? 2 : 1;
-            landTile.governorId = heg.id === 'caocao' ? 'zhangliao' : 'taishici';
+            landTile.governorId = heg.id === 'caocao' ? 'xiahoudun' : 'ganning';
             outcome = 'buy_city';
             quote = DATA.HEGEMONS[heg.id].quotes.buyCity;
             events.push({ type: 'hegemon_buy', hegemonId: heg.id, tileIdx: heg.pos, cityName: landTile.name, text: heg.name + '占领了【' + landTile.name + '】！' });
@@ -1784,7 +1785,7 @@
               quote = DATA.HEGEMONS[heg.id].quotes.troubleLose;
               var tlText = heg.name + '在【' + landTile.name + '】上门找茬踢到铁板！向主公双倍赔付 +' + doubleToll + ' 两！';
               addLog(tlText, 'good');
-              events.push({ type: 'hegemon_trouble', hegemonId: heg.id, playerDefended: true, amount: doubleToll, tileIdx: heg.pos, quote: quote, text: tlText });
+              events.push({ type: 'hegemon_trouble', hegemonId: heg.id, playerDefended: true, amount: doubleToll, tileIdx: heg.pos, cryImg: heg.cryImg, quote: quote, text: tlText });
             }
           } else {
             // 天师坛额外抽香油钱 5%（上限 0.5T）
@@ -1803,6 +1804,7 @@
               type: 'hegemon_pay_player',
               hegemonId: heg.id,
               hegemonName: heg.name,
+              cryImg: heg.cryImg,
               tileIdx: heg.pos,
               cityName: landTile.name,
               amount: totalDue,
@@ -1840,6 +1842,7 @@
       actions.push({
         hegemonId: heg.id,
         name: heg.name,
+        cryImg: heg.cryImg,
         roll: roll,
         fromPos: startPos,
         pos: heg.pos,

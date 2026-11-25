@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>富甲天下：十八啦！— B+A 竖屏单手潮玩大富翁 MVP</title>
+  <title>富甲天下：十八啦！— B+A 精修版竖屏单手潮玩大富翁 MVP</title>
   <link rel="stylesheet" href="./css/style.css" />
   <script>
-    // 优雅图片兜底：正式态 100% 加载真实透明底 PNG；若开发期某图尚未落盘，自动生成清晰 SVG 立牌兜底避免断图
+    // 优雅图片兜底：正式态 100% 加载 68 张真实精修 PNG；若开发期某图尚未落盘，生成干净 SVG 立牌兜底防断图
     window.FTX_IMG_FALLBACK = function (imgEl, label) {
       if (!imgEl || imgEl.dataset.fallbackApplied === '1') return;
       imgEl.dataset.fallbackApplied = '1';
@@ -22,7 +22,7 @@
 </head>
 <body>
   <div id="desktop-stage">
-    <!-- 9:16 黄金四段式主视口（严格 8% + 54% + 16% + 22% = 100%，零纵向滚动条） -->
+    <!-- 9:16 黄金四段式主视口（严格 8% + 54% + 16% + 22% = 100%，零纵向滚动条，全界面零系统 Emoji） -->
     <main id="app-viewport" aria-label="富甲天下：十八啦！主游戏视口">
       <!-- A层：3D潮玩微缩庭院木案底图 -->
       <img
@@ -46,11 +46,11 @@
             <span id="ui-hegemon-alert-text">霸主动态：圈地抢摊中</span>
           </button>
 
-          <!-- 第三幕/全局预估火力 vs 魔王气血微缩对比条 -->
+          <!-- 第三幕/后半局预估火力 vs 魔王气血微缩对比条 -->
           <div class="boss-fire-pill hidden" id="ui-boss-bar-wrap" title="决战预估火力 vs 天命魔王气血">
             <div class="boss-fire-labels">
-              <span>🔥<b id="ui-fire-val">0</b></span>
-              <span>👹<b id="ui-bosshp-val">10000</b></span>
+              <span>火力 <b id="ui-fire-val">0</b></span>
+              <span>魔王 <b id="ui-bosshp-val">10000</b></span>
             </div>
             <div class="boss-fire-track">
               <div class="boss-fire-fill" id="ui-fire-fill" style="width: 35%"></div>
@@ -59,37 +59,64 @@
 
           <div class="topbar-tools">
             <button type="button" class="tool-chip" id="btn-speed" title="切换动画倍速">1x</button>
-            <button type="button" class="tool-chip" id="btn-audio" title="开关音效与庙会小调">🔊</button>
+            <button type="button" class="tool-chip audio-chip" id="btn-audio" title="开关音效与庙会小调">
+              <svg id="icon-sound-on" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+              <svg id="icon-sound-off" class="hidden" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+              </svg>
+            </button>
           </div>
         </div>
 
         <div class="topbar-row topbar-lower">
-          <!-- 数字② 银两滚轮跳字槽 -->
+          <!-- 数字② 银两滚轮跳字槽（高精银元宝铜钱图标） -->
           <div class="res-chip res-silver" id="chip-silver">
-            <span class="res-icon">🪙</span>
-            <span class="res-val" id="ui-silver">2,000</span>
+            <img
+              class="ui-res-icon"
+              src="./assets/ui/ui_silver_ingot.png"
+              alt="银两"
+              onerror="FTX_IMG_FALLBACK(this, '银两')"
+            />
+            <span class="res-val" id="ui-silver">3,000</span>
             <span class="res-delta" id="ui-silver-delta"></span>
           </div>
 
-          <!-- 数字③ 兵力护卫槽 -->
+          <!-- 数字③ 兵力护卫槽（高精虎符帅旗图标） -->
           <div class="res-chip res-troops" id="chip-troops">
-            <span class="res-icon">🛡️</span>
+            <img
+              class="ui-res-icon"
+              src="./assets/ui/ui_troops_flag.png"
+              alt="兵力"
+              onerror="FTX_IMG_FALLBACK(this, '兵力')"
+            />
             <span class="res-val" id="ui-troops">1,000</span>
           </div>
 
-          <!-- 数字④ 气运签竹签槽 -->
+          <!-- 数字④ 气运签竹签槽（高精三支红竹气运签图标） -->
           <div class="res-chip res-sticks" id="chip-sticks" title="气运签：可在踩凶格时改命重摇或刷新政见">
             <img
-              class="mini-fortune-img"
-              src="./assets/world/icon_fortune.png"
+              class="ui-res-icon"
+              src="./assets/ui/ui_luck_sticks.png"
               alt="气运签"
-              onerror="FTX_IMG_FALLBACK(this, '签筒')"
+              onerror="FTX_IMG_FALLBACK(this, '灵签')"
             />
             <span class="res-val" id="ui-sticks">2/3</span>
           </div>
 
-          <!-- 主公四维与正邪命格胶囊 -->
+          <!-- 主公四维与正邪命格胶囊（高精正邪铜镜图标） -->
           <button type="button" class="res-chip res-fame" id="btn-lord-stats" title="查看主公四维属性与势力详情">
+            <img
+              class="ui-res-icon"
+              src="./assets/ui/ui_fame_mirror.png"
+              alt="名望"
+              onerror="FTX_IMG_FALLBACK(this, '名望')"
+            />
             <span class="fame-badge neutral" id="ui-fame-badge">中庸 0</span>
           </button>
         </div>
@@ -98,12 +125,19 @@
       <!-- ==================== ② 方环棋盘 + 中央舞台 (54%) ==================== -->
       <section id="zone-board">
         <div id="board-sandbox">
-          <!-- 8x8 方环网格：外周 28 格 (0..27) + 内侧 6x6 不切屏中央舞台 -->
+          <!-- 8x8 方环网格：外周 28 格 (0..27) + 内侧 6x6 不切屏 3D 擂台中央舞台 -->
           <div id="board-grid">
             <!-- JS 初始化时精确填充 28 个 .board-tile 格子 -->
 
-            <!-- 内侧 6x6 中央舞台（grid-row: 2/8; grid-column: 2/8，永不黑屏切场） -->
+            <!-- 内侧 6x6 中央舞台（铺设 3D 青石蟠龙浮雕武场擂台底板，永不黑屏切场） -->
             <div id="center-stage" data-mode="idle">
+              <img
+                id="stage-arena-bg"
+                src="./assets/world/stage_courtyard_arena.png"
+                alt="青石蟠龙武场擂台"
+                onerror="FTX_IMG_FALLBACK(this, '擂台')"
+              />
+
               <!-- 四州方位微铭牌 -->
               <span class="region-plate plate-north">北·中原</span>
               <span class="region-plate plate-south">南·荆州</span>
@@ -115,40 +149,64 @@
                 <span id="ui-ticker-text">欢迎来到《富甲天下：十八啦！》，单手掷骰发大财！</span>
               </div>
 
-              <!-- 舞台模式 1：日常陶碗双骰 + 霸主身家简报 -->
+              <!-- 曹操/霸主踩玩家巨城大出血肉痛颜艺特写浮层（非阻塞同屏爆笑反馈！） -->
+              <div class="hegemon-bleed-toast hidden" id="caocao-bleed-popup">
+                <img
+                  id="bleed-avatar-img"
+                  src="./assets/chars/caocao_cry.png"
+                  alt="霸主肉痛特写"
+                  onerror="FTX_IMG_FALLBACK(this, '肉痛')"
+                />
+                <div class="bleed-texts">
+                  <strong id="bleed-amount-text">曹操大出血 +1,800 两！</strong>
+                  <span id="bleed-quote-text">宁教我负天下人，休教天下人收我停车费！</span>
+                </div>
+              </div>
+
+              <!-- 舞台模式 1：霸主身家简报 + 3D 红陶描金大碗公与立体朱砂真骨骰 -->
               <div class="stage-panel active" id="stage-panel-idle">
                 <div class="rival-mini-strip" id="ui-rival-strip">
                   <div class="rival-mini-card rival-caocao" id="mini-hegemon-caocao">
                     <img src="./assets/chars/caocao_chariot.png" alt="曹操" onerror="FTX_IMG_FALLBACK(this, '曹操')" />
                     <div class="rival-mini-meta">
                       <b>◆ 曹操</b>
-                      <span id="ui-caocao-vault">¥5,000 · 3城</span>
+                      <span id="ui-caocao-vault">5,000两 · 3城</span>
                     </div>
                   </div>
                   <div class="rival-mini-card rival-sunquan" id="mini-hegemon-sunquan">
                     <img src="./assets/chars/sunquan_chariot.png" alt="孙权" onerror="FTX_IMG_FALLBACK(this, '孙权')" />
                     <div class="rival-mini-meta">
                       <b>▲ 孙权</b>
-                      <span id="ui-sunquan-vault">¥3,500 · 2城</span>
+                      <span id="ui-sunquan-vault">3,800两 · 2城</span>
                     </div>
                   </div>
                 </div>
 
-                <!-- 十八啦陶土大碗公与立体双骰 -->
+                <!-- 3D 红陶描金双龙耳「十八啦」大碗公 + 两颗立体朱砂骨骰 -->
                 <div class="dice-arena" id="dice-arena">
-                  <div class="dice-banner hidden" id="ui-dice-banner">十八啦——通杀！</div>
-                  <div class="ceramic-bowl" id="ceramic-bowl">
-                    <div class="bowl-inner">
-                      <div class="die-3d" id="die-1" data-face="6">
-                        <span class="pip p1"></span><span class="pip p2"></span><span class="pip p3"></span>
-                        <span class="pip p4"></span><span class="pip p5"></span><span class="pip p6"></span>
-                        <span class="pip p7"></span><span class="pip p8"></span><span class="pip p9"></span>
-                      </div>
-                      <div class="die-3d" id="die-2" data-face="6">
-                        <span class="pip p1"></span><span class="pip p2"></span><span class="pip p3"></span>
-                        <span class="pip p4"></span><span class="pip p5"></span><span class="pip p6"></span>
-                        <span class="pip p7"></span><span class="pip p8"></span><span class="pip p9"></span>
-                      </div>
+                  <div class="dice-banner hidden" id="ui-dice-banner">十八啦——豹子通杀！</div>
+                  <div class="bowl-3d-stage" id="ceramic-bowl">
+                    <img
+                      class="bowl-3d-img"
+                      src="./assets/world/stage_dice_bowl.png"
+                      alt="十八啦红陶描金大碗公"
+                      onerror="FTX_IMG_FALLBACK(this, '碗公')"
+                    />
+                    <div class="bowl-dice-pair">
+                      <img
+                        class="bone-die-img"
+                        id="die-1"
+                        src="./assets/world/dice_3d_6.png"
+                        alt="骰子一"
+                        onerror="FTX_IMG_FALLBACK(this, '六')"
+                      />
+                      <img
+                        class="bone-die-img"
+                        id="die-2"
+                        src="./assets/world/dice_3d_6.png"
+                        alt="骰子二"
+                        onerror="FTX_IMG_FALLBACK(this, '六')"
+                      />
                     </div>
                     <div class="bowl-sum-tag" id="ui-bowl-sum">待掷骰 · 7点最高频</div>
                   </div>
@@ -160,9 +218,8 @@
                 </div>
               </div>
 
-              <!-- 舞台模式 2：骑木马单挑不切屏舞台（复刻许昌实机标杆帧！） -->
+              <!-- 舞台模式 2：骑木马单挑不切屏舞台（两侧军师口斗 + 弹簧木马对冲 + 2.0s奇策窗） -->
               <div class="stage-panel" id="stage-panel-duel">
-                <!-- 两侧军师摇扇口斗气泡 -->
                 <div class="duel-advisors-row">
                   <div class="advisor-standee ally">
                     <img
@@ -171,10 +228,10 @@
                       alt="诸葛亮"
                       onerror="FTX_IMG_FALLBACK(this, '孔明')"
                     />
-                    <div class="comic-bubble left" id="duel-ally-bubble">夜市叫卖！</div>
+                    <div class="comic-bubble left" id="duel-ally-bubble">《夜市叫卖》斗志↑</div>
                   </div>
                   <div class="advisor-standee enemy">
-                    <div class="comic-bubble right" id="duel-enemy-bubble">气急败坏！</div>
+                    <div class="comic-bubble right" id="duel-enemy-bubble">郭嘉：气急败坏↓</div>
                     <img
                       id="duel-enemy-advisor-img"
                       src="./assets/chars/guojia_fan.png"
@@ -184,10 +241,14 @@
                   </div>
                 </div>
 
-                <!-- 中央弹簧摇摇木马对冲区 -->
                 <div class="duel-horses-arena" id="duel-horses-arena">
-                  <!-- 放水摔马喜剧乌鸦横飞层 -->
-                  <div class="crows-fly-layer hidden" id="duel-crows-layer">🐦‍⬛ 🐦‍⬛ 🐦‍⬛ 嘎……弹簧卡壳啦！</div>
+                  <!-- 放水摔马喜剧飞鸦层（纯矢量飞鸟剪影 + 台味横幅） -->
+                  <div class="crows-fly-layer hidden" id="duel-crows-layer">
+                    <svg viewBox="0 0 64 20" width="40" height="13" fill="#FFF" aria-hidden="true">
+                      <path d="M4 12 Q10 3 16 10 Q22 3 28 12 Q22 9 16 14 Q10 9 4 12 Z M34 10 Q40 2 46 9 Q52 2 58 10 Q52 7 46 12 Q40 7 34 10 Z"/>
+                    </svg>
+                    <span>嘎……木马弹簧卡壳扑街啦！</span>
+                  </div>
 
                   <div class="horse-fighter ally" id="duel-ally-fighter">
                     <img
@@ -199,7 +260,7 @@
                     <span class="fighter-tag" id="duel-ally-name">张飞</span>
                   </div>
 
-                  <div class="duel-clash-spark" id="duel-clash-spark">⚡VS🔥</div>
+                  <div class="duel-clash-spark" id="duel-clash-spark">对决</div>
 
                   <div class="horse-fighter enemy" id="duel-enemy-fighter">
                     <img
@@ -212,7 +273,6 @@
                   </div>
                 </div>
 
-                <!-- 斗志拉锯槽 + 胜算徽章 -->
                 <div class="duel-morale-wrap">
                   <div class="morale-header">
                     <span>我方斗志 <b id="duel-morale-ally">65</b></span>
@@ -229,9 +289,7 @@
                   <div class="tactic-timer-bar">
                     <div class="tactic-timer-fill" id="duel-timer-fill"></div>
                   </div>
-                  <div class="tactic-btn-group" id="duel-tactic-buttons">
-                    <!-- JS 注入发光「⚡ 拍出战斗奇策！」按钮与「直接开打」跳过键 -->
-                  </div>
+                  <div class="tactic-btn-group" id="duel-tactic-buttons"></div>
                 </div>
               </div>
 
@@ -276,7 +334,7 @@
                       onerror="FTX_IMG_FALLBACK(this, '先锋')"
                     />
                   </div>
-                  <div class="finale-fx-burst" id="finale-fx-burst">💥</div>
+                  <div class="finale-fx-burst" id="finale-fx-burst">轰击</div>
                   <div class="finale-boss-side" id="finale-boss-side">
                     <img
                       id="finale-boss-img"
@@ -291,17 +349,17 @@
             </div>
           </div>
 
-          <!-- B层：棋盘 2D 模切白边立牌小人独立动画层（覆盖在 8x8 Grid 上逐格弹跳） -->
+          <!-- B层：棋盘 2D 模切白边立牌小人独立动画层 -->
           <div id="board-pieces-layer">
             <div class="board-piece piece-caocao" id="piece-caocao">
               <img src="./assets/chars/caocao_chariot.png" alt="曹操车驾" onerror="FTX_IMG_FALLBACK(this, '曹操')" />
               <span class="piece-flag caocao">◆曹</span>
-              <span class="piece-status hidden" id="piece-caocao-status">💤</span>
+              <span class="piece-status hidden" id="piece-caocao-status">瘫3</span>
             </div>
             <div class="board-piece piece-sunquan" id="piece-sunquan">
               <img src="./assets/chars/sunquan_chariot.png" alt="孙权车驾" onerror="FTX_IMG_FALLBACK(this, '孙权')" />
               <span class="piece-flag sunquan">▲孙</span>
-              <span class="piece-status hidden" id="piece-sunquan-status">💤</span>
+              <span class="piece-status hidden" id="piece-sunquan-status">瘫3</span>
             </div>
             <div id="pieces-debt-container"></div>
             <div class="board-piece piece-player" id="piece-player">
@@ -311,7 +369,7 @@
                 alt="主公"
                 onerror="FTX_IMG_FALLBACK(this, '主公')"
               />
-              <span class="piece-flag player" id="piece-player-flag">●主公</span>
+              <span class="piece-flag player" id="piece-player-flag">●刘备</span>
             </div>
           </div>
 
@@ -319,7 +377,7 @@
           <div class="tile-popover hidden" id="tile-popover">
             <div class="tile-popover-head">
               <strong id="pop-tile-title">13 许昌（州府）</strong>
-              <button type="button" class="pop-close-btn" id="btn-close-popover">✕</button>
+              <button type="button" class="pop-close-btn" id="btn-close-popover">×</button>
             </div>
             <div class="tile-popover-body" id="pop-tile-body"></div>
           </div>
@@ -328,7 +386,7 @@
 
       <!-- ==================== ③ 构筑与手牌舱 (16%) ==================== -->
       <section id="zone-deck">
-        <!-- 上层：左侧先锋头像（点击切换张飞/赵云） + 四件装备槽 + 已选政见/命格抽屉按钮 -->
+        <!-- 上层：左侧先锋头像（点击切换张飞/赵云） + 四件插画装备槽 + 政见卷轴按钮 -->
         <div class="deck-upper-bar">
           <button type="button" class="vanguard-switch-btn" id="btn-switch-vanguard" title="点击切换出战先锋（张飞 / 赵云）">
             <img
@@ -339,8 +397,8 @@
               onerror="FTX_IMG_FALLBACK(this, '先锋')"
             />
             <div class="vg-meta">
-              <span class="vg-name" id="ui-vanguard-name">张飞 <small>🔄换将</small></span>
-              <span class="vg-power" id="ui-vanguard-power">武斗 92</span>
+              <span class="vg-name" id="ui-vanguard-name">张飞 <small class="swap-pill">换将</small></span>
+              <span class="vg-power" id="ui-vanguard-power">武斗 102</span>
             </div>
             <img
               class="adv-mini-avatar"
@@ -354,56 +412,57 @@
 
           <div class="equip-slots-row" id="ui-equip-slots">
             <div class="equip-slot tier-1" data-slot="weapon" title="兵器槽">
-              <span class="slot-icon">🗡️</span>
-              <span class="slot-name">牙签</span>
+              <img class="eq-slot-img" src="./assets/ui/eq_slot_weapon.png" alt="兵器" onerror="FTX_IMG_FALLBACK(this, '兵器')" />
+              <span class="slot-name">牙签+6</span>
             </div>
             <div class="equip-slot empty" data-slot="helm" title="头冠槽">
-              <span class="slot-icon">🪖</span>
-              <span class="slot-name">空置</span>
+              <img class="eq-slot-img" src="./assets/ui/eq_slot_helm.png" alt="头冠" onerror="FTX_IMG_FALLBACK(this, '头冠')" />
+              <span class="slot-name">头冠</span>
             </div>
             <div class="equip-slot empty" data-slot="armor" title="衣甲槽">
-              <span class="slot-icon">🥋</span>
-              <span class="slot-name">空置</span>
+              <img class="eq-slot-img" src="./assets/ui/eq_slot_armor.png" alt="衣甲" onerror="FTX_IMG_FALLBACK(this, '衣甲')" />
+              <span class="slot-name">衣甲</span>
             </div>
-            <div class="equip-slot tier-1" data-slot="mount" title="坐骑槽">
-              <span class="slot-icon">🐴</span>
+            <div class="equip-slot empty" data-slot="mount" title="坐骑槽">
+              <img class="eq-slot-img" src="./assets/ui/eq_slot_mount.png" alt="坐骑" onerror="FTX_IMG_FALLBACK(this, '木马')" />
               <span class="slot-name">木马</span>
             </div>
           </div>
 
           <button type="button" class="policy-drawer-btn" id="btn-policy-drawer" title="查看已选政见与命格词条">
-            <span class="pd-icon">📜</span>
+            <img
+              class="pd-scroll-img"
+              src="./assets/ui/ui_policy_scroll.png"
+              alt="政见卷轴"
+              onerror="FTX_IMG_FALLBACK(this, '政见')"
+            />
             <span class="pd-label">政见 <b id="ui-policy-count">0</b></span>
           </button>
         </div>
 
-        <!-- 下层：3张棋盘锦囊手牌 + 2张战斗奇策手牌 -->
+        <!-- 下层：3张棋盘锦囊手牌 + 2张战斗奇策手牌（每张渲染高精卡面插画） -->
         <div class="deck-cards-bar">
           <div class="card-group board-card-group">
             <span class="group-tag">锦囊</span>
-            <div class="card-slots" id="ui-board-cards">
-              <!-- JS 渲染 3 个棋盘锦囊槽 -->
-            </div>
+            <div class="card-slots" id="ui-board-cards"></div>
           </div>
           <div class="card-group combat-card-group">
             <span class="group-tag combat">奇策</span>
-            <div class="card-slots" id="ui-combat-cards">
-              <!-- JS 渲染 2 个战斗奇策槽 -->
-            </div>
+            <div class="card-slots" id="ui-combat-cards"></div>
           </div>
         </div>
       </section>
 
       <!-- ==================== ④ 底部大拇指热区 (22%) ==================== -->
       <footer id="zone-thumb">
-        <!-- 左侧辅助列：规则/战报快查 + 自动连掷托管 -->
+        <!-- 左侧辅助列：竹简战报钮 + 发条木牛流马自动连掷钮 -->
         <div class="thumb-left-col">
           <button type="button" class="thumb-round-btn" id="btn-open-log">
-            <span class="tr-icon">📖</span>
+            <img class="tr-img" src="./assets/ui/ui_btn_log.png" alt="战报规则" onerror="FTX_IMG_FALLBACK(this, '战报')" />
             <span class="tr-txt">战报/规则</span>
           </button>
           <button type="button" class="thumb-round-btn" id="btn-auto-roll">
-            <span class="tr-icon">🤖</span>
+            <img class="tr-img" src="./assets/ui/ui_btn_auto.png" alt="木牛流马连掷" onerror="FTX_IMG_FALLBACK(this, '连掷')" />
             <span class="tr-txt" id="ui-auto-txt">自动连掷</span>
           </button>
         </div>
@@ -411,14 +470,14 @@
         <!-- 中央超大立体鎏金「掷骰 十八啦！」主按键 + 凶格「气运签改命重摇！」救急钮 -->
         <div class="thumb-center-col">
           <button type="button" class="luck-reroll-btn hidden" id="btn-luck-reroll">
-            <img src="./assets/world/icon_fortune.png" alt="改命" onerror="FTX_IMG_FALLBACK(this, '改命')" />
+            <img src="./assets/ui/ui_luck_sticks.png" alt="气运灵签" onerror="FTX_IMG_FALLBACK(this, '改命')" />
             <span id="ui-reroll-text">气运签改命重摇！</span>
           </button>
 
           <button type="button" class="gold-roll-btn" id="btn-roll">
             <div class="roll-dice-icons" aria-hidden="true">
-              <span class="mini-die d3">⚂</span>
-              <span class="mini-die d6">⚅</span>
+              <img class="btn-die-img d-top" src="./assets/world/dice_3d_3.png" alt="" onerror="FTX_IMG_FALLBACK(this, '三')" />
+              <img class="btn-die-img d-bot" src="./assets/world/dice_3d_6.png" alt="" onerror="FTX_IMG_FALLBACK(this, '六')" />
             </div>
             <div class="roll-btn-texts">
               <span class="roll-main-title" id="ui-roll-title">掷骰 十八啦！</span>
@@ -429,7 +488,7 @@
 
         <!-- 右侧「加注 ×1 / ×2 / ×3」火焰拨片 -->
         <div class="thumb-right-col" id="ui-bet-box">
-          <div class="bet-header">🔥 加注</div>
+          <div class="bet-header">加注倍率</div>
           <div class="bet-buttons">
             <button type="button" class="bet-btn active" data-bet="1">×1</button>
             <button type="button" class="bet-btn" data-bet="2">×2</button>
@@ -456,14 +515,14 @@
                 <img src="./assets/chars/liubei_happy.png" alt="刘备" onerror="FTX_IMG_FALLBACK(this, '刘备')" />
                 <div class="lord-pick-info">
                   <strong>刘备 · 仁义草鞋</strong>
-                  <span>魅力40杀价狠 · 回城探班双倍税+补兵 · 起手占涿县</span>
+                  <span>魅力45杀价狠 · 正道开城劝降 · 回城探班双倍税 · 起手占涿县</span>
                 </div>
               </button>
               <button type="button" class="lord-pick-card" data-lord="dongzhuo">
-                <img src="./assets/chars/dongzhuo_piece.png" alt="董卓" onerror="FTX_IMG_FALLBACK(this, '董卓')" />
+                <img src="./assets/chars/dongzhuo_happy.png" alt="董卓" onerror="FTX_IMG_FALLBACK(this, '董卓')" />
                 <div class="lord-pick-info">
                   <strong>董卓 · 西凉拆迁</strong>
-                  <span>高体魄 · 开局邪道名望-30直接解锁「开芭乐票」赖账 · 抢地八折</span>
+                  <span>高体魄 · 开局邪道直接解锁「开芭乐票」赖账 · 空城强占八折</span>
                 </div>
               </button>
             </div>
@@ -487,21 +546,21 @@
             <div class="start-section half">
               <div class="sec-label">局数时长</div>
               <div class="seg-group" id="start-loops-pick">
-                <button type="button" class="seg-btn selected" data-loops="8">⚡ 8圈快爽局</button>
-                <button type="button" class="seg-btn" data-loops="15">🏆 15圈标准局</button>
+                <button type="button" class="seg-btn selected" data-loops="8">8圈快爽局</button>
+                <button type="button" class="seg-btn" data-loops="15">15圈标准局</button>
               </div>
             </div>
             <div class="start-section half">
               <div class="sec-label">17号章节机制格</div>
               <div class="seg-group" id="start-mode-pick">
-                <button type="button" class="seg-btn selected" data-mode="hulao">🐯 虎牢收费站</button>
-                <button type="button" class="seg-btn" data-mode="chibi">🔥 赤壁连环船</button>
+                <button type="button" class="seg-btn selected" data-mode="hulao">虎牢收费站</button>
+                <button type="button" class="seg-btn" data-mode="chibi">赤壁连环船</button>
               </div>
             </div>
           </div>
 
           <button type="button" class="primary-cta-btn" id="btn-start-game">
-            🎲 开桌掷骰 · 十八啦！
+            开桌掷骰 · 十八啦！
           </button>
         </div>
       </div>
@@ -512,25 +571,24 @@
           <div class="landing-top-strip">
             <span class="landing-tile-badge" id="landing-tile-title">13 许昌（曹操 Lv.5）</span>
             <button type="button" class="sheet-reroll-chip hidden" id="btn-sheet-reroll">
-              🎋 耗1签改命重摇
+              <img src="./assets/ui/ui_luck_sticks.png" alt="" onerror="FTX_IMG_FALLBACK(this, '签')" />
+              <span id="ui-sheet-reroll-txt">耗1签改命重摇</span>
             </button>
           </div>
 
-          <!-- 踩敌城专属：复刻许昌实机帧（左主公飙泪/坏笑大头像 + 大红字 -8000 + 右四色立体大键） -->
+          <!-- 踩敌城专属：左主公专属哭笑大头像 + 大红字过路费 + 右固定四键 -->
           <div class="four-choice-layout" id="landing-four-choice">
             <div class="toll-cry-left">
               <img
                 id="landing-mood-img"
                 src="./assets/chars/liubei_cry.png"
-                alt="主公表情"
+                alt="主公颜艺"
                 onerror="FTX_IMG_FALLBACK(this, '颜艺')"
               />
               <div class="toll-big-number" id="landing-toll-num">-8,000</div>
               <div class="toll-sub-quote" id="landing-sub-quote">夭寿哦！住一晚这么贵！</div>
             </div>
-            <div class="four-buttons-grid" id="landing-four-buttons">
-              <!-- JS 严格按固定四键顺序生成：1.缴交(或开芭乐票) 2.单挑 3.野战 4.攻城(或开城劝降) -->
-            </div>
+            <div class="four-buttons-grid" id="landing-four-buttons"></div>
           </div>
 
           <!-- 普通功能格/无主城/赌场/夜市/奇遇通用紧凑布局 -->
@@ -555,15 +613,15 @@
       <!-- 3. 左旧右新「即换即融」对比条 -->
       <div class="bottom-sheet hidden" id="sheet-equip">
         <div class="equip-compare-card">
-          <div class="equip-sheet-title">⚔️ 喜获新行头 · 即换即融（落选自动折算现银！）</div>
+          <div class="equip-sheet-title">喜获新行头 · 即换即融（落选自动折算现银！）</div>
           <div class="equip-compare-grid">
             <div class="equip-box old-box" id="equip-old-box"></div>
-            <div class="equip-vs-arrow">➡</div>
+            <div class="equip-vs-arrow">对比</div>
             <div class="equip-box new-box" id="equip-new-box"></div>
           </div>
           <div class="equip-action-row">
             <button type="button" class="eq-btn sell" id="btn-equip-sell">保留旧装 · 新货折银</button>
-            <button type="button" class="eq-btn equip" id="btn-equip-wear">✨ 换上新装 · 旧货折银</button>
+            <button type="button" class="eq-btn equip" id="btn-equip-wear">换上新装 · 旧货折银</button>
           </div>
         </div>
       </div>
@@ -573,11 +631,11 @@
         <div class="modal-card estate-modal-card">
           <div class="estate-header">
             <div>
-              <h2>🏯 过圈置业时间</h2>
+              <h2>过圈置业时间</h2>
               <p id="estate-loop-summary">本圈俸禄与税收已入袋，每座城限升 1 级！</p>
             </div>
             <button type="button" class="uncle-auto-btn" id="btn-uncle-auto">
-              👴 阿伯代办
+              阿伯代办
               <small>一键最优盖楼</small>
             </button>
           </div>
@@ -587,12 +645,10 @@
             <span>名下产业：<b id="estate-city-count">2</b> 座</span>
           </div>
 
-          <div class="estate-cities-list" id="estate-cities-list">
-            <!-- JS 渲染每座城：一键升规模、盖7种蓝图建筑(含箭塔/屎王神/市集图标)、调派太守 -->
-          </div>
+          <div class="estate-cities-list" id="estate-cities-list"></div>
 
           <button type="button" class="primary-cta-btn" id="btn-finish-estate">
-            ✅ 置业完毕 · 继续跑圈
+            置业完毕 · 继续跑圈
           </button>
         </div>
       </div>
@@ -601,15 +657,14 @@
       <div class="modal-mask hidden" id="modal-policy">
         <div class="modal-card policy-modal-card">
           <div class="policy-header">
-            <span class="policy-kicker">🗳️ 里民大会 · 选定全场高喊「冻蒜！」</span>
+            <span class="policy-kicker">里民大会 · 选定全场高喊「冻蒜！」</span>
             <h2>政见三选一</h2>
           </div>
-          <div class="policy-cards-list" id="policy-cards-list">
-            <!-- JS 渲染 3 张政见卡 -->
-          </div>
+          <div class="policy-cards-list" id="policy-cards-list"></div>
           <div class="policy-footer">
             <button type="button" class="secondary-pill-btn" id="btn-refresh-policy">
-              🎋 耗 1 支气运签重抽政见
+              <img src="./assets/ui/ui_luck_sticks.png" alt="" onerror="FTX_IMG_FALLBACK(this, '签')" />
+              <span id="ui-refresh-policy-txt">耗 1 支气运签重抽政见</span>
             </button>
           </div>
         </div>
@@ -619,8 +674,8 @@
       <div class="modal-mask hidden" id="modal-rival">
         <div class="modal-card rival-modal-card">
           <div class="rival-exam-head">
-            <span class="exam-kicker">🚨 期中考 · 踢馆宿敌拦路！</span>
-            <h2 id="rival-exam-title">督邮·查税官</h2>
+            <span class="exam-kicker">期中考 · 踢馆宿敌拦路！</span>
+            <h2 id="rival-exam-title">督邮·黑心查税官</h2>
           </div>
           <div class="rival-exam-body">
             <img
@@ -640,7 +695,7 @@
         <div class="card-use-box">
           <div class="card-use-head">
             <strong id="card-use-title">施放棋盘锦囊</strong>
-            <button type="button" class="pop-close-btn" id="btn-cancel-card">✕</button>
+            <button type="button" class="pop-close-btn" id="btn-cancel-card">×</button>
           </div>
           <p class="card-use-desc" id="card-use-desc"></p>
           <div class="card-step-picker" id="card-use-options"></div>
@@ -652,7 +707,7 @@
         <div class="modal-card info-drawer-card">
           <div class="info-drawer-head">
             <h3 id="drawer-title">局势与战报</h3>
-            <button type="button" class="pop-close-btn" id="btn-close-drawer">✕</button>
+            <button type="button" class="pop-close-btn" id="btn-close-drawer">×</button>
           </div>
           <div class="info-drawer-content" id="drawer-content"></div>
         </div>
@@ -679,10 +734,11 @@
 
           <div class="go-actions">
             <button type="button" class="luck-retry-boss-btn hidden" id="btn-retry-boss">
-              🎋 耗1支气运签 · 逆天重轰第三段！
+              <img src="./assets/ui/ui_luck_sticks.png" alt="" onerror="FTX_IMG_FALLBACK(this, '签')" />
+              <span>耗1支气运签 · 逆天重轰第三段！</span>
             </button>
             <button type="button" class="primary-cta-btn" id="btn-restart-game">
-              🔄 再来一局 · 十八啦！
+              再来一局 · 十八啦！
             </button>
           </div>
         </div>
