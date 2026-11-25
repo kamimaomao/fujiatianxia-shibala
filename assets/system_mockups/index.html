@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>《富甲天下：十八啦！》全案 12 大核心系统 9:16 实机 UI 效果图画廊</title>
+  <style>
+    :root {
+      --bg-page: #F9F5EB;
+      --bg-card: #FFFFFF;
+      --bg-warm: #F4ECE0;
+      --ink: #231815;
+      --muted: #5C554E;
+      --border: #DFD5C5;
+      --vermilion: #D9483B;
+      --amber: #D97706;
+      --gold: #F59E0B;
+      --indigo: #2563EB;
+      --jade: #15803D;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 10px 30px rgba(35, 24, 21, 0.08);
+      --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 严守 AGENTS.md：页面处于后台隐藏状态时停止一切过渡与视觉活动，零后台轮询动画 */
+    html[data-page-hidden="true"] *,
+    html[data-page-hidden="true"] *::before,
+    html[data-page-hidden="true"] *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, transparent 45%),
+        var(--bg-page);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.58;
+      padding: 22px 18px 64px;
+    }
+
+    .container {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* 顶部总览牌匾 */
+    .hero-header {
+      background: linear-gradient(135deg, #2B180C 0%, #4A2812 100%);
+      color: #FFFBEB;
+      border: 3px solid #D97706;
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      box-shadow: 0 16px 40px rgba(35, 24, 21, 0.22);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    .hero-left {
+      max-width: 880px;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      background: rgba(253, 224, 71, 0.18);
+      border: 1px solid #FDE047;
+      color: #FDE047;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .hero-header h1 {
+      font-size: clamp(24px, 3.6vw, 34px);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .hero-header p {
+      font-size: 14.5px;
+      color: #FDE68A;
+      opacity: 0.94;
+    }
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 2px solid #FDE047;
+      color: #231815;
+      background: linear-gradient(180deg, #FDE047, #F59E0B);
+      cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+
+    .nav-btn.ghost {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFBEB;
+      border-color: rgba(253, 224, 71, 0.55);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 控制工具条：分类筛选 + 手机壳开关 + AB 对比开关 */
+    .toolbar {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      background: rgba(255, 253, 247, 0.95);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 24px rgba(35, 24, 21, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tab-pill {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: #FFF;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .tab-pill.active {
+      background: var(--ink);
+      color: #FDE047;
+      border-color: var(--ink);
+    }
+
+    .view-toggles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .toggle-btn {
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 7px 13px;
+      border-radius: 10px;
+      border: 1.8px solid var(--ink);
+      background: var(--bg-warm);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .toggle-btn.active {
+      background: #FEF3C7;
+      border-color: #D97706;
+      color: #78350F;
+    }
+
+    /* 双系统同屏 AB 比对台 */
+    .compare-panel {
+      display: none;
+      background: #FFFFFF;
+      border: 2.5px solid var(--amber);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .compare-panel.open {
+      display: flex;
+    }
+
+    .compare-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .compare-selects {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-selects select {
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 10px;
+      border: 1.8px solid var(--ink);
+      background: #FFFDF7;
+      color: var(--ink);
+    }
+
+    .compare-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 760px) {
+      .compare-stage {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compare-slot {
+      background: var(--bg-warm);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .compare-slot img {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 3px solid var(--ink);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+      cursor: zoom-in;
+    }
+
+    /* 三大系统分区板块 */
+    .category-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .category-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 4px;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .category-head h2 {
+      font-size: 22px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cat-pill {
+      font-size: 12px;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      color: #FFF;
+    }
+    .cat-pill.in-run { background: var(--vermilion); }
+    .cat-pill.meta { background: var(--indigo); }
+    .cat-pill.liveops { background: var(--jade); }
+
+    .category-head span {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .mockups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .sys-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 20px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .sys-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--amber);
+    }
+
+    /* 逼真 9:16 手机外框包装（支持切换无框纯净大图） */
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 10px 10px 14px;
+      border-radius: 34px;
+      background: linear-gradient(145deg, #2C2623 0%, #14110F 100%);
+      border: 2.5px solid #6E5A47;
+      box-shadow:
+        0 16px 34px rgba(25, 15, 8, 0.28),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+      cursor: zoom-in;
+    }
+
+    /* 手机顶部听筒微槽与底部指示条 */
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 12px;
+      background: rgba(12, 10, 9, 0.82);
+      border-radius: 999px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .phone-frame::after {
+      content: "";
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 84px;
+      height: 3.5px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .phone-screen {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #231815;
+      position: relative;
+    }
+
+    .phone-screen img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 切换为无手机壳纯净原图模式 */
+    body.frameless-mode .phone-frame {
+      max-width: 100%;
+      padding: 0;
+      border-radius: 14px;
+      background: none;
+      border: 2px solid var(--ink);
+    }
+    body.frameless-mode .phone-frame::before,
+    body.frameless-mode .phone-frame::after {
+      display: none;
+    }
+    body.frameless-mode .phone-screen {
+      border-radius: 12px;
+    }
+
+    .sys-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .sys-top-tags {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sys-num {
+      font-size: 11.5px;
+      font-weight: 900;
+      padding: 2px 9px;
+      border-radius: 6px;
+      background: var(--ink);
+      color: #FDE047;
+    }
+
+    .sys-doc-ref {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .sys-title {
+      font-size: 16.5px;
+      font-weight: 900;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .sys-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .sys-bullets {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .sys-bullets li {
+      font-size: 11.5px;
+      font-weight: 800;
+      background: var(--bg-warm);
+      color: #5C3A21;
+      border: 1px solid #DFCDAE;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      padding-top: 4px;
+    }
+
+    .mini-act-btn {
+      flex: 1;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1.5px solid var(--ink);
+      background: #FFFDF7;
+      cursor: pointer;
+    }
+    .mini-act-btn.primary {
+      background: #FEF3C7;
+      border-color: #B45309;
+    }
+
+    /* 全屏高清灯箱 */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(16, 10, 6, 0.92);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      color: #FFFBEB;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lb-top {
+      width: 100%;
+      max-width: 1160px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lb-title {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .lb-tools {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lb-btn {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(253, 224, 71, 0.65);
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFBEB;
+      cursor: pointer;
+    }
+
+    .lb-stage {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      overflow: auto;
+      padding: 10px 0;
+    }
+
+    .lb-stage img {
+      max-height: 82vh;
+      max-width: 88vw;
+      border-radius: 16px;
+      border: 2.5px solid #F59E0B;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+      transition: transform 0.18s ease;
+      cursor: zoom-in;
+    }
+
+    .lb-stage img.zoomed {
+      max-height: none;
+      width: min(92vw, 880px);
+      cursor: zoom-out;
+    }
+
+    .lb-caption {
+      max-width: 860px;
+      text-align: center;
+      font-size: 13px;
+      color: #FDE68A;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      padding-top: 12px;
+    }
+    footer a {
+      color: #B45309;
+      font-weight: 800;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero-header">
+      <div class="hero-left">
+        <span class="hero-kicker">B+A 融合视觉圣经 · 1024×1536 高清 9:16 竖屏实机样张</span>
+        <h1>《富甲天下：十八啦！》全案 12 大核心系统效果图画廊</h1>
+        <p>
+          完整覆盖「局内核心博弈（01~04）」「局外角色卡牌养成（05~08）」「商业化与长线运营（09~12）」十二大系统界面——统一采用《富甲天下 3/4》2D 粗墨线模切白边漫画立牌 ×《MONOPOLY GO!》级 3D 潮玩微缩沙盘美学。
+        </p>
+      </div>
+      <nav class="hero-nav">
+        <a class="nav-btn" href="../../mvp/index.html">立即试玩可玩 MVP</a>
+        <a class="nav-btn ghost" href="../art_style_candidates/index.html">B+A 画风比对台</a>
+        <a class="nav-btn ghost" href="../../index.html">返回项目总门户</a>
+      </nav>
+    </header>
+
+    <!-- 悬浮筛选与对比工具栏 -->
+    <div class="toolbar">
+      <div class="filter-tabs" id="filter-tabs">
+        <button type="button" class="tab-pill active" data-cat="all">全部 12 大系统</button>
+        <button type="button" class="tab-pill" data-cat="in-run">一、局内核心博弈 (01~04)</button>
+        <button type="button" class="tab-pill" data-cat="meta">二、局外角色卡牌养成 (05~08)</button>
+        <button type="button" class="tab-pill" data-cat="liveops">三、商业化与长线运营 (09~12)</button>
+      </div>
+      <div class="view-toggles">
+        <button type="button" class="toggle-btn active" id="btn-toggle-bezel">9:16 手机壳包装：开</button>
+        <button type="button" class="toggle-btn" id="btn-toggle-compare">双系统同屏 AB 比对台</button>
+      </div>
+    </div>
+
+    <!-- 双图同屏对比面板 -->
+    <section class="compare-panel" id="compare-panel">
+      <div class="compare-controls">
+        <strong>双系统同屏视觉与信息密度对照（点击图片可进入全屏灯箱）</strong>
+        <div class="compare-selects">
+          <label>左槽：<select id="cmp-left-select"></select></label>
+          <label>右槽：<select id="cmp-right-select"></select></label>
+        </div>
+      </div>
+      <div class="compare-stage">
+        <div class="compare-slot">
+          <img id="cmp-left-img" src="./sys_01_board_overview.png" alt="左对比系统" />
+          <strong id="cmp-left-title"></strong>
+          <p id="cmp-left-desc" style="font-size:12.5px;color:#5C554E"></p>
+        </div>
+        <div class="compare-slot">
+          <img id="cmp-right-img" src="./sys_02_duel_and_four_choice.png" alt="右对比系统" />
+          <strong id="cmp-right-title"></strong>
+          <p id="cmp-right-desc" style="font-size:12.5px;color:#5C554E"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 三大分区容器（由下方内联配置渲染） -->
+    <div id="gallery-root" style="display:flex;flex-direction:column;gap:28px;"></div>
+
+    <footer>
+      《富甲天下：十八啦！》全系统视觉设定画廊 ·
+      <a href="../../mvp/index.html">在线可玩 MVP</a> ｜
+      <a href="../art_style_candidates/index.html">B+A 画风比对台</a> ｜
+      <a href="../../index.html">返回项目门户</a>
+    </footer>
+  </div>
+
+  <!-- 全屏高清灯箱（支持键盘左右键翻页与点击放大） -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="系统效果图高清预览">
+    <div class="lb-top">
+      <div class="lb-title" id="lb-title">系统 01</div>
+      <div class="lb-tools">
+        <button type="button" class="lb-btn" id="lb-prev">← 上一系统</button>
+        <button type="button" class="lb-btn" id="lb-zoom">放大细节</button>
+        <button type="button" class="lb-btn" id="lb-next">下一系统 →</button>
+        <button type="button" class="lb-btn" id="lb-close">关闭 (Esc)</button>
+      </div>
+    </div>
+    <div class="lb-stage" id="lb-stage">
+      <img id="lb-img" src="./sys_01_board_overview.png" alt="高清系统效果图" />
+    </div>
+    <div class="lb-caption" id="lb-caption"></div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var SYSTEMS = [
+        // 一、局内核心博弈 (01~04)
+        {
+          idx: 1,
+          code: '系统 01',
+          cat: 'in-run',
+          file: './sys_01_board_overview.png',
+          docRef: '分册 02 · 第二、三章',
+          title: '9:16 主棋盘与「霸主同步落子」全景',
+          desc: '黄金四段式（8%+54%+16%+22%）单手布局：外环 28 格四州连城 3D 沙盘配 7 步琥珀落点预览，内侧青石蟠龙擂台红陶碗公跃起朱砂双骰，主公与曹操、孙权车驾同刻弹跳零等待。',
+          tags: ['8×8 外环 28 格', '霸主同步落子', '十八啦碗公骨骰', '加注 ×1/×2/×3']
+        },
+        {
+          idx: 2,
+          code: '系统 02',
+          cat: 'in-run',
+          file: './sys_02_duel_and_four_choice.png',
+          docRef: '分册 02 · 第四章',
+          title: '「踩城四择」× 骑木马单挑与军师口斗',
+          desc: '踩进敌城绝不乖乖挨宰：下半屏刘备飙泪配固定四色宝石键（交钱/单挑/野战/攻城）与邪道「芭乐票」改写；上半屏不切屏展开张飞折凳木马对撞吕布、孔明郭嘉摇扇互喷及 2 秒奇策窗。',
+          tags: ['固定四择真博弈', '不切屏弹簧木马', '军师口斗涨斗志', '2.0s 奇策高光窗']
+        },
+        {
+          idx: 3,
+          code: '系统 03',
+          cat: 'in-run',
+          file: './sys_03_loop_estate_and_policy.png',
+          docRef: '分册 02 · 第四、六章',
+          title: '过圈置业基建 × 里民大会「政见三选一」',
+          desc: '跨过起点触发一屏收租婆时间：支持手动加盖箭塔剥皮、屎王神熏臭邻居或一键「阿伯代办」最优盖楼；紧接召开里民大会三选一拍板包租/单挑/老千政见，全场盖红章高呼「冻蒜！」。',
+          tags: ['一屏升城盖楼', '阿伯代办自动ROI', '箭塔与屎王神', '里民政见冻蒜']
+        },
+        {
+          idx: 4,
+          code: '系统 04',
+          cat: 'in-run',
+          file: './sys_04_boss_finale_barrage.png',
+          docRef: '分册 02 · 第七章',
+          title: '关底「决战三段」全盘身家化炮火轰天命魔王',
+          desc: '彻底终结传统大富翁尾盘垃圾时间：第 15 圈将全盘房产身家化作万门黄金火炮（D1）、驻城太守羁绊连携（D2）与先锋单骑连击擂鼓助威（D3），正面轰沉赤壁铁索魔化曹丞相巨舰。',
+          tags: ['身家÷10变炮火', '太守连携合击', '擂鼓助威+20%', '零垃圾时间收官']
+        },
+
+        // 二、局外角色卡牌养成 (05~08)
+        {
+          idx: 5,
+          code: '系统 05',
+          cat: 'meta',
+          file: './sys_05_lord_hall_and_stars.png',
+          docRef: '分册 03 · 第一、二章',
+          title: '高价值「主公祠堂」与六重发财星宿养成',
+          desc: '每位首发主公（刘备、曹操、孙权、董卓、孟获、张角）各自改写一条底层盘面规则；环绕北斗七星状「发财星宿」6 颗命星，1/3/6 星产生质变机制飞跃，撑起长线核心追求。',
+          tags: ['六主公改写规则', '发财星宿 1~6 星', '主城沙盘联动', '高溢价核心追求']
+        },
+        {
+          idx: 6,
+          code: '系统 06',
+          cat: 'meta',
+          file: './sys_06_general_roster_and_bonds.png',
+          docRef: '分册 03 · 第三章',
+          title: '8 人「出征名册」× 零仓管三层羁绊与同窗共鸣',
+          desc: '1 先锋 + 1 军师 + 6 驻城太守三岗分工明确（陆/水/林地形适性各司其职），配合私塾书桌「同窗等级共鸣」免重复练级，以及地域/历史/图鉴三层羁绊，真正实现抽到蓝紫卡也零仓管。',
+          tags: ['先锋/军师/6太守', '陆水林三栖分工', '同窗等级共鸣', '三层零仓管羁绊']
+        },
+        {
+          idx: 7,
+          code: '系统 07',
+          cat: 'meta',
+          file: './sys_07_destiny_job_tree.png',
+          docRef: '分册 03 · 第四章',
+          title: '《虚拟人生》四维命盘与「19 节点正邪网状命格转职树」',
+          desc: '传承《虚拟人生》灵魂：体魄、谋略、魅力与双向正邪名望驱动 19 节点网状命格树——既可走正道修成皇冠「大掌柜」，亦可堕入紫火邪道解锁铁窗恶霸、地下钱庄大亨与鬼手老千！',
+          tags: ['体/谋/魅/名望四维', '19节点网状转职', '正道大掌柜路线', '邪道老千恶霸路线']
+        },
+        {
+          idx: 8,
+          code: '系统 08',
+          cat: 'meta',
+          file: './sys_08_deck_blueprints_and_subsystems.png',
+          docRef: '分册 03 · 第五、六章',
+          title: '锦囊蓝图工坊 ×「祖传聚宝盆与千术骰」副养成',
+          desc: '上半屏木格卡册编组棋盘锦囊、战斗奇策与七大建筑升星蓝图；下半屏 3D 庭院「祖传聚宝盆」离线喷涌铜钱讲义，搭配丝绒「千术骰子收藏匣」与招财三足金蟾萌宠提供稳健成长感。',
+          tags: ['锦囊奇策卡册', '建筑蓝图升星', '聚宝盆离线挂机', '千术骰与招财金蟾']
+        },
+
+        // 三、商业化与长线运营 (09~12)
+        {
+          idx: 9,
+          code: '系统 09',
+          cat: 'liveops',
+          file: './sys_09_dual_gacha_shrine.png',
+          docRef: '分册 04 · 第二章',
+          title: '双卡池抽卡（「庙口招贤台」×「夜市点将摊」）',
+          desc: '纯正台湾庙会大戏台摇签筒开奖演出：主公与核心名将池「庙口招贤台」配心愿单锁底不歪，锦囊与蓝图池「夜市点将摊」高频爽抽，签筒爆开金龙元宝礼花情绪价值拉满。',
+          tags: ['招贤台×点将摊双池', '3席心愿单防歪', '庙口摇签筒演出', '透明保底精算']
+        },
+        {
+          idx: 10,
+          code: '系统 10',
+          cat: 'liveops',
+          file: './sys_10_taiwan_shop_and_bailout.png',
+          docRef: '分册 04 · 第一、三章',
+          title: '台味特色付费橱窗（「地下钱庄救急包」× 光明灯月卡 × 升官战令）',
+          desc: '把付费包装成市井喜剧桥段：局外高转化「地下钱庄 1 折破产救急包」墨镜掌柜递茶解围，搭配庙宇祈福「光明灯月卡」（免广告+每日补签）与官帽晋升阶梯「发财战令」。',
+          tags: ['地下钱庄1折救急包', '庙口光明灯月卡', '升官发财战令', '市井幽默软性转化']
+        },
+        {
+          idx: 11,
+          code: '系统 11',
+          cat: 'liveops',
+          file: './sys_11_tower_and_nightmarket_event.png',
+          docRef: '分册 04 · 第五章',
+          title: '单人长线玩法（「通天钱庄百层塔」×「庙口夜市限时棋盘」）',
+          desc: '纯单人深水区内容支柱：上半屏摩天中式「通天钱庄百层塔」每十层镇守特色魔改霸主；下半屏节庆主题「庙口夜市棋盘」将全盘城池化作立体蚵仔煎、卤肉饭、烤香肠摊与红神轿巡游！',
+          tags: ['通天钱庄百层塔', '庙口夜市主题盘', '蚵仔煎卤肉饭摊', '单人长线防钝化']
+        },
+        {
+          idx: 12,
+          code: '系统 12',
+          cat: 'liveops',
+          file: './sys_12_guild_and_humor_leaderboard.png',
+          docRef: '分册 04 · 第五章',
+          title: '零压力「四海商会大聚宝盆」×「市井幽默榜」',
+          desc: '彻底摒弃 SLG 强制打卡与被抢焦虑：四海商会全员日常跑圈顺手注资「商会大聚宝盆」、外派太守助战与贴纸许愿墙；搭配比拼谁摔马最惨、谁被收租最多的「市井幽默榜」与「递卫生纸」互动！',
+          tags: ['零强制社交焦虑', '商会共攒聚宝盆', '太守外派借将', '市井比惨幽默榜']
+        }
+      ];
+
+      var CATEGORIES = [
+        { key: 'in-run', badge: '第一卷 · 局内核心博弈 (01~04)', cls: 'in-run', title: '十分钟单手跑圈 × 踩城四择 × 决战万炮', sub: '对应立项书《分册 02：核心玩法、方环棋盘与台味喜剧》' },
+        { key: 'meta', badge: '第二卷 · 局外角色卡牌养成 (05~08)', cls: 'meta', title: '主公改规则 × 三岗零仓管 × 19节点正邪命格', sub: '对应立项书《分册 03：角色、卡牌与五维养成系统》' },
+        { key: 'liveops', badge: '第三卷 · 商业化与长线运营 (09~12)', cls: 'liveops', title: '庙口双池 × 台味救急橱窗 × 夜市赛季与幽默商会', sub: '对应立项书《分册 04：混合变现漏斗与单人长线运营》' }
+      ];
+
+      var rootEl = document.getElementById('gallery-root');
+      var currentFilter = 'all';
+      var currentLightboxIdx = 0;
+
+      function renderGallery() {
+        rootEl.innerHTML = '';
+        CATEGORIES.forEach(function (cat) {
+          if (currentFilter !== 'all' && currentFilter !== cat.key) return;
+          var items = SYSTEMS.filter(function (s) { return s.cat === cat.key; });
+
+          var sec = document.createElement('section');
+          sec.className = 'category-block';
+          sec.innerHTML =
+            '<div class="category-head">' +
+              '<h2><span class="cat-pill ' + cat.cls + '">' + cat.badge + '</span> ' + cat.title + '</h2>' +
+              '<span>' + cat.sub + '</span>' +
+            '</div>' +
+            '<div class="mockups-grid"></div>';
+
+          var grid = sec.querySelector('.mockups-grid');
+          items.forEach(function (sys) {
+            var card = document.createElement('article');
+            card.className = 'sys-card';
+            card.dataset.sysIdx = String(sys.idx - 1);
+
+            var tagsHtml = sys.tags.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+            card.innerHTML =
+              '<div class="phone-frame" data-open-lb="' + (sys.idx - 1) + '" title="点击全屏高清查看">' +
+                '<div class="phone-screen">' +
+                  '<img src="' + sys.file + '" alt="' + sys.code + ' ' + sys.title + '" loading="lazy" />' +
+                '</div>' +
+              '</div>' +
+              '<div class="sys-meta">' +
+                '<div class="sys-top-tags">' +
+                  '<span class="sys-num">' + sys.code + '</span>' +
+                  '<span class="sys-doc-ref">' + sys.docRef + '</span>' +
+                '</div>' +
+                '<h3 class="sys-title">' + sys.title + '</h3>' +
+                '<p class="sys-desc">' + sys.desc + '</p>' +
+                '<ul class="sys-bullets">' + tagsHtml + '</ul>' +
+                '<div class="card-actions">' +
+                  '<button type="button" class="mini-act-btn primary" data-open-lb="' + (sys.idx - 1) + '">全屏高清放大</button>' +
+                  '<button type="button" class="mini-act-btn" data-send-cmp="' + (sys.idx - 1) + '">送入 AB 对比</button>' +
+                '</div>' +
+              '</div>';
+
+            grid.appendChild(card);
+          });
+
+          rootEl.appendChild(sec);
+        });
+      }
+
+      // 初始化对比下拉框
+      var selL = document.getElementById('cmp-left-select');
+      var selR = document.getElementById('cmp-right-select');
+      SYSTEMS.forEach(function (s, i) {
+        var optL = new Option(s.code + '｜' + s.title, String(i));
+        var optR = new Option(s.code + '｜' + s.title, String(i));
+        selL.add(optL);
+        selR.add(optR);
+      });
+      selL.value = '0';
+      selR.value = '1';
+
+      function syncCompareSlots() {
+        var sL = SYSTEMS[Number(selL.value) || 0];
+        var sR = SYSTEMS[Number(selR.value) || 1];
+        var imgL = document.getElementById('cmp-left-img');
+        var imgR = document.getElementById('cmp-right-img');
+        imgL.src = sL.file;
+        imgL.dataset.openLb = String(sL.idx - 1);
+        document.getElementById('cmp-left-title').textContent = sL.code + '｜' + sL.title;
+        document.getElementById('cmp-left-desc').textContent = sL.desc;
+
+        imgR.src = sR.file;
+        imgR.dataset.openLb = String(sR.idx - 1);
+        document.getElementById('cmp-right-title').textContent = sR.code + '｜' + sR.title;
+        document.getElementById('cmp-right-desc').textContent = sR.desc;
+      }
+      selL.addEventListener('change', syncCompareSlots);
+      selR.addEventListener('change', syncCompareSlots);
+      syncCompareSlots();
+
+      // 灯箱控制
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lb-img');
+      var lbTitle = document.getElementById('lb-title');
+      var lbCaption = document.getElementById('lb-caption');
+
+      function openLightbox(index) {
+        currentLightboxIdx = (index + SYSTEMS.length) % SYSTEMS.length;
+        var sys = SYSTEMS[currentLightboxIdx];
+        lbImg.classList.remove('zoomed');
+        lbImg.src = sys.file;
+        lbTitle.textContent = sys.code + '｜' + sys.title + ' （' + sys.idx + ' / 12）';
+        lbCaption.textContent = sys.desc;
+        lb.classList.add('open');
+      }
+
+      function closeLightbox() {
+        lb.classList.remove('open');
+        lbImg.classList.remove('zoomed');
+      }
+
+      document.addEventListener('click', function (e) {
+        var lbTrigger = e.target.closest('[data-open-lb]');
+        if (lbTrigger) {
+          openLightbox(Number(lbTrigger.dataset.openLb));
+          return;
+        }
+        var cmpTrigger = e.target.closest('[data-send-cmp]');
+        if (cmpTrigger) {
+          var idxStr = cmpTrigger.dataset.sendCmp;
+          var panel = document.getElementById('compare-panel');
+          panel.classList.add('open');
+          document.getElementById('btn-toggle-compare').classList.add('active');
+          selR.value = selL.value;
+          selL.value = idxStr;
+          syncCompareSlots();
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      document.getElementById('lb-prev').addEventListener('click', function () { openLightbox(currentLightboxIdx - 1); });
+      document.getElementById('lb-next').addEventListener('click', function () { openLightbox(currentLightboxIdx + 1); });
+      document.getElementById('lb-close').addEventListener('click', closeLightbox);
+      document.getElementById('lb-zoom').addEventListener('click', function () { lbImg.classList.toggle('zoomed'); });
+      lbImg.addEventListener('click', function () { lbImg.classList.toggle('zoomed'); });
+      lb.addEventListener('click', function (e) {
+        if (e.target === lb || e.target === document.getElementById('lb-stage')) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowLeft') openLightbox(currentLightboxIdx - 1);
+        else if (e.key === 'ArrowRight') openLightbox(currentLightboxIdx + 1);
+      });
+
+      // 筛选与外观切换
+      document.getElementById('filter-tabs').addEventListener('click', function (e) {
+        var btn = e.target.closest('.tab-pill');
+        if (!btn) return;
+        currentFilter = btn.dataset.cat;
+        document.querySelectorAll('.tab-pill').forEach(function (p) {
+          p.classList.toggle('active', p.dataset.cat === currentFilter);
+        });
+        renderGallery();
+      });
+
+      document.getElementById('btn-toggle-bezel').addEventListener('click', function () {
+        var frameless = document.body.classList.toggle('frameless-mode');
+        this.classList.toggle('active', !frameless);
+        this.textContent = frameless ? '9:16 手机壳包装：关（纯净原图）' : '9:16 手机壳包装：开';
+      });
+
+      document.getElementById('btn-toggle-compare').addEventListener('click', function () {
+        var panel = document.getElementById('compare-panel');
+        var isOpen = panel.classList.toggle('open');
+        this.classList.toggle('active', isOpen);
+      });
+
+      // 严守 AGENTS.md 单例后台可见性休眠标记
+      function syncPageHidden() {
+        document.documentElement.setAttribute('data-page-hidden', document.hidden ? 'true' : 'false');
+      }
+      document.addEventListener('visibilitychange', syncPageHidden);
+      syncPageHidden();
+
+      renderGallery();
+    })();
+  </script>
+</body>
+</html>

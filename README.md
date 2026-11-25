@@ -9,6 +9,8 @@
 
 - **🎲 立即在线试玩可玩 MVP（手机竖屏 / 电脑浏览器即点即玩）**：  
   👉 **[https://kamimaomao.github.io/fujiatianxia-shibala/mvp/index.html](https://kamimaomao.github.io/fujiatianxia-shibala/mvp/index.html)**
+- **📱 查看全案 12 大核心系统 9:16 实机效果图画廊**：  
+  👉 **[https://kamimaomao.github.io/fujiatianxia-shibala/assets/system_mockups/index.html](https://kamimaomao.github.io/fujiatianxia-shibala/assets/system_mockups/index.html)**
 - **🏠 项目门户导航主页**：  
   👉 **[https://kamimaomao.github.io/fujiatianxia-shibala/](https://kamimaomao.github.io/fujiatianxia-shibala/)**
 - **🎨 B+A 融合方案与五向美术风格 AB 比对台**：  
@@ -45,6 +47,7 @@
 | **[`docs/04_commercialization_and_liveops.md`](./docs/04_commercialization_and_liveops.md)** | 分册 04：混合变现漏斗、产消对账单、单人长线赛季、里程碑与美术风格矩阵 |
 | **[`assets/fig01~fig04_*.svg`](./assets/)** | 四幅高分辨率工程线框与系统拓扑矢量图（`fig01`~`fig04`） |
 | **[`assets/art_style_candidates/`](./assets/art_style_candidates/)** | B+A 融合方案（赵云同构设定卡 + 许昌 9:16 实机基准帧）与 A~E 候选画风对比页 |
+| **[`assets/system_mockups/`](./assets/system_mockups/)** | **全案 12 大核心系统 9:16 竖屏实机 UI 效果图画廊**（局内博弈 / 局外养成 / 商业化长线） |
 | **[`mvp/`](./mvp/)** | B+A 真实资产可玩 MVP 完整源码与 68 张高精透明底立牌/微缩沙盘/3D碗公骨骰/UI卡面 PNG 资产 |
 
 ---
